@@ -1,0 +1,579 @@
+{
+ "bgm": {
+  "path": "assets/bgm/track.wav",
+  "volume": 0.14,
+  "mode": "generate",
+  "query": "warm upbeat marimba bed (synthesized in code; MusicGen unavailable)",
+  "duration_s": 30.4
+ },
+ "bgm_pending": false,
+ "voices": [
+  {
+   "frame": 1,
+   "path": "assets/voice/01.wav",
+   "duration_s": 3.989,
+   "words": [
+    {
+     "id": "w0",
+     "text": "Four",
+     "start": 0.14,
+     "end": 0.27
+    },
+    {
+     "id": "w1",
+     "text": "friends,",
+     "start": 0.38,
+     "end": 1.11
+    },
+    {
+     "id": "w2",
+     "text": "four",
+     "start": 1.11,
+     "end": 1.39
+    },
+    {
+     "id": "w3",
+     "text": "routes.",
+     "start": 1.48,
+     "end": 2.02
+    },
+    {
+     "id": "w4",
+     "text": "One",
+     "start": 2.16,
+     "end": 2.28
+    },
+    {
+     "id": "w5",
+     "text": "table",
+     "start": 2.28,
+     "end": 2.71
+    },
+    {
+     "id": "w6",
+     "text": "at",
+     "start": 2.71,
+     "end": 2.78
+    },
+    {
+     "id": "w7",
+     "text": "7:15.",
+     "start": 2.96,
+     "end": 4.06
+    }
+   ]
+  },
+  {
+   "frame": 2,
+   "path": "assets/voice/02.wav",
+   "duration_s": 2.965,
+   "words": [
+    {
+     "id": "w0",
+     "text": "Just",
+     "start": 0.04,
+     "end": 0.25
+    },
+    {
+     "id": "w1",
+     "text": "text",
+     "start": 0.37,
+     "end": 0.53
+    },
+    {
+     "id": "w2",
+     "text": "Rendezvous",
+     "start": 0.6,
+     "end": 1.21
+    },
+    {
+     "id": "w3",
+     "text": "what",
+     "start": 1.22,
+     "end": 1.49
+    },
+    {
+     "id": "w4",
+     "text": "you",
+     "start": 1.49,
+     "end": 1.66
+    },
+    {
+     "id": "w5",
+     "text": "want",
+     "start": 1.71,
+     "end": 1.75
+    },
+    {
+     "id": "w6",
+     "text": "and",
+     "start": 2.05,
+     "end": 2.18
+    },
+    {
+     "id": "w7",
+     "text": "who's",
+     "start": 2.18,
+     "end": 2.43
+    },
+    {
+     "id": "w8",
+     "text": "coming.",
+     "start": 2.46,
+     "end": 2.84
+    }
+   ]
+  },
+  {
+   "frame": 3,
+   "path": "assets/voice/03.wav",
+   "duration_s": 4.523,
+   "words": [
+    {
+     "id": "w0",
+     "text": "It",
+     "start": 0.02,
+     "end": 0.09
+    },
+    {
+     "id": "w1",
+     "text": "checks",
+     "start": 0.14,
+     "end": 0.47
+    },
+    {
+     "id": "w2",
+     "text": "calendars,",
+     "start": 0.51,
+     "end": 1.13
+    },
+    {
+     "id": "w3",
+     "text": "budgets,",
+     "start": 1.26,
+     "end": 1.74
+    },
+    {
+     "id": "w4",
+     "text": "and",
+     "start": 1.76,
+     "end": 2.01
+    },
+    {
+     "id": "w5",
+     "text": "every",
+     "start": 2.04,
+     "end": 2.42
+    },
+    {
+     "id": "w6",
+     "text": "walk,",
+     "start": 2.51,
+     "end": 2.98
+    },
+    {
+     "id": "w7",
+     "text": "then",
+     "start": 2.98,
+     "end": 3.15
+    },
+    {
+     "id": "w8",
+     "text": "picks",
+     "start": 3.19,
+     "end": 3.41
+    },
+    {
+     "id": "w9",
+     "text": "the",
+     "start": 3.5,
+     "end": 3.55
+    },
+    {
+     "id": "w10",
+     "text": "fairest",
+     "start": 3.67,
+     "end": 4.02
+    },
+    {
+     "id": "w11",
+     "text": "spot.",
+     "start": 4.02,
+     "end": 4.43
+    }
+   ]
+  },
+  {
+   "frame": 4,
+   "path": "assets/voice/04.wav",
+   "duration_s": 4.736,
+   "words": [
+    {
+     "id": "w0",
+     "text": "If",
+     "start": 0.04,
+     "end": 0.11
+    },
+    {
+     "id": "w1",
+     "text": "they",
+     "start": 0.22,
+     "end": 0.42
+    },
+    {
+     "id": "w2",
+     "text": "take",
+     "start": 0.42,
+     "end": 0.69
+    },
+    {
+     "id": "w3",
+     "text": "reservations,",
+     "start": 0.69,
+     "end": 1.6
+    },
+    {
+     "id": "w4",
+     "text": "it",
+     "start": 1.74,
+     "end": 1.99
+    },
+    {
+     "id": "w5",
+     "text": "calls",
+     "start": 1.99,
+     "end": 2.32
+    },
+    {
+     "id": "w6",
+     "text": "and",
+     "start": 2.76,
+     "end": 2.88
+    },
+    {
+     "id": "w7",
+     "text": "asks",
+     "start": 2.88,
+     "end": 3.12
+    },
+    {
+     "id": "w8",
+     "text": "you",
+     "start": 3.17,
+     "end": 3.33
+    },
+    {
+     "id": "w9",
+     "text": "anything",
+     "start": 3.4,
+     "end": 3.74
+    },
+    {
+     "id": "w10",
+     "text": "it",
+     "start": 3.74,
+     "end": 3.79
+    },
+    {
+     "id": "w11",
+     "text": "can't",
+     "start": 3.87,
+     "end": 4.19
+    },
+    {
+     "id": "w12",
+     "text": "answer.",
+     "start": 4.19,
+     "end": 4.68
+    }
+   ]
+  },
+  {
+   "frame": 5,
+   "path": "assets/voice/05.wav",
+   "duration_s": 4.437,
+   "words": [
+    {
+     "id": "w0",
+     "text": "Everyone",
+     "start": 0.03,
+     "end": 0.51
+    },
+    {
+     "id": "w1",
+     "text": "gets",
+     "start": 0.51,
+     "end": 0.67
+    },
+    {
+     "id": "w2",
+     "text": "a",
+     "start": 0.76,
+     "end": 0.82
+    },
+    {
+     "id": "w3",
+     "text": "text",
+     "start": 0.82,
+     "end": 1.07
+    },
+    {
+     "id": "w4",
+     "text": "right",
+     "start": 1.07,
+     "end": 1.39
+    },
+    {
+     "id": "w5",
+     "text": "when",
+     "start": 1.39,
+     "end": 1.6
+    },
+    {
+     "id": "w6",
+     "text": "it's",
+     "start": 1.66,
+     "end": 1.88
+    },
+    {
+     "id": "w7",
+     "text": "time",
+     "start": 1.88,
+     "end": 2.18
+    },
+    {
+     "id": "w8",
+     "text": "to",
+     "start": 2.2,
+     "end": 2.44
+    },
+    {
+     "id": "w9",
+     "text": "leave,",
+     "start": 2.44,
+     "end": 3.08
+    },
+    {
+     "id": "w10",
+     "text": "timed",
+     "start": 3.11,
+     "end": 3.42
+    },
+    {
+     "id": "w11",
+     "text": "to",
+     "start": 3.42,
+     "end": 3.55
+    },
+    {
+     "id": "w12",
+     "text": "their",
+     "start": 3.55,
+     "end": 3.89
+    },
+    {
+     "id": "w13",
+     "text": "own",
+     "start": 3.89,
+     "end": 4.09
+    },
+    {
+     "id": "w14",
+     "text": "walk.",
+     "start": 4.09,
+     "end": 4.58
+    }
+   ]
+  },
+  {
+   "frame": 6,
+   "path": "assets/voice/06.wav",
+   "duration_s": 5.355,
+   "words": [
+    {
+     "id": "w0",
+     "text": "And",
+     "start": 0.08,
+     "end": 0.22
+    },
+    {
+     "id": "w1",
+     "text": "after",
+     "start": 0.22,
+     "end": 0.59
+    },
+    {
+     "id": "w2",
+     "text": "dinner,",
+     "start": 0.59,
+     "end": 1.2
+    },
+    {
+     "id": "w3",
+     "text": "the",
+     "start": 1.25,
+     "end": 1.45
+    },
+    {
+     "id": "w4",
+     "text": "bill",
+     "start": 1.45,
+     "end": 1.73
+    },
+    {
+     "id": "w5",
+     "text": "splits",
+     "start": 1.81,
+     "end": 2.28
+    },
+    {
+     "id": "w6",
+     "text": "itself,",
+     "start": 2.28,
+     "end": 2.91
+    },
+    {
+     "id": "w7",
+     "text": "everyone",
+     "start": 2.91,
+     "end": 3.32
+    },
+    {
+     "id": "w8",
+     "text": "pays",
+     "start": 3.42,
+     "end": 3.64
+    },
+    {
+     "id": "w9",
+     "text": "back",
+     "start": 3.64,
+     "end": 3.87
+    },
+    {
+     "id": "w10",
+     "text": "their",
+     "start": 3.92,
+     "end": 4.16
+    },
+    {
+     "id": "w11",
+     "text": "share",
+     "start": 4.16,
+     "end": 4.4
+    },
+    {
+     "id": "w12",
+     "text": "with",
+     "start": 4.4,
+     "end": 4.73
+    },
+    {
+     "id": "w13",
+     "text": "one",
+     "start": 4.73,
+     "end": 4.98
+    },
+    {
+     "id": "w14",
+     "text": "tap.",
+     "start": 4.98,
+     "end": 5.28
+    }
+   ]
+  },
+  {
+   "frame": 7,
+   "path": "assets/voice/07.wav",
+   "duration_s": 3.221,
+   "words": [
+    {
+     "id": "w0",
+     "text": "Rendezvous,",
+     "start": 0.06,
+     "end": 0.96
+    },
+    {
+     "id": "w1",
+     "text": "a",
+     "start": 0.96,
+     "end": 1.04
+    },
+    {
+     "id": "w2",
+     "text": "table",
+     "start": 1.04,
+     "end": 1.36
+    },
+    {
+     "id": "w3",
+     "text": "for",
+     "start": 1.46,
+     "end": 1.68
+    },
+    {
+     "id": "w4",
+     "text": "us,",
+     "start": 1.68,
+     "end": 1.94
+    },
+    {
+     "id": "w5",
+     "text": "at",
+     "start": 1.97,
+     "end": 2.06
+    },
+    {
+     "id": "w6",
+     "text": "tablefor.us.",
+     "start": 2.12,
+     "end": 3.12
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "frame": 1,
+   "file": "assets/sfx/chime.mp3",
+   "offset_s": 0,
+   "duration_s": 2.5,
+   "volume": 0.35
+  },
+  {
+   "frame": 3,
+   "file": "assets/sfx/chime.mp3",
+   "offset_s": 0,
+   "duration_s": 2.5,
+   "volume": 0.35
+  },
+  {
+   "frame": 4,
+   "file": "assets/sfx/notification.mp3",
+   "offset_s": 0,
+   "duration_s": 2.46,
+   "volume": 0.35
+  },
+  {
+   "frame": 5,
+   "file": "assets/sfx/notification.mp3",
+   "offset_s": 0,
+   "duration_s": 2.46,
+   "volume": 0.35
+  },
+  {
+   "frame": 5,
+   "file": "assets/sfx/chime.mp3",
+   "offset_s": 0,
+   "duration_s": 2.5,
+   "volume": 0.35
+  },
+  {
+   "frame": 7,
+   "file": "assets/sfx/chime.mp3",
+   "offset_s": 0,
+   "duration_s": 2.5,
+   "volume": 0.35
+  }
+ ]
+}

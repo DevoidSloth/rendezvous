@@ -1,0 +1,56 @@
+{
+  "lines": [
+    {
+      "id": "01",
+      "sfx": [
+        "soft-whoosh",
+        "chime"
+      ]
+    },
+    {
+      "id": "02",
+      "sfx": [
+        "keyboard-typing",
+        "message-send"
+      ]
+    },
+    {
+      "id": "03",
+      "sfx": [
+        "soft-pop",
+        "chime"
+      ]
+    },
+    {
+      "id": "04",
+      "sfx": [
+        "phone-ring",
+        "notification",
+        "success-chime"
+      ]
+    },
+    {
+      "id": "05",
+      "sfx": [
+        "notification",
+        "chime"
+      ]
+    },
+    {
+      "id": "06",
+      "sfx": [
+        "cash-register",
+        "checkmark-pop"
+      ]
+    },
+    {
+      "id": "07",
+      "sfx": [
+        "chime"
+      ]
+    }
+  ],
+  "bgm": {
+    "mode": "none"
+  }
+}

@@ -1,0 +1,10 @@
+{
+ "provider": "kokoro",
+ "lines": [],
+ "bgm": {
+  "mode": "generate",
+  "query": "warm upbeat indie pop, light marimba and claps, hopeful",
+  "prompt": "warm upbeat indie pop instrumental, light marimba, soft claps, bright and hopeful, 112 bpm, no vocals",
+  "duration_s": 30
+ }
+}

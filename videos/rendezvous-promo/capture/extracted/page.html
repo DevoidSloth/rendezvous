@@ -1,0 +1,1774 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style type="text/css" data-vite-dev-id="/Users/jasonpitchford/Dev/rondezvous/apps/web/src/styles.css">/* ───────────────────────── tokens ─────────────────────────
+   A transit diagram: enamel-grey platform, navy ink, one line per friend,
+   signal red for the table everyone is heading to. */
+
+:root {
+  --platform: #eef1f4;
+  --platform-2: #e2e7ed;
+  --ink: #0e1b2c;
+  --ink-soft: #4a5868;
+  --rule: #c9d1da;
+  --signal: #e3262e;
+  --l1: #2551e0;
+  --l2: #f57a12;
+  --l3: #8e3fd0;
+  --l4: #0d9a64;
+  --on-signal: #ffffff;
+
+  /* map tokens (the Ithaca map in the demo) */
+  --paper: var(--platform);
+  --paper-2: #e6ebf0;
+  --contour: #cfd7df;
+  --contour-index: #b6c1cc;
+  --street: #fbfcfd;
+  --water: #a9c6d6;
+  --water-ink: #3b6c82;
+  --pin: var(--signal);
+  --f1: var(--l1);
+  --f2: var(--l2);
+  --f3: var(--l3);
+  --f4: var(--l4);
+
+  /* the phone is always a light iPhone */
+  --bubble: #0a84ff;
+  --bubble-in: #e9e9ee;
+  --screen: #ffffff;
+  --screen-ink: #111111;
+  --bezel: #0e1b2c;
+
+  --display: "Big Shoulders", "Arial Narrow", sans-serif;
+  --text: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif;
+  --max: 1320px;
+  --pad: clamp(16px, 4vw, 56px);
+  --trunk: 132px;
+  --measure: 34rem;
+  color-scheme: light;
+}
+
+/* Evening tokens: the demo band, and the whole page in dark mode. */
+.night,
+:root[data-theme="dark"] {
+  --platform: #0e1b2c;
+  --platform-2: #132438;
+  --ink: #eef1f4;
+  --ink-soft: #a4b1c0;
+  --rule: #2a3c52;
+  --signal: #ff4148;
+  --l1: #6f8fff;
+  --l2: #ff9a3d;
+  --l3: #b77bf0;
+  --l4: #2cc58b;
+  --paper-2: #13263b;
+  --contour: #1f3349;
+  --contour-index: #2b4460;
+  --street: #1c3047;
+  --water: #1f4a63;
+  --water-ink: #8ec3d8;
+  --bezel: #000;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --platform: #0b1626;
+    --platform-2: #102035;
+    --ink: #eef1f4;
+    --ink-soft: #a4b1c0;
+    --rule: #26384d;
+    --signal: #ff4148;
+    --l1: #6f8fff;
+    --l2: #ff9a3d;
+    --l3: #b77bf0;
+    --l4: #2cc58b;
+    --paper-2: #13263b;
+    --contour: #1f3349;
+    --contour-index: #2b4460;
+    --street: #1c3047;
+    --water: #1f4a63;
+    --water-ink: #8ec3d8;
+    --bezel: #000;
+    color-scheme: dark;
+  }
+  :root:not([data-theme="light"]) .night {
+    --platform: #060f1b;
+    --platform-2: #0d1a2b;
+  }
+}
+
+/* ───────────────────────── base ───────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+body {
+  margin: 0;
+  background: var(--platform);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1.1875rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+ol,
+ul,
+figure {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-optical-sizing: auto;
+  font-weight: 850;
+  text-wrap: balance;
+}
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1.5px;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--l1);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -64px;
+  z-index: 20;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--platform);
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.skip:focus {
+  top: 16px;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+.muted {
+  color: var(--ink-soft);
+}
+
+.page {
+  position: relative;
+}
+
+/* Every block shares one container; the left gutter is the trunk's lane. */
+.hero,
+.story,
+.demo > *,
+.privacy,
+.built,
+.footer {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+/* ───────────────────────── nav + hero ───────────────────────── */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+}
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 850;
+  font-size: 1.7rem;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+}
+.wordmark.small {
+  font-size: 1.25rem;
+  gap: 8px;
+}
+.nav-links {
+  display: flex;
+  gap: clamp(14px, 3vw, 34px);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+.nav-links a:hover {
+  color: var(--ink);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+  min-height: min(820px, calc(100svh - 90px));
+  padding-bottom: clamp(40px, 6vw, 80px);
+}
+.hero h1 {
+  font-size: clamp(4rem, 7.3vw, 8.2rem);
+  line-height: 0.86;
+  font-weight: 900;
+  letter-spacing: -0.005em;
+}
+.hero h1 .line {
+  display: block;
+  white-space: nowrap;
+}
+/* The full stop is the table: the station every line in the diagram ends at. */
+.pin-period {
+  display: inline-block;
+  width: 0.2em;
+  height: 0.2em;
+  margin-left: 0.05em;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 0 0.045em var(--platform), 0 0 0 0.085em var(--ink);
+}
+.lede {
+  margin-top: clamp(22px, 2.6vw, 34px);
+  max-width: 31rem;
+  font-size: clamp(1.15rem, 1.45vw, 1.32rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border: 3px solid var(--ink);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--platform);
+}
+.btn-primary:hover {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--on-signal);
+}
+.btn-quiet:hover {
+  background: var(--ink);
+  color: var(--platform);
+}
+
+.hero-diagram {
+  position: relative;
+}
+.hero-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.d-ghost {
+  fill: none;
+  stroke-width: 3;
+  stroke-dasharray: 2 12;
+  stroke-linecap: round;
+  opacity: 0.4;
+}
+.d-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.d-origin {
+  fill: var(--platform);
+  stroke: currentColor;
+  stroke-width: 6;
+}
+.d-walker {
+  fill: currentColor;
+  stroke: var(--platform);
+  stroke-width: 5;
+}
+.d-name {
+  font-family: var(--display);
+  font-weight: 850;
+  font-size: 30px;
+  fill: var(--ink);
+}
+.d-from {
+  font-family: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  fill: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.d-rider .d-name,
+.d-rider .d-from {
+  transition: opacity 0.3s;
+}
+.d-rider.waiting .d-name,
+.d-rider.waiting .d-from {
+  opacity: 0.45;
+}
+.d-clock {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 158px;
+  fill: var(--ink);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.d-clock-sub {
+  font-family: var(--text);
+  font-weight: 700;
+  font-size: 19px;
+  fill: var(--ink-soft);
+}
+.d-clock-sub.on {
+  fill: var(--signal);
+}
+.d-station {
+  fill: var(--platform);
+  stroke: var(--ink);
+  stroke-width: 8;
+}
+.d-dot {
+  fill: var(--ink);
+  transition: fill 0.4s;
+}
+.d-table.arrived .d-dot {
+  fill: var(--signal);
+}
+.d-ring {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 4;
+  opacity: 0;
+}
+.d-table.arrived .d-ring {
+  animation: arrive 1.5s cubic-bezier(0.2, 0.7, 0.3, 1) 1;
+}
+@keyframes arrive {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.d-venue {
+  font-family: var(--display);
+  font-weight: 850;
+  font-size: 30px;
+  fill: var(--ink);
+}
+.d-venue-sub {
+  font-family: var(--text);
+  font-weight: 700;
+  font-size: 16px;
+  fill: var(--ink-soft);
+}
+.replay {
+  position: absolute;
+  right: 0;
+  top: -28px;
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+.replay:hover {
+  color: var(--ink);
+}
+
+/* ───────────────────────── trunk ───────────────────────── */
+
+.trunk {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.trunk-ghost {
+  fill: none;
+  stroke-width: 7;
+  opacity: 0.1;
+}
+.trunk-line {
+  fill: none;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.trunk-station {
+  fill: var(--platform);
+  stroke: var(--rule);
+  stroke-width: 4;
+  transition: stroke 0.3s;
+}
+.trunk-station.reached {
+  stroke: var(--ink);
+}
+.trunk-end-station {
+  fill: var(--platform);
+  stroke: var(--rule);
+  stroke-width: 6;
+  transition: stroke 0.3s;
+}
+.trunk-end-dot {
+  fill: var(--rule);
+  transition: fill 0.3s;
+}
+.trunk-end.reached .trunk-end-station {
+  stroke: var(--ink);
+}
+.trunk-end.reached .trunk-end-dot {
+  fill: var(--signal);
+}
+
+/* ───────────────────────── story ───────────────────────── */
+
+.story {
+  padding-top: clamp(64px, 9vw, 128px);
+  padding-left: calc(var(--pad) + var(--trunk));
+}
+.story-head h2,
+.section-head h2 {
+  font-size: clamp(2.6rem, 5.4vw, 4.6rem);
+  line-height: 0.92;
+  max-width: 14ch;
+}
+.story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+}
+.stations {
+  list-style: none;
+  padding: 0;
+}
+.station {
+  position: relative;
+  min-height: 74vh;
+  display: flex;
+  align-items: center;
+}
+.station:first-child {
+  min-height: 60vh;
+}
+.station-mark {
+  position: absolute;
+  left: calc(var(--trunk) / -2);
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  transform: translate(-50%, -50%);
+}
+.station-body {
+  max-width: 33rem;
+  opacity: 0.32;
+  transition: opacity 0.45s;
+}
+.station.active .station-body {
+  opacity: 1;
+}
+.station-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.station-num {
+  display: none;
+}
+.station h3 {
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  line-height: 0.95;
+  margin-bottom: 18px;
+}
+.station-body > p:not(.station-name) {
+  color: var(--ink-soft);
+}
+.station-body > p.station-detail {
+  margin-top: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.story-phone-wrap {
+  position: sticky;
+  top: max(24px, calc(50vh - 330px));
+  padding-top: 18vh;
+}
+.story-phone {
+  height: 660px;
+  max-height: calc(100vh - 48px);
+}
+.phone-status-dot {
+  width: 24px;
+  height: 11px;
+  border-radius: 3px;
+  border: 1.5px solid currentColor;
+  opacity: 0.5;
+}
+.bubble-line {
+  display: block;
+}
+.relay-name {
+  font-weight: 700;
+}
+.relay-name.who-maya {
+  color: #c25e00;
+}
+.relay-name.who-ana {
+  color: #087a4f;
+}
+.relay-name.who-dev {
+  color: #7330b0;
+}
+.msg.fresh {
+  animation: pop 0.42s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+}
+.msg.fresh + .msg.fresh {
+  animation-delay: 0.14s;
+}
+.msg.fresh + .msg.fresh + .msg.fresh {
+  animation-delay: 0.28s;
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+}
+
+/* ───────────────────────── demo (night band) ───────────────────────── */
+
+.demo {
+  background: var(--platform);
+  color: var(--ink);
+  margin-top: clamp(48px, 7vw, 96px);
+  padding: clamp(64px, 8vw, 112px) 0;
+}
+.demo > * {
+  padding-left: calc(var(--pad) + var(--trunk));
+}
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(16px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(28px, 4vw, 52px);
+}
+.section-head p {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+}
+.demo-grid {
+  display: grid;
+  grid-template-columns: 372px minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+/* phone (shared by the story and the demo) */
+
+.phone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 740px;
+  max-height: calc(100svh - 40px);
+  min-height: 540px;
+  background: var(--screen);
+  color: var(--screen-ink);
+  border: 11px solid var(--bezel);
+  border-radius: 50px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--text);
+  font-size: 15.5px;
+  line-height: 1.32;
+  box-shadow: 0 40px 80px -40px rgb(14 27 44 / 0.55);
+  color-scheme: light;
+}
+.phone-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 26px 4px;
+  font-weight: 600;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.phone-status-icons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.phone-status-icons svg {
+  fill: currentColor;
+}
+.phone-banner {
+  position: absolute;
+  z-index: 3;
+  top: 40px;
+  left: 8px;
+  right: 8px;
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px 11px;
+  border: 0;
+  border-radius: 20px;
+  text-align: left;
+  background: rgb(236 236 240 / 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #111;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.5);
+  animation: drop 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+@keyframes drop {
+  from {
+    transform: translateY(-120%);
+  }
+}
+.phone-banner-app {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+.phone-banner-text {
+  font-size: 14.5px;
+}
+.phone-head {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  padding: 6px 12px 10px;
+  border-bottom: 0.5px solid rgb(0 0 0 / 0.14);
+}
+.phone-avatars {
+  display: flex;
+}
+.phone-avatars span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-left: -7px;
+  border-radius: 50%;
+  border: 2px solid var(--screen);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+.phone-avatars span:first-child {
+  margin-left: 0;
+}
+.phone-avatars .agent-avatar {
+  background: #0e1b2c;
+  padding: 4px;
+}
+.phone-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+.phone-subtitle {
+  font-size: 11.5px;
+  opacity: 0.55;
+}
+.phone-thread {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  scrollbar-width: thin;
+}
+.thread-stamp {
+  text-align: center;
+  font-size: 11.5px;
+  opacity: 0.5;
+  margin: 2px 0 8px;
+}
+.thread-stamp b {
+  font-weight: 600;
+}
+.thread-empty {
+  margin: auto 18px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.45;
+  opacity: 0.6;
+}
+.msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+  position: relative;
+}
+.msg.in {
+  align-self: flex-start;
+}
+.msg.out {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.msg.first {
+  margin-top: 8px;
+}
+.msg-from {
+  font-size: 11.5px;
+  margin: 0 0 2px 12px;
+  opacity: 0.6;
+  font-weight: 600;
+}
+.msg.in:not(.agent) .msg-from {
+  opacity: 1;
+}
+.bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+.bubble {
+  position: relative;
+  padding: 7px 12px 8px;
+  border-radius: 18px;
+  background: var(--bubble-in);
+  overflow-wrap: anywhere;
+}
+.msg.out .bubble {
+  background: var(--bubble);
+  color: #fff;
+}
+.bubble.has-reactions {
+  margin-top: 14px;
+}
+.maps-link {
+  display: inline-block;
+  margin-top: 4px;
+  font-weight: 600;
+  color: var(--bubble);
+}
+.tapbacks {
+  position: absolute;
+  top: -15px;
+  right: -8px;
+  display: flex;
+  gap: 2px;
+  padding: 3px 7px 2px;
+  border-radius: 999px;
+  background: var(--bubble-in);
+  border: 2px solid var(--screen);
+  font-size: 13px;
+  line-height: 1.2;
+}
+.tapbacks.yours {
+  background: var(--bubble);
+}
+.tapbacks small {
+  font-size: 10.5px;
+  font-weight: 700;
+  margin-left: 1px;
+  vertical-align: 1px;
+}
+.tapbacks.yours small {
+  color: #fff;
+}
+.react-btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgb(0 0 0 / 0.45);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.msg:hover .react-btn,
+.react-btn:focus-visible,
+.react-btn[aria-expanded="true"] {
+  opacity: 1;
+}
+@media (hover: none) {
+  .react-btn {
+    opacity: 0.8;
+  }
+}
+.tapback-picker {
+  display: flex;
+  gap: 2px;
+  margin-top: 6px;
+  padding: 4px 6px;
+  border-radius: 999px;
+  background: var(--screen);
+  box-shadow: 0 6px 24px -6px rgb(0 0 0 / 0.35), 0 0 0 0.5px rgb(0 0 0 / 0.12);
+  align-self: flex-start;
+}
+.tapback-picker button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+.tapback-picker button:hover {
+  background: var(--bubble-in);
+}
+.bubble.typing {
+  display: flex;
+  gap: 4px;
+  padding: 12px 14px;
+}
+.bubble.typing i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+  animation: blink 1.2s infinite;
+}
+.bubble.typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.bubble.typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes blink {
+  30% {
+    opacity: 0.85;
+  }
+}
+.phone-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 0 10px 8px;
+  min-height: 8px;
+}
+.chip {
+  border: 1px solid rgb(10 132 255 / 0.7);
+  background: transparent;
+  color: var(--bubble);
+  border-radius: 999px;
+  padding: 6px 12px 5px;
+  font-size: 13.5px;
+  line-height: 1.25;
+  cursor: pointer;
+  text-align: left;
+}
+.chip.primary {
+  background: var(--bubble);
+  color: #fff;
+}
+.chip.emoji {
+  font-size: 18px;
+  padding: 3px 14px;
+}
+.chip:hover {
+  filter: brightness(1.08);
+}
+.chip-note {
+  font-size: 13px;
+  opacity: 0.55;
+  padding: 6px 4px;
+}
+.phone-compose {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 22px;
+}
+.phone-compose input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgb(0 0 0 / 0.22);
+  background: transparent;
+  color: var(--screen-ink);
+  font: inherit;
+  font-size: 16px;
+}
+.phone-compose input:focus-visible {
+  outline: 2px solid var(--bubble);
+  outline-offset: 1px;
+}
+.send {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--bubble);
+  color: #fff;
+  cursor: pointer;
+}
+.send:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* backstage */
+
+.backstage {
+  min-width: 0;
+}
+.rail {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  position: relative;
+}
+.rail::before {
+  content: "";
+  position: absolute;
+  left: calc(100% / 12);
+  right: calc(100% / 12);
+  top: 12px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--rule);
+}
+.rail li {
+  position: relative;
+}
+.rail li.done::after,
+.rail li.current::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: -50%;
+  width: 100%;
+  height: 6px;
+  background: var(--ink);
+}
+.rail li:first-child::after {
+  display: none;
+}
+.rail button {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0 0 4px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.rail button:disabled {
+  cursor: default;
+}
+.rail-stop {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--platform);
+  border: 6px solid var(--rule);
+  transition: border-color 0.3s, background 0.3s;
+}
+.rail li.done .rail-stop {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+.rail li.current .rail-stop {
+  border-color: var(--signal);
+  background: var(--platform);
+}
+.rail-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+}
+.rail li.done .rail-name,
+.rail li.current .rail-name {
+  color: var(--ink);
+}
+.rail li.viewing .rail-name {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+.stage-copy {
+  margin: 18px 0;
+  max-width: 40rem;
+  min-height: 3.1em;
+  color: var(--ink-soft);
+}
+.stage-body {
+  border: 2px solid var(--rule);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--platform-2);
+}
+
+.map {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--text);
+}
+.view-map {
+  position: relative;
+  border-bottom: 2px solid var(--rule);
+}
+.view-map .map {
+  aspect-ratio: 4 / 3;
+}
+.map-paper {
+  fill: var(--paper-2);
+}
+.map-contours path {
+  fill: none;
+  stroke: var(--contour);
+  stroke-width: 1.4;
+}
+.map-contours path.index {
+  stroke: var(--contour-index);
+  stroke-width: 2;
+}
+.map-streets path {
+  fill: none;
+  stroke: var(--street);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.map-lake {
+  fill: var(--water);
+}
+.map-hatch {
+  stroke: var(--water-ink);
+  stroke-width: 0.8;
+  opacity: 0.35;
+}
+.map-creeks path {
+  fill: none;
+  stroke: var(--water);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.map-labels text {
+  fill: var(--ink-soft);
+  font-weight: 700;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: var(--paper-2);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.map-labels .water {
+  fill: var(--water-ink);
+  font-style: italic;
+  font-weight: 500;
+}
+.map-labels .area {
+  fill: var(--ink);
+  opacity: 0.65;
+}
+.map-labels .place {
+  font-style: italic;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.route-ghost {
+  fill: none;
+  stroke: currentColor;
+  opacity: 0.3;
+  stroke-dasharray: 1 9;
+  stroke-linecap: round;
+}
+.route-origin {
+  fill: var(--paper-2);
+  stroke: currentColor;
+  stroke-width: 3;
+}
+.route-trail {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.map-routes .dim,
+.map-walkers .dim {
+  opacity: 0.35;
+}
+.walker {
+  fill: currentColor;
+  stroke: var(--paper-2);
+  stroke-width: 4;
+}
+.walker-label {
+  fill: var(--ink);
+  font-weight: 800;
+  font-size: 22px;
+  paint-order: stroke;
+  stroke: var(--paper-2);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+}
+.dest-ring {
+  fill: none;
+  stroke: var(--pin);
+  stroke-width: 2.5;
+  opacity: 0.4;
+}
+.dest-dot {
+  fill: var(--pin);
+}
+.dest-core {
+  fill: var(--paper-2);
+}
+.map-dest.arrived .dest-ring {
+  animation: arrive 1.4s ease-out 1;
+}
+.map-tag {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: grid;
+  padding: 8px 14px 6px;
+  background: var(--platform);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  line-height: 1.25;
+  font-size: 0.95rem;
+}
+.map-tag b {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 850;
+}
+.map-tag span {
+  color: var(--ink-soft);
+}
+.who {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+.who th,
+.who td {
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule);
+  font-weight: 400;
+}
+.who thead th {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  padding-top: 12px;
+}
+.who tbody th {
+  font-weight: 800;
+  white-space: nowrap;
+}
+.who .num {
+  text-align: right;
+  white-space: nowrap;
+}
+.who thead th:last-child {
+  text-align: right;
+}
+.dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.considered {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px 16px;
+  font-size: 0.98rem;
+}
+.approvals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  color: var(--ink-soft);
+}
+.approvals span:not(.yes):not(.approvals-label) {
+  opacity: 0.55;
+}
+.approvals .yes {
+  color: var(--ink);
+  font-weight: 700;
+}
+.view-call,
+.view-settle {
+  padding: 20px;
+}
+.view-call.empty,
+.view-settle.empty {
+  min-height: 240px;
+  display: grid;
+  align-items: center;
+  color: var(--ink-soft);
+}
+.call-head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.call-head b {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 850;
+}
+.call-head span {
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.call-pulse {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--l4);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--l4) 50%, transparent);
+  animation: ring 1.6s infinite;
+}
+.call-head.waiting .call-pulse {
+  background: var(--l2);
+}
+.call-head.booked .call-pulse,
+.call-head.failed .call-pulse {
+  animation: none;
+}
+.call-head.failed .call-pulse {
+  background: var(--signal);
+}
+@keyframes ring {
+  70% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+.transcript {
+  list-style: none;
+  padding: 14px 0 0;
+  display: grid;
+  gap: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.transcript li {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 12px;
+}
+.who-label {
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding-top: 2px;
+}
+.transcript .host .who-label,
+.transcript .host p {
+  color: var(--ink-soft);
+}
+.transcript .asking {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--l2) 18%, transparent);
+  font-weight: 700;
+}
+.fineprint {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.dms {
+  list-style: none;
+  padding: 4px 0;
+}
+.dms li {
+  display: grid;
+  grid-template-columns: 18px 4rem minmax(0, 1fr);
+  align-items: baseline;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+.dms li:last-child {
+  border-bottom: 0;
+}
+.dms li.sent {
+  color: var(--ink);
+}
+.dm-name {
+  font-weight: 800;
+  color: var(--ink);
+}
+.ledger-total {
+  font-size: 1.2rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+.ledger {
+  list-style: none;
+  padding: 0;
+}
+.ledger li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  grid-template-areas: "dot who amt" ". state state";
+  gap: 2px 8px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ledger .dot {
+  grid-area: dot;
+}
+.ledger-who {
+  grid-area: who;
+  font-weight: 700;
+}
+.ledger-amt {
+  grid-area: amt;
+  font-family: var(--display);
+  font-weight: 850;
+  font-size: 1.5rem;
+}
+.ledger-state {
+  grid-area: state;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.ledger li.paid .ledger-state {
+  color: var(--l4);
+  font-weight: 700;
+}
+.ledger code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-weight: 400;
+  font-size: 0.85em;
+  color: var(--ink-soft);
+}
+
+/* ───────────────────────── privacy + built ───────────────────────── */
+
+.privacy,
+.built {
+  padding-top: clamp(64px, 9vw, 128px);
+  padding-left: calc(var(--pad) + var(--trunk));
+}
+.rules > div {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(16px, 5vw, 72px);
+  padding: 22px 0 20px;
+  border-top: 2px solid var(--rule);
+}
+.rules > div:last-child {
+  border-bottom: 2px solid var(--rule);
+}
+.rules dt {
+  font-family: var(--display);
+  font-weight: 850;
+  font-size: 2rem;
+  line-height: 1;
+}
+.rules dd {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+}
+.parts {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(24px, 4vw, 56px);
+}
+.parts li {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 20px 0 22px;
+  border-top: 2px solid var(--rule);
+}
+.parts b {
+  font-family: var(--display);
+  font-weight: 850;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+.parts span {
+  color: var(--ink-soft);
+}
+
+/* ───────────────────────── footer ───────────────────────── */
+
+.footer {
+  padding-top: clamp(80px, 10vw, 140px);
+  padding-bottom: 40px;
+  padding-left: calc(var(--pad) + var(--trunk));
+}
+.footer-arrive {
+  position: relative;
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+.footer-dot {
+  position: absolute;
+  left: calc(var(--trunk) / -2);
+  top: 0.62em;
+  font-size: clamp(2.2rem, 4.6vw, 4rem);
+  width: 4px;
+  height: 4px;
+  transform: translate(-50%, -50%);
+}
+.footer-arrive p {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4.6vw, 4rem);
+  line-height: 1;
+  color: var(--ink-soft);
+}
+.footer-arrive b {
+  color: var(--ink);
+  font-weight: 900;
+}
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 2px solid var(--rule);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.footer-meta .wordmark {
+  color: var(--ink);
+}
+
+/* ───────────────────────── motion preferences ───────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .msg.fresh,
+  .phone-banner,
+  .d-table.arrived .d-ring,
+  .map-dest.arrived .dest-ring,
+  .call-pulse,
+  .bubble.typing i {
+    animation: none;
+  }
+}
+
+/* ───────────────────────── responsive ───────────────────────── */
+
+@media (max-width: 1100px) {
+  :root {
+    --trunk: 96px;
+  }
+  .demo-grid {
+    grid-template-columns: 340px minmax(0, 1fr);
+  }
+  .story-grid {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+  .parts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 880px) {
+  :root {
+    --trunk: 0px;
+  }
+  .trunk {
+    display: none;
+  }
+  .hero-grid,
+  .section-head,
+  .rules > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero-grid {
+    min-height: 0;
+  }
+  .hero h1 {
+    font-size: clamp(3.6rem, 17vw, 6rem);
+  }
+  .section-head {
+    align-items: start;
+  }
+  .rules > div {
+    gap: 6px;
+  }
+  /* On phones the story is a plain numbered list; a pinned phone would cover it. */
+  .story-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .story-phone-wrap {
+    display: none;
+  }
+  .station,
+  .station:first-child {
+    min-height: 0;
+    padding: 28px 0;
+    border-top: 2px solid var(--rule);
+  }
+  .station-body {
+    opacity: 1;
+  }
+  .station-num {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 4px solid var(--ink);
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+  .demo-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .phone {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    height: 680px;
+  }
+  .parts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 1.0625rem;
+  }
+  /* The diagram scales down to about half size on a phone, so its type scales up. */
+  .d-name {
+    font-size: 40px;
+  }
+  .d-from,
+  .d-venue-sub {
+    display: none;
+  }
+  .d-venue {
+    font-size: 40px;
+  }
+  .d-clock-sub {
+    font-size: 26px;
+  }
+  .nav-links a:not(:first-child) {
+    display: none;
+  }
+  .phone {
+    border-width: 8px;
+    border-radius: 40px;
+    height: 640px;
+  }
+  .rail-name {
+    font-size: 0.85rem;
+  }
+  .rail-stop {
+    width: 24px;
+    height: 24px;
+    border-width: 5px;
+  }
+  .rail::before,
+  .rail li.done::after,
+  .rail li.current::after {
+    top: 9px;
+  }
+  .who th,
+  .who td {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+  .who thead th:nth-child(2),
+  .who td:nth-child(2) {
+    display: none;
+  }
+  .transcript li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .dms li {
+    grid-template-columns: 18px minmax(0, 1fr);
+  }
+  .dm-text {
+    grid-column: 2;
+  }
+}
+</style>
+<style>/* latin-ext */
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: italic;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=NaPpcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiMhXSWUJ7iyGKiJPeX97Fy3cnHjSBJTCEYPldVzJ7jE4xcsQ&skey=5c5b2364e8689c3&v=v7) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: italic;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=NaPpcYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGseiMhXSWUJ7iyGKiJPeX97Fy3cnHjSBJTCEYPldVwp7jE4xcsQ&skey=5c5b2364e8689c3&v=v7) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=NaPncYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGscKFt4tOOfV4ZmW3srRDv_uNBaCsF45OWWlcZhplwJTkMY4&skey=cc6f4df37b6931db&v=v7) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=NaPncYPdHfdVxJw0IfIP0lvYFqijb-UxCtm5_wdGscKFt4tOOfV4ZmW3srRDv_uNBaCsF45OWWlcZhRlwJTkMY4&skey=cc6f4df37b6931db&v=v7) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Big Shoulders';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=qFdk35CPh40oITJ69S3GFqy5-BQAf4qnj7feObpH_oStqyTi33thrko94eTNCNk0DFVQtQ&skey=223c3b2fa6edee3d&v=v4) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Big Shoulders';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=qFdk35CPh40oITJ69S3GFqy5-BQAf4qnj7feObpH_oStqyTi33thrko94eTNCdk0DFVQtQ&skey=223c3b2fa6edee3d&v=v4) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Big Shoulders';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=qFdk35CPh40oITJ69S3GFqy5-BQAf4qnj7feObpH_oStqyTi33thrko94eTNB9k0DFVQtQ&skey=223c3b2fa6edee3d&v=v4) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+<script type="module" src="/@vite/client"></script>
+</head>
+<body>
+
+    <div id="root"><div class="page"><a class="skip" href="#try">Skip to the demo</a><header class="hero" id="top"><nav class="nav" aria-label="Main"><a href="#top" class="wordmark" aria-label="Rendezvous home"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" class="logo"><g stroke-width="3.4" stroke-linecap="round" fill="none"><path d="M5 5 L12.5 12.5" stroke="var(--l1)" /><path d="M27 5 L19.5 12.5" stroke="var(--l2)" /><path d="M5 27 L12.5 19.5" stroke="var(--l3)" /><path d="M27 27 L19.5 19.5" stroke="var(--l4)" /></g><circle cx="16" cy="16" r="4.6" fill="var(--signal)" /></svg><span>Rendezvous</span></a><div class="nav-links"><a href="#how">How it works</a><a href="#try">Try it</a><a href="#privacy">Privacy</a></div></nav><div class="hero-grid"><div class="hero-copy" data-trunk-start="true"><h1><span class="line">Four routes,</span><span class="line">one table<span class="pin-period" aria-hidden="true"></span><span class="sr-only">.</span></span></h1><p class="lede">Rendezvous lives in iMessage. Text it what you want to do and who's coming. It picks the spot that's fairest to everyone's walk, calls to book the table, tells each of you when to leave, and splits the bill afterward.</p><div class="cta-row"><a class="btn btn-primary" href="#try">Plan a dinner here</a><a class="btn btn-quiet" href="#how">See how it works</a></div></div><figure class="hero-diagram"><svg viewBox="0 0 760 660" role="img" aria-label="Four friends leave from North Campus, Olin Library, Duffield Hall and the Commons at different times, and all arrive at Sangam at 7:15 PM."><text x="40" y="350" class="d-clock">7:15</text><text x="44" y="392" class="d-clock-sub on">Everyone's at the table</text><path d="M70,60 L266.0,60.0 Q300,60 324.0,84.0 L446.0,206.0 Q470,230 470.0,264.0 L470,330" class="d-ghost" style="stroke: var(--l1);" /><path d="M690,70 L690.0,126.0 Q690,160 666.0,184.0 L574.1,275.9 Q560,290 560.0,310.0 L560.0,310.0 Q560,330 540.0,330.0 L470,330" class="d-ghost" style="stroke: var(--l2);" /><path d="M680,600 L634.0,600.0 Q600,600 576.0,576.0 L494.0,494.0 Q470,470 470.0,436.0 L470,330" class="d-ghost" style="stroke: var(--l3);" /><path d="M60,560 L206.0,560.0 Q240,560 264.0,536.0 L346.0,454.0 Q370,430 370.0,396.0 L370.0,364.0 Q370,330 404.0,330.0 L470,330" class="d-ghost" style="stroke: var(--l4);" /><g class="d-rider there" style="color: var(--l1);"><path d="M70,60 L266.0,60.0 Q300,60 324.0,84.0 L446.0,206.0 Q470,230 470.0,264.0 L470,330" class="d-line" style="stroke-dasharray: 563.576, 563.576; stroke-dashoffset: 0;" /><circle cx="70" cy="60" r="11" class="d-origin" /><text x="70" y="102" text-anchor="start" class="d-name">Jason</text><text x="70" y="124" text-anchor="start" class="d-from">North Campus, leaves 6:49</text></g><g class="d-rider there" style="color: var(--l2);"><path d="M690,70 L690.0,126.0 Q690,160 666.0,184.0 L574.1,275.9 Q560,290 560.0,310.0 L560.0,310.0 Q560,330 540.0,330.0 L470,330" class="d-line" style="stroke-dasharray: 390.881, 390.881; stroke-dashoffset: 0;" /><circle cx="690" cy="70" r="11" class="d-origin" /><text x="666" y="112" text-anchor="end" class="d-name">Maya</text><text x="666" y="134" text-anchor="end" class="d-from">Olin Library, leaves 7:05</text></g><g class="d-rider there" style="color: var(--l3);"><path d="M680,600 L634.0,600.0 Q600,600 576.0,576.0 L494.0,494.0 Q470,470 470.0,436.0 L470,330" class="d-line" style="stroke-dasharray: 397.007, 397.007; stroke-dashoffset: 0;" /><circle cx="680" cy="600" r="11" class="d-origin" /><text x="656" y="642" text-anchor="end" class="d-name">Dev</text><text x="656" y="664" text-anchor="end" class="d-from">Duffield Hall, leaves 7:09</text></g><g class="d-rider there" style="color: var(--l4);"><path d="M60,560 L206.0,560.0 Q240,560 264.0,536.0 L346.0,454.0 Q370,430 370.0,396.0 L370.0,364.0 Q370,330 404.0,330.0 L470,330" class="d-line" style="stroke-dasharray: 544.197, 544.197; stroke-dashoffset: 0;" /><circle cx="60" cy="560" r="11" class="d-origin" /><text x="60" y="602" text-anchor="start" class="d-name">Ana</text><text x="60" y="624" text-anchor="start" class="d-from">The Commons, leaves 7:00</text></g><g class="d-table arrived" transform="translate(470 330)"><circle r="44" class="d-ring" /><circle r="30" class="d-station" /><circle r="15" class="d-dot" /></g><text x="448" y="266" text-anchor="end" class="d-venue">Sangam</text><text x="448" y="288" text-anchor="end" class="d-venue-sub">table for 4, 7:15 PM</text></svg><button class="replay">Replay</button></figure></div></header><main><section class="story" id="how" aria-labelledby="how-title"><div class="story-head"><h2 id="how-title">From “dinner?” to “paid back” in one thread</h2></div><div class="story-grid"><ol class="stations"><li data-index="0" class="station past"><span class="station-mark" data-station="true" aria-hidden="true"></span><div class="station-body"><p class="station-name"><span class="station-num">1</span>Ask</p><h3>Say what you want and who's coming</h3><p>Text Rendezvous like you'd text a friend. It saves everyone's numbers, so next time "dinner with the roommates" is enough.</p><p class="station-detail">No app to download. It's just iMessage.</p></div></li><li data-index="1" class="station active"><span class="station-mark" data-station="true" aria-hidden="true"></span><div class="station-body"><p class="station-name"><span class="station-num">2</span>Plan</p><h3>It finds the fairest spot</h3><p>It checks when everyone's free, what they can spend, and how far each person walks. Then it picks the place where the longest walk is shortest.</p><p class="station-detail">Calendars share free/busy only. Balances and locations stay private.</p></div></li><li data-index="2" class="station"><span class="station-mark" data-station="true" aria-hidden="true"></span><div class="station-body"><p class="station-name"><span class="station-num">3</span>Agree</p><h3>Everyone taps 👍, or asks for a change</h3><p>A reply like “can we do Indian instead” starts a new round in seconds. After three rounds, the organizer picks.</p><p class="station-detail">Quiet friends get ten minutes before it locks in.</p></div></li><li data-index="3" class="station"><span class="station-mark" data-station="true" aria-hidden="true"></span><div class="station-body"><p class="station-name"><span class="station-num">4</span>Book</p><h3>It calls the restaurant</h3><p>Grok Voice calls, says it's an AI, and books the table. When the host asks something only you can answer, the question lands in your chat.</p><p class="station-detail">It never gives out a card number.</p></div></li><li data-index="4" class="station"><span class="station-mark" data-station="true" aria-hidden="true"></span><div class="station-body"><p class="station-name"><span class="station-num">5</span>Go</p><h3>Everyone gets a nudge to leave</h3><p>Each person gets a text 15 minutes before they need to head out, timed to their own walk, with directions that open in Maps.</p><p class="station-detail">Different routes, one arrival time.</p></div></li><li data-index="5" class="station"><span class="station-mark" data-station="true" aria-hidden="true"></span><div class="station-body"><p class="station-name"><span class="station-num">6</span>Settle</p><h3>The bill splits itself</h3><p>Whoever paid says so. Each person taps 👍 on their own line, and only then does their money move, through Capital One Nessie.</p><p class="station-detail">Nobody can pay on someone else's behalf.</p></div></li></ol><div class="story-phone-wrap"><div class="phone story-phone" aria-hidden="true"><div class="phone-status"><span>5:42</span><span class="phone-status-dot"></span></div><header class="phone-head"><div class="phone-avatars"><span class="agent-avatar"><svg viewBox="0 0 32 32" width="100%" height="100%" aria-hidden="true"><g stroke-width="3.2" stroke-linecap="round" fill="none"><path d="M7 8 L13 13.5" stroke="var(--f1)" /><path d="M25 8 L19 13.5" stroke="var(--f2)" /><path d="M7 24 L13 18.5" stroke="var(--f3)" /><path d="M25 24 L19 18.5" stroke="var(--f4)" /></g><circle cx="16" cy="16" r="3.6" fill="var(--pin)" /></svg></span></div><div class="phone-title">Rendezvous</div></header><div class="phone-thread"><div class="msg out"><div class="bubble"><span class="bubble-line">dinner tonight, under $15 each, with Maya, Dev and Ana</span></div></div><div class="msg in agent"><div class="bubble"><span class="bubble-line">On it. Checking calendars, budgets and walks.</span></div></div><div class="msg in agent fresh"><div class="bubble has-reactions"><span class="bubble-line">How about this: Mama Teresa Pizzeria, tonight at 6:45 PM.</span><span class="bubble-line">Walks: Jason 29 min, Maya 11, Dev 5, Ana 19.</span><span class="bubble-line">React 👍 to lock it in, or reply with a change.</span><span class="tapbacks">👍<small>2</small></span></div></div></div></div></div></div></section><section class="demo night" id="try" aria-labelledby="try-title"><div class="section-head"><h2 id="try-title">Now plan one yourself</h2><p>This runs the real Rendezvous planner in your browser. You're Jason, with three pretend friends, a pretend restaurant and pretend money. Type anything, or tap a suggestion.</p></div><div class="demo-grid"><div class="phone" aria-label="Group chat demo"><div class="phone-status" aria-hidden="true"><span>5:41</span><span class="phone-status-icons"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" /><rect x="4.5" y="5" width="3" height="6" rx="1" /><rect x="9" y="2.5" width="3" height="8.5" rx="1" /><rect x="13.5" y="0" width="3" height="11" rx="1" /></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".45" /><rect x="2" y="2" width="15" height="8" rx="1.8" /><rect x="22.5" y="4" width="1.8" height="4" rx=".9" opacity=".45" /></svg></span></div><header class="phone-head"><div class="phone-avatars" aria-hidden="true"><span style="background: var(--f2);">M</span><span style="background: var(--f3);">D</span><span style="background: var(--f4);">A</span><span class="agent-avatar"><svg viewBox="0 0 32 32" width="100%" height="100%" aria-hidden="true"><g stroke-width="3.2" stroke-linecap="round" fill="none"><path d="M7 8 L13 13.5" stroke="var(--f1)" /><path d="M25 8 L19 13.5" stroke="var(--f2)" /><path d="M7 24 L13 18.5" stroke="var(--f3)" /><path d="M25 24 L19 18.5" stroke="var(--f4)" /></g><circle cx="16" cy="16" r="3.6" fill="var(--pin)" /></svg></span></div><div class="phone-title">Dinner crew</div><div class="phone-subtitle">Maya, Dev, Ana and Rendezvous</div></header><div class="phone-thread" role="log" aria-live="polite" aria-label="Messages"><div class="thread-stamp"><b>Today</b> 5:41 PM</div><p class="thread-empty">You're Jason, and Maya, Dev and Ana are in this chat with Rendezvous. Mention it below and say what you want to do.</p></div><div class="phone-chips" aria-label="Suggested replies"><button class="chip primary">@Rendezvous dinner tonight, under $15 each</button><button class="chip">@Rendezvous lunch tomorrow at noon</button></div><form class="phone-compose"><label class="sr-only" for="compose">Message the group as Jason</label><input id="compose" placeholder="iMessage" autocomplete="off" enterkeyhint="send" value=""><button type="submit" class="send" disabled aria-label="Send"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg></button></form></div><section class="backstage" aria-label="What Rendezvous is doing"><ol class="rail"><li class="current viewing"><button aria-current="step"><span class="rail-stop" aria-hidden="true"></span><span class="rail-name">Ask</span></button></li><li><button disabled><span class="rail-stop" aria-hidden="true"></span><span class="rail-name">Plan</span></button></li><li><button disabled><span class="rail-stop" aria-hidden="true"></span><span class="rail-name">Agree</span></button></li><li><button disabled><span class="rail-stop" aria-hidden="true"></span><span class="rail-name">Book</span></button></li><li><button disabled><span class="rail-stop" aria-hidden="true"></span><span class="rail-name">Go</span></button></li><li><button disabled><span class="rail-stop" aria-hidden="true"></span><span class="rail-name">Settle</span></button></li></ol><p class="stage-copy">Someone texts Rendezvous what they want to do and who's coming, or mentions it in a group chat.</p><div class="stage-body"><div class="view-plan"><div class="view-map"><svg class="map" viewBox="-7.22296099310546 49.99999999996372 1080 862.5531914893492" role="img" aria-label="Where each friend is right now" preserveAspectRatio="xMidYMid slice"><defs><pattern id="hatch-_r_0_" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="9" class="map-hatch" /></pattern></defs><rect x="-50" y="-50" width="1100" height="1100" class="map-paper" /><g class="map-contours"><path d="M271.9,1000.0 C275.0,993.1 285.0,972.2 290.4,958.3 C295.9,944.4 301.0,930.6 304.6,916.7 C308.3,902.8 310.7,888.9 312.1,875.0 C313.6,861.1 313.5,847.2 313.3,833.3 C313.2,819.4 311.8,805.6 311.3,791.7 C310.9,777.8 308.0,763.9 310.6,750.0 C313.3,736.1 319.8,722.2 327.0,708.3 C334.2,694.4 352.0,680.6 353.7,666.7 C355.4,652.8 339.9,638.9 337.3,625.0 C334.7,611.1 337.7,597.2 338.3,583.3 C339.0,569.4 341.5,555.6 341.4,541.7 C341.3,527.8 339.8,513.9 337.6,500.0 C335.4,486.1 331.2,472.2 328.2,458.3 C325.1,444.4 318.9,430.6 319.4,416.7 C320.0,402.8 325.8,388.9 331.4,375.0 C337.0,361.1 353.0,347.2 353.3,333.3 C353.7,319.4 339.3,305.6 333.5,291.7 C327.7,277.8 320.2,263.9 318.6,250.0 C317.0,236.1 322.1,222.2 324.1,208.3 C326.0,194.4 329.0,180.6 330.4,166.7 C331.7,152.8 332.2,138.9 332.2,125.0 C332.1,111.1 330.9,97.2 330.2,83.3 C329.5,69.4 328.0,55.6 327.8,41.7 C327.5,27.8 328.7,6.9 328.9,0.0" /><path d="M351.2,1000.0 C352.1,993.1 356.2,972.2 357.0,958.3 C357.7,944.4 356.8,930.6 355.7,916.7 C354.7,902.8 352.2,888.9 350.4,875.0 C348.7,861.1 346.3,847.2 345.2,833.3 C344.1,819.4 343.3,805.6 343.7,791.7 C344.1,777.8 343.5,763.9 347.6,750.0 C351.6,736.1 360.2,722.2 367.9,708.3 C375.6,694.4 393.4,680.6 393.8,666.7 C394.2,652.8 375.8,638.9 370.1,625.0 C364.3,611.1 362.5,597.2 359.1,583.3 C355.8,569.4 353.3,555.6 350.0,541.7 C346.6,527.8 342.2,513.9 339.0,500.0 C335.8,486.1 332.0,472.2 330.7,458.3 C329.5,444.4 327.0,430.6 331.6,416.7 C336.2,402.8 347.7,388.9 358.2,375.0 C368.7,361.1 390.2,347.2 394.6,333.3 C398.9,319.4 388.1,305.6 384.3,291.7 C380.5,277.8 373.6,263.9 371.9,250.0 C370.2,236.1 373.6,222.2 374.2,208.3 C374.9,194.4 375.5,180.6 375.7,166.7 C376.0,152.8 375.4,138.9 375.9,125.0 C376.3,111.1 376.6,97.2 378.4,83.3 C380.2,69.4 382.8,55.6 386.5,41.7 C390.2,27.8 398.3,6.9 400.6,0.0" /><path d="M386.2,1000.0 C384.8,993.1 380.6,972.2 377.7,958.3 C374.9,944.4 371.3,930.6 369.0,916.7 C366.8,902.8 364.8,888.9 364.1,875.0 C363.3,861.1 363.7,847.2 364.6,833.3 C365.6,819.4 367.7,805.6 369.6,791.7 C371.6,777.8 372.4,763.9 376.3,750.0 C380.3,736.1 387.6,722.2 393.4,708.3 C399.2,694.4 413.7,680.6 411.2,666.7 C408.7,652.8 386.5,638.9 378.5,625.0 C370.4,611.1 366.4,597.2 362.7,583.3 C359.1,569.4 357.6,555.6 356.6,541.7 C355.6,527.8 355.4,513.9 356.8,500.0 C358.1,486.1 360.5,472.2 364.7,458.3 C368.9,444.4 372.6,430.6 381.7,416.7 C390.9,402.8 406.5,388.9 419.4,375.0 C432.3,361.1 454.7,347.2 459.0,333.3 C463.4,319.4 450.7,305.6 445.2,291.7 C439.7,277.8 429.8,263.9 426.2,250.0 C422.6,236.1 423.8,222.2 423.7,208.3 C423.7,194.4 424.4,180.6 425.9,166.7 C427.4,152.8 429.4,138.9 432.5,125.0 C435.6,111.1 439.9,97.2 444.5,83.3 C449.2,69.4 455.0,55.6 460.2,41.7 C465.3,27.8 472.9,6.9 475.5,0.0" /><path d="M384.0,1000.0 C382.9,993.1 378.4,972.2 377.2,958.3 C376.0,944.4 375.9,930.6 376.7,916.7 C377.4,902.8 379.6,888.9 381.7,875.0 C383.9,861.1 387.0,847.2 389.3,833.3 C391.6,819.4 394.0,805.6 395.4,791.7 C396.8,777.8 395.6,763.9 397.8,750.0 C400.0,736.1 404.4,722.2 408.7,708.3 C412.9,694.4 425.6,680.6 423.2,666.7 C420.7,652.8 399.7,638.9 394.0,625.0 C388.4,611.1 388.6,597.2 389.5,583.3 C390.4,569.4 395.1,555.6 399.4,541.7 C403.8,527.8 409.8,513.9 415.6,500.0 C421.4,486.1 427.9,472.2 434.3,458.3 C440.7,444.4 445.1,430.6 453.8,416.7 C462.4,402.8 475.6,388.9 486.0,375.0 C496.4,361.1 514.9,347.2 516.1,333.3 C517.4,319.4 501.2,305.6 493.6,291.7 C486.1,277.8 474.7,263.9 470.9,250.0 C467.1,236.1 469.4,222.2 470.8,208.3 C472.1,194.4 475.7,180.6 479.1,166.7 C482.4,152.8 487.0,138.9 491.0,125.0 C495.1,111.1 499.8,97.2 503.1,83.3 C506.4,69.4 509.5,55.6 511.0,41.7 C512.5,27.8 511.8,6.9 511.9,0.0" class="index" /><path d="M387.4,1000.0 C388.6,993.1 391.3,972.2 394.2,958.3 C397.0,944.4 401.1,930.6 404.5,916.7 C407.9,902.8 411.7,888.9 414.4,875.0 C417.0,861.1 419.2,847.2 420.5,833.3 C421.7,819.4 421.8,805.6 421.9,791.7 C422.0,777.8 419.0,763.9 421.1,750.0 C423.2,736.1 428.3,722.2 434.5,708.3 C440.7,694.4 456.9,680.6 458.4,666.7 C459.9,652.8 444.3,638.9 443.4,625.0 C442.5,611.1 448.2,597.2 453.0,583.3 C457.7,569.4 465.9,555.6 471.9,541.7 C477.8,527.8 484.0,513.9 488.6,500.0 C493.1,486.1 496.4,472.2 499.4,458.3 C502.3,444.4 501.7,430.6 506.1,416.7 C510.5,402.8 518.8,388.9 525.9,375.0 C532.9,361.1 548.5,347.2 548.3,333.3 C548.2,319.4 531.9,305.6 524.8,291.7 C517.7,277.8 508.2,263.9 505.8,250.0 C503.4,236.1 508.0,222.2 510.2,208.3 C512.4,194.4 516.5,180.6 518.9,166.7 C521.3,152.8 523.7,138.9 524.6,125.0 C525.4,111.1 525.3,97.2 524.0,83.3 C522.8,69.4 520.0,55.6 516.9,41.7 C513.8,27.8 507.5,6.9 505.6,0.0" /><path d="M423.5,1000.0 C425.8,993.1 433.3,972.2 437.3,958.3 C441.3,944.4 444.9,930.6 447.5,916.7 C450.0,902.8 451.5,888.9 452.6,875.0 C453.7,861.1 453.6,847.2 454.0,833.3 C454.4,819.4 454.1,805.6 455.1,791.7 C456.2,777.8 455.5,763.9 460.4,750.0 C465.3,736.1 474.7,722.2 484.5,708.3 C494.4,694.4 515.2,680.6 519.6,666.7 C524.1,652.8 511.2,638.9 511.1,625.0 C511.0,611.1 516.2,597.2 519.0,583.3 C521.8,569.4 526.1,555.6 527.8,541.7 C529.5,527.8 529.7,513.9 529.2,500.0 C528.7,486.1 526.1,472.2 524.8,458.3 C523.4,444.4 519.0,430.6 521.2,416.7 C523.4,402.8 530.9,388.9 537.9,375.0 C545.0,361.1 562.3,347.2 563.5,333.3 C564.6,319.4 550.9,305.6 545.1,291.7 C539.3,277.8 531.3,263.9 528.7,250.0 C526.2,236.1 529.7,222.2 529.8,208.3 C529.9,194.4 530.4,180.6 529.3,166.7 C528.1,152.8 525.7,138.9 523.0,125.0 C520.3,111.1 516.2,97.2 512.9,83.3 C509.6,69.4 505.7,55.6 503.2,41.7 C500.7,27.8 498.9,6.9 498.1,0.0" /><path d="M480.2,1000.0 C481.5,993.1 486.0,972.2 487.7,958.3 C489.3,944.4 489.6,930.6 490.2,916.7 C490.8,902.8 490.5,888.9 491.1,875.0 C491.8,861.1 492.4,847.2 494.3,833.3 C496.2,819.4 498.7,805.6 502.3,791.7 C505.8,777.8 508.6,763.9 515.6,750.0 C522.5,736.1 533.9,722.2 544.0,708.3 C554.0,694.4 573.8,680.6 575.8,666.7 C577.9,652.8 560.8,638.9 556.1,625.0 C551.4,611.1 550.3,597.2 547.6,583.3 C544.9,569.4 542.9,555.6 540.0,541.7 C537.1,527.8 533.1,513.9 530.2,500.0 C527.3,486.1 523.7,472.2 522.5,458.3 C521.3,444.4 518.8,430.6 522.9,416.7 C526.9,402.8 537.8,388.9 547.0,375.0 C556.3,361.1 576.2,347.2 578.6,333.3 C580.9,319.4 567.5,305.6 561.0,291.7 C554.5,277.8 544.4,263.9 539.6,250.0 C534.8,236.1 534.8,222.2 532.3,208.3 C529.9,194.4 527.4,180.6 525.0,166.7 C522.6,152.8 519.6,138.9 518.0,125.0 C516.4,111.1 515.1,97.2 515.4,83.3 C515.8,69.4 517.4,55.6 520.2,41.7 C522.9,27.8 530.1,6.9 532.1,0.0" /><path d="M528.9,1000.0 C528.8,993.1 528.1,972.2 527.9,958.3 C527.8,944.4 527.3,930.6 528.0,916.7 C528.7,902.8 530.0,888.9 532.2,875.0 C534.3,861.1 537.6,847.2 540.9,833.3 C544.2,819.4 548.4,805.6 552.0,791.7 C555.5,777.8 557.3,763.9 562.0,750.0 C566.6,736.1 574.0,722.2 579.6,708.3 C585.3,694.4 599.1,680.6 595.9,666.7 C592.7,652.8 569.5,638.9 560.5,625.0 C551.5,611.1 546.4,597.2 541.6,583.3 C536.9,569.4 534.3,555.6 532.0,541.7 C529.8,527.8 528.4,513.9 528.3,500.0 C528.1,486.1 528.9,472.2 531.1,458.3 C533.3,444.4 534.8,430.6 541.4,416.7 C548.0,402.8 560.8,388.9 570.8,375.0 C580.7,361.1 600.0,347.2 601.3,333.3 C602.5,319.4 586.7,305.6 578.5,291.7 C570.3,277.8 557.7,263.9 552.1,250.0 C546.5,236.1 546.0,222.2 544.8,208.3 C543.5,194.4 543.6,180.6 544.8,166.7 C546.0,152.8 548.2,138.9 551.7,125.0 C555.2,111.1 560.3,97.2 565.6,83.3 C571.0,69.4 577.8,55.6 583.9,41.7 C590.0,27.8 599.1,6.9 602.2,0.0" class="index" /><path d="M562.3,1000.0 C562.2,993.1 561.4,972.2 562.1,958.3 C562.8,944.4 564.6,930.6 566.7,916.7 C568.7,902.8 571.9,888.9 574.3,875.0 C576.8,861.1 579.7,847.2 581.4,833.3 C583.0,819.4 584.1,805.6 584.1,791.7 C584.0,777.8 580.7,763.9 580.9,750.0 C581.1,736.1 583.2,722.2 585.3,708.3 C587.3,694.4 597.7,680.6 593.2,666.7 C588.6,652.8 565.5,638.9 557.9,625.0 C550.3,611.1 548.6,597.2 547.6,583.3 C546.5,569.4 549.3,555.6 551.6,541.7 C553.9,527.8 557.8,513.9 561.4,500.0 C564.9,486.1 569.0,472.2 573.0,458.3 C577.0,444.4 578.9,430.6 585.3,416.7 C591.7,402.8 602.6,388.9 611.3,375.0 C620.0,361.1 636.9,347.2 637.2,333.3 C637.6,319.4 620.9,305.6 613.4,291.7 C606.0,277.8 595.3,263.9 592.5,250.0 C589.7,236.1 593.7,222.2 596.7,208.3 C599.8,194.4 605.5,180.6 610.9,166.7 C616.3,152.8 623.2,138.9 629.3,125.0 C635.4,111.1 642.2,97.2 647.5,83.3 C652.9,69.4 657.8,55.6 661.2,41.7 C664.6,27.8 666.8,6.9 667.9,0.0" /><path d="M597.7,1000.0 C598.6,993.1 601.1,972.2 603.0,958.3 C604.9,944.4 607.6,930.6 609.1,916.7 C610.6,902.8 612.0,888.9 612.1,875.0 C612.2,861.1 611.3,847.2 609.7,833.3 C608.0,819.4 604.9,805.6 602.2,791.7 C599.4,777.8 593.6,763.9 593.2,750.0 C592.8,736.1 595.6,722.2 599.7,708.3 C603.9,694.4 618.4,680.6 618.2,666.7 C618.0,652.8 601.0,638.9 598.7,625.0 C596.4,611.1 600.8,597.2 604.2,583.3 C607.6,569.4 614.5,555.6 619.1,541.7 C623.8,527.8 628.7,513.9 632.3,500.0 C635.9,486.1 638.3,472.2 640.8,458.3 C643.3,444.4 642.5,430.6 647.3,416.7 C652.1,402.8 661.3,388.9 669.7,375.0 C678.1,361.1 695.6,347.2 697.6,333.3 C699.6,319.4 686.1,305.6 681.7,291.7 C677.4,277.8 671.1,263.9 671.6,250.0 C672.0,236.1 679.6,222.2 684.5,208.3 C689.4,194.4 696.1,180.6 700.7,166.7 C705.4,152.8 709.8,138.9 712.5,125.0 C715.2,111.1 716.7,97.2 717.0,83.3 C717.3,69.4 715.9,55.6 714.3,41.7 C712.7,27.8 708.5,6.9 707.4,0.0" /></g><g class="map-streets"><path d="M34.4,885.1 C70.5,885.1 307.7,885.1 343.7,885.1" /><path d="M34.4,842.6 C74.1,841.6 322.5,836.0 375.0,834.0 C427.5,832.1 461.4,828.0 484.4,825.5 C507.3,823.0 561.7,814.3 571.9,812.8" /><path d="M34.4,800.0 C88.7,798.0 445.7,785.0 500.0,783.0" /><path d="M34.4,753.2 C66.8,751.7 280.1,741.9 312.5,740.4" /><path d="M34.4,702.1 C70.5,700.6 307.7,690.9 343.7,689.4" /><path d="M121.9,936.2 C121.9,898.9 121.9,654.3 121.9,617.0" /><path d="M187.5,936.2 C187.5,898.9 187.5,654.3 187.5,617.0" /><path d="M234.4,936.2 C234.4,898.9 234.4,654.3 234.4,617.0" /><path d="M271.9,936.2 C271.9,901.4 271.9,673.0 271.9,638.3" /><path d="M593.7,936.2 C593.7,902.9 594.8,700.7 593.7,651.1 C592.7,601.4 585.5,527.0 584.4,510.6" /><path d="M562.5,842.6 C563.2,823.2 568.0,696.0 568.7,676.6" /><path d="M593.7,723.4 C617.4,724.4 749.5,726.0 796.9,731.9 C844.3,737.9 976.3,769.5 1000.0,774.5" /><path d="M593.7,787.2 C608.3,787.2 704.2,787.2 718.7,787.2" /><path d="M290.6,629.8 C307.8,619.9 408.3,566.5 437.5,544.7 C466.7,522.8 523.5,457.4 540.6,442.6 C557.8,427.7 579.3,420.0 584.4,417.0" /><path d="M475.0,808.5 C479.0,788.7 503.2,675.0 509.4,638.3 C515.6,601.6 525.9,510.5 528.1,493.6" /><path d="M500.0,591.5 C515.7,592.5 599.7,599.0 634.4,600.0 C669.0,601.0 754.2,604.5 796.9,600.0 C839.5,595.5 976.3,566.2 1000.0,561.7" /><path d="M746.9,646.8 C748.3,613.0 757.9,391.2 759.4,357.4" /><path d="M584.4,417.0 C590.2,398.2 609.6,290.1 634.4,255.3 C659.2,220.6 761.5,146.5 796.9,119.1 C832.2,91.8 921.1,32.7 937.5,21.3" /><path d="M796.9,348.9 C796.9,308.2 796.9,40.7 796.9,0.0" /></g><path d="M0.0,0.0 C21.9,0.0 167.1,-6.0 187.5,0.0 C207.9,6.0 181.9,39.1 175.0,51.1 C168.1,63.0 140.2,91.2 128.1,102.1 C116.1,113.0 86.8,137.2 71.9,144.7 C56.9,152.1 8.4,163.5 0.0,166.0 L0,0 Z" class="map-lake" /><path d="M0.0,0.0 C21.9,0.0 167.1,-6.0 187.5,0.0 C207.9,6.0 181.9,39.1 175.0,51.1 C168.1,63.0 140.2,91.2 128.1,102.1 C116.1,113.0 86.8,137.2 71.9,144.7 C56.9,152.1 8.4,163.5 0.0,166.0 L0,0 Z" fill="url(#hatch-_r_0_)" /><ellipse cx="834.3749999998126" cy="327.65957446799894" rx="17" ry="7" class="map-lake" /><g class="map-creeks"><path d="M1000.0,259.6 C986.5,265.5 909.9,302.2 884.4,310.6 C858.9,319.1 807.9,333.9 781.2,331.9 C754.6,329.9 682.9,297.1 656.2,293.6 C629.6,290.1 577.9,293.7 553.1,302.1 C528.3,310.6 471.8,355.0 443.7,366.0 C415.7,376.9 338.4,403.7 312.5,395.7 C286.6,387.8 241.2,330.1 221.9,297.9 C202.6,265.6 155.6,140.0 146.9,119.1" /><path d="M1000.0,600.0 C979.2,603.0 855.8,621.1 821.9,625.5 C788.0,630.0 732.7,634.8 709.4,638.3 C686.0,641.8 644.5,648.4 621.9,655.3 C599.3,662.3 540.8,687.4 515.6,697.9 C490.5,708.3 435.4,736.7 406.2,744.7 C377.1,752.6 296.6,767.9 265.6,766.0 C234.6,764.0 167.6,736.6 140.6,727.7 C113.6,718.7 46.8,693.8 34.4,689.4" /><path d="M781.2,1000.0 C754.6,994.5 599.1,961.1 553.1,953.2 C507.2,945.2 425.4,933.4 387.5,931.9 C349.6,930.4 269.3,943.4 228.1,940.4 C186.9,937.4 57.0,910.4 34.4,906.4" /><path d="M28.1,1000.0 C28.9,952.8 32.6,695.0 34.4,595.7 C36.2,496.5 42.7,201.1 43.7,148.9" /></g><g class="map-labels" style="font-size: 21.6px;"><text x="374.9999999996114" y="340.93617021277623" class="water" transform="rotate(-6 374.9999999996114 348.93617021277623)">Fall Creek</text><text x="303.124999999882" y="728.1702127660308" class="water" transform="rotate(2 303.124999999882 736.1702127660308)">Cascadilla Creek</text><text x="437.4999999999167" y="962.2127659573722" class="water" transform="rotate(-3 437.4999999999167 970.2127659573722)">Six Mile Creek</text><text x="28.124999999604483" y="46.80851063832875" class="water">Cayuga Lake</text><text x="834.3749999998126" y="268.0851063830456" class="water">Beebe Lake</text><text x="884.3749999997016" y="51.06382978740517" class="area">North Campus</text><text x="653.1249999999931" y="429.78723404250684" class="area">Arts Quad</text><text x="749.9999999996669" y="676.595744680775" class="area">Engineering Quad</text><text x="653.1249999999931" y="821.2765957445355" class="area">Collegetown</text><text x="246.8749999997849" y="876.5957446807147" class="area">The Commons</text><text x="103.12499999988204" y="651.0638297872238" class="area">Downtown</text><text x="415.6249999996323" y="574.4680851062673" class="place" transform="rotate(-62 415.6249999996323 574.4680851062673)">East Hill</text></g><g class="map-routes"><g style="color: var(--f1);"><path d="" class="route-ghost" style="stroke-width: 3.24;" /><path d="" class="route-trail" style="stroke-width: 6.48;" /></g><g style="color: var(--f2);"><path d="" class="route-ghost" style="stroke-width: 3.24;" /><path d="" class="route-trail" style="stroke-width: 6.48;" /></g><g style="color: var(--f3);"><path d="" class="route-ghost" style="stroke-width: 3.24;" /><path d="" class="route-trail" style="stroke-width: 6.48;" /></g><g style="color: var(--f4);"><path d="" class="route-ghost" style="stroke-width: 3.24;" /><path d="" class="route-trail" style="stroke-width: 6.48;" /></g></g><g class="map-walkers"><g transform="translate(844.3749999998793 119.99999999996372) scale(1.08)" style="color: var(--f1);"><circle r="11" class="walker" /><text x="17" y="5" class="walker-label">Jason</text></g><g transform="translate(631.5624999998079 478.2978723403453) scale(1.08)" style="color: var(--f2);"><circle r="11" class="walker" /><text x="17" y="5" class="walker-label">Maya</text></g><g transform="translate(686.8750000000513 617.4468085105481) scale(1.08)" style="color: var(--f3);"><circle r="11" class="walker" /><text x="17" y="5" class="walker-label">Dev</text></g><g transform="translate(231.24999999970856 842.5531914893129) scale(1.08)" style="color: var(--f4);"><circle r="11" class="walker" /><text x="17" y="5" class="walker-label">Ana</text></g></g></svg></div><table class="who"><caption class="sr-only">Each friend's calendar and walk</caption><thead><tr><th scope="col">Friend</th><th scope="col">Calendar (free/busy only)</th><th scope="col">Location</th></tr></thead><tbody><tr><th scope="row"><span class="dot" aria-hidden="true" style="background: var(--f1);"></span>Jason</th><td>Busy until 6:15 PM</td><td class="num">North Campus</td></tr><tr><th scope="row"><span class="dot" aria-hidden="true" style="background: var(--f2);"></span>Maya</th><td>Free until 8:30 PM</td><td class="num">Olin Library</td></tr><tr><th scope="row"><span class="dot" aria-hidden="true" style="background: var(--f3);"></span>Dev</th><td>Busy until 6:30 PM</td><td class="num">Duffield Hall</td></tr><tr><th scope="row"><span class="dot" aria-hidden="true" style="background: var(--f4);"></span>Ana</th><td class="muted">No calendar linked</td><td class="num">The Commons</td></tr></tbody></table><p class="considered muted">Locations only feed the walking math. Nobody else in the plan sees them.</p></div></div></section></div></section><section class="privacy" id="privacy" aria-labelledby="privacy-title"><div class="section-head"><h2 id="privacy-title">It knows just enough</h2><p>Rendezvous takes the least it needs for each step, and nothing moves without the right person's say-so.</p></div><dl class="rules"><div><dt>Calendars</dt><dd>It sees when you're busy, never what you're doing. Event names and guests stay on your calendar.</dd></div><div><dt>Location</dt><dd>Where you are only feeds the walking math. Nobody else in the plan sees it.</dd></div><div><dt>Balances</dt><dd>Your balance only rules out places you can't afford. Nobody in the chat ever sees it.</dd></div><div><dt>Payments</dt><dd>Money moves only when the person who owes taps 👍 on their own line. Anyone else's tap is ignored.</dd></div><div><dt>Phone calls</dt><dd>It says it's an AI at the start of every call, and it never speaks or stores a card or account number.</dd></div></dl></section><section class="built" id="built" aria-labelledby="built-title"><div class="section-head"><h2 id="built-title">What it runs on</h2><p>One agent server holds the plan and talks to the group through Photon. A separate Python bridge handles the phone audio. Built in Cursor at BigRed//Hacks 2026.</p></div><ul class="parts"><li><b>Photon</b><span>The whole interface: iMessage threads and group chats, tapback approvals and departure texts.</span></li><li><b>Grok</b><span>Reads what the group asks for, and Grok Voice places the reservation call.</span></li><li><b>Capital One Nessie</b><span>Ithaca restaurants as merchants, budgets from balances, and the transfers that settle the bill.</span></li><li><b>Google Maps and Calendar</b><span>Walking times for every route, and free/busy for every calendar.</span></li><li><b>Twilio and Pipecat</b><span>Bridge the restaurant's phone line to the voice agent.</span></li><li><b>GoDaddy Registry</b><span>tablefor.us, because it's a table for us.</span></li></ul></section></main><footer class="footer"><div class="footer-arrive"><span class="footer-dot" data-trunk-end="true" aria-hidden="true"></span><p><b>Table for 4 at 7:15.</b> Everyone made it.</p></div><div class="footer-meta"><span class="wordmark small"><svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true" class="logo"><g stroke-width="3.4" stroke-linecap="round" fill="none"><path d="M5 5 L12.5 12.5" stroke="var(--l1)" /><path d="M27 5 L19.5 12.5" stroke="var(--l2)" /><path d="M5 27 L12.5 19.5" stroke="var(--l3)" /><path d="M27 27 L19.5 19.5" stroke="var(--l4)" /></g><circle cx="16" cy="16" r="4.6" fill="var(--signal)" /></svg>Rendezvous</span><span>Made at BigRed//Hacks 2026 in Ithaca, NY. <a href="https://tablefor.us">tablefor.us</a></span></div></footer><svg class="trunk" width="1920" height="9099" viewBox="0 0 1920 9099" aria-hidden="true"><path d="M404,1341.265625 L404.0,8799.6 Q404,8823.59375 409.4,8847.0 L422,8901.59375" class="trunk-ghost" style="stroke: var(--l1);" /><path d="M416,1341.265625 L416.0,8811.6 Q416,8835.59375 418.2,8859.5 L422,8901.59375" class="trunk-ghost" style="stroke: var(--l2);" /><path d="M428,1341.265625 L428.0,8811.6 Q428,8835.59375 425.8,8859.5 L422,8901.59375" class="trunk-ghost" style="stroke: var(--l3);" /><path d="M440,1341.265625 L440.0,8799.6 Q440,8823.59375 434.6,8847.0 L422,8901.59375" class="trunk-ghost" style="stroke: var(--l4);" /><path d="M404,1341.265625 L404.0,8799.6 Q404,8823.59375 409.4,8847.0 L422,8901.59375" class="trunk-line" style="stroke: var(--l1); stroke-dasharray: 7562.17, 7562.17; stroke-dashoffset: 7562.17;" /><path d="M416,1341.265625 L416.0,8811.6 Q416,8835.59375 418.2,8859.5 L422,8901.59375" class="trunk-line" style="stroke: var(--l2); stroke-dasharray: 7560.57, 7560.57; stroke-dashoffset: 7560.57;" /><path d="M428,1341.265625 L428.0,8811.6 Q428,8835.59375 425.8,8859.5 L422,8901.59375" class="trunk-line" style="stroke: var(--l3); stroke-dasharray: 7560.57, 7560.57; stroke-dashoffset: 7560.57;" /><path d="M440,1341.265625 L440.0,8799.6 Q440,8823.59375 434.6,8847.0 L422,8901.59375" class="trunk-line" style="stroke: var(--l4); stroke-dasharray: 7562.17, 7562.17; stroke-dashoffset: 7562.17;" /><rect x="392" y="1550.265625" width="60" height="22" rx="11" class="trunk-station" /><rect x="392" y="2273.859375" width="60" height="22" rx="11" class="trunk-station" /><rect x="392" y="3073.046875" width="60" height="22" rx="11" class="trunk-station" /><rect x="392" y="3872.234375" width="60" height="22" rx="11" class="trunk-station" /><rect x="392" y="4671.421875" width="60" height="22" rx="11" class="trunk-station" /><rect x="392" y="5470.609375" width="60" height="22" rx="11" class="trunk-station" /><g transform="translate(422 8901.59375)" class="trunk-end"><circle r="22" class="trunk-end-station" /><circle r="11" class="trunk-end-dot" /></g></svg></div></div>
+    <script type="module" src="/src/main.tsx?t=1791077183727"></script>
+  
+
+
+</body>
+</html>

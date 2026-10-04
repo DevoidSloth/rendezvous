@@ -1,0 +1,387 @@
+<template>
+  <div id="root" data-composition-id="05-leave-on-time" data-width="1920" data-height="1080" data-start="0" data-duration="4.937">
+    <style>
+      @font-face {
+        font-family: "Big Shoulders";
+        src: url("assets/fonts/BigShoulders-latin.woff2") format("woff2");
+        font-weight: 400 900;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Atkinson Hyperlegible Next";
+        src: url("assets/fonts/AtkinsonHyperlegibleNext-latin.woff2") format("woff2");
+        font-weight: 300 800;
+        font-style: normal;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      #root .clip {
+        position: absolute;
+        inset: 0;
+      }
+      #r05-ground {
+        background: #EEF1F4;
+      }
+      #r05-stage {
+        container-type: size;
+      }
+      #r05-world {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+      #r05-map {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: visible;
+      }
+      .r05-ghost {
+        fill: none;
+        stroke: #C9D1DA;
+        stroke-width: 4;
+        stroke-dasharray: 2 14;
+        stroke-linecap: round;
+      }
+      .r05-guide {
+        stroke: #C9D1DA;
+        stroke-width: 2;
+        stroke-dasharray: 6 8;
+      }
+      .r05-route {
+        fill: none;
+        stroke-width: 16;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      #r05-tick-group line {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+      }
+      .r05-label {
+        position: absolute;
+        margin: 0;
+        white-space: nowrap;
+        font-family: "Big Shoulders", sans-serif;
+        font-weight: 900;
+        font-size: 2.35cqw;
+        line-height: 1;
+        color: #0E1B2C;
+      }
+      .r05-label .r05-verb {
+        font-family: "Atkinson Hyperlegible Next", sans-serif;
+        font-weight: 600;
+        font-size: 1.45cqw;
+        color: #4A5868;
+        margin: 0 0.35em 0 0.3em;
+      }
+      .r05-label .r05-time {
+        margin-left: 0.25em;
+      }
+      .r05-axis-label {
+        position: absolute;
+        margin: 0;
+        width: 120px;
+        text-align: center;
+        font-family: "Atkinson Hyperlegible Next", sans-serif;
+        font-weight: 700;
+        font-size: 1.4cqw;
+        color: #4A5868;
+      }
+      #r05-eyebrow {
+        position: absolute;
+        left: 200px;
+        top: 150px;
+        margin: 0;
+        font-family: "Atkinson Hyperlegible Next", sans-serif;
+        font-weight: 700;
+        font-size: 1.45cqw;
+        color: #4A5868;
+      }
+      #r05-playhead {
+        position: absolute;
+        left: 198px;
+        top: 250px;
+        width: 4px;
+        height: 520px;
+        background: #0E1B2C;
+        opacity: 0.18;
+      }
+      /* HUD: clock */
+      #r05-clock {
+        position: absolute;
+        left: 1500px;
+        top: 360px;
+        margin: 0;
+        font-family: "Big Shoulders", sans-serif;
+        font-weight: 900;
+        line-height: 0.9;
+        color: #0E1B2C;
+        transform-origin: 0% 50%;
+      }
+      #r05-clock-time {
+        display: block;
+        font-size: 9.4cqw;
+      }
+      #r05-clock-pm {
+        display: block;
+        font-size: 3.4cqw;
+        margin-top: 0.35em;
+      }
+      /* HUD: iMessage-style notification banners (the phone layer) */
+      .r05-banner {
+        position: absolute;
+        left: 1330px;
+        top: 48px;
+        width: 530px;
+        height: 112px;
+        box-sizing: border-box;
+        padding: 20px 24px;
+        background: #FFFFFF;
+        border-radius: 26px;
+        box-shadow: 0 14px 34px rgba(14, 27, 44, 0.16);
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-family: "Atkinson Hyperlegible Next", sans-serif;
+        color: #0E1B2C;
+      }
+      .r05-app {
+        flex: 0 0 auto;
+        width: 64px;
+        height: 64px;
+        border-radius: 15px;
+        background: #34C759;
+        position: relative;
+      }
+      .r05-app::after {
+        content: "";
+        position: absolute;
+        left: 13px;
+        top: 15px;
+        width: 38px;
+        height: 30px;
+        border-radius: 50%;
+        background: #FFFFFF;
+      }
+      .r05-banner-text {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+      .r05-banner-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 19px;
+        font-weight: 600;
+        color: #4A5868;
+      }
+      .r05-banner-msg {
+        margin-top: 6px;
+        font-size: 27px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .r05-swatch {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin-right: 10px;
+        vertical-align: 1px;
+      }
+    </style>
+
+    <div id="r05-ground" class="clip" data-start="0" data-duration="4.937" data-track-index="0"></div>
+
+    <div id="r05-stage" class="clip" data-start="0" data-duration="4.937" data-track-index="1">
+      <!-- the one virtual camera: .world pans across the pre-placed stations -->
+      <div id="r05-world">
+        <p id="r05-eyebrow">Leave times, tonight</p>
+        <div id="r05-playhead"></div>
+        <svg id="r05-map" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+          <!-- guides from each origin down to the time axis -->
+          <line class="r05-guide" x1="200" y1="300" x2="200" y2="760" />
+          <line class="r05-guide" x1="711" y1="410" x2="711" y2="760" />
+          <line class="r05-guide" x1="947" y1="520" x2="947" y2="760" />
+          <line class="r05-guide" x1="1105" y1="630" x2="1105" y2="760" />
+          <line class="r05-guide" x1="1380" y1="465" x2="1380" y2="760" />
+          <!-- time axis -->
+          <line id="r05-axis" x1="200" y1="760" x2="1380" y2="760" stroke="#0E1B2C" stroke-width="4" stroke-linecap="round" />
+          <g id="r05-tick-group" stroke="#0E1B2C" stroke-width="4" stroke-linecap="round">
+            <line x1="200" y1="750" x2="200" y2="772" />
+            <line x1="711" y1="750" x2="711" y2="772" />
+            <line x1="947" y1="750" x2="947" y2="772" />
+            <line x1="1105" y1="750" x2="1105" y2="772" />
+            <line x1="1380" y1="746" x2="1380" y2="776" />
+          </g>
+          <!-- ghost routes (planned walks) -->
+          <path class="r05-ghost" d="M200 300 H1215 L1380 465" />
+          <path class="r05-ghost" d="M711 410 H1325 L1380 465" />
+          <path class="r05-ghost" d="M947 520 H1325 L1380 465" />
+          <path class="r05-ghost" d="M1105 630 H1215 L1380 465" />
+          <!-- live routes, one per friend -->
+          <path id="r05-route-jason" class="r05-route" stroke="#2551E0" d="M200 300 H1215 L1380 465" />
+          <path id="r05-route-ana" class="r05-route" stroke="#0D9A64" d="M711 410 H1325 L1380 465" />
+          <path id="r05-route-maya" class="r05-route" stroke="#F57A12" d="M947 520 H1325 L1380 465" />
+          <path id="r05-route-dev" class="r05-route" stroke="#8E3FD0" d="M1105 630 H1215 L1380 465" />
+          <!-- origin dots -->
+          <circle id="r05-dot-jason" class="r05-origin" cx="200" cy="300" r="17" fill="#2551E0" stroke="#EEF1F4" stroke-width="6" />
+          <circle id="r05-dot-ana" class="r05-origin" cx="711" cy="410" r="17" fill="#0D9A64" stroke="#EEF1F4" stroke-width="6" />
+          <circle id="r05-dot-maya" class="r05-origin" cx="947" cy="520" r="17" fill="#F57A12" stroke="#EEF1F4" stroke-width="6" />
+          <circle id="r05-dot-dev" class="r05-origin" cx="1105" cy="630" r="17" fill="#8E3FD0" stroke="#EEF1F4" stroke-width="6" />
+          <!-- arrival station: platform circle, thick ink ring, signal-red dot -->
+          <circle id="r05-pulse" class="r05-station-part" cx="1380" cy="465" r="52" fill="none" stroke="#E3262E" stroke-width="6" opacity="0" />
+          <circle id="r05-station" class="r05-station-part" cx="1380" cy="465" r="46" fill="#EEF1F4" stroke="#0E1B2C" stroke-width="13" />
+          <circle id="r05-core-idle" class="r05-station-part" cx="1380" cy="465" r="18" fill="#C9D1DA" />
+          <circle id="r05-core" class="r05-station-part" cx="1380" cy="465" r="21" fill="#E3262E" />
+        </svg>
+
+        <p id="r05-label-jason" class="r05-label" style="left: 186px; top: 230px">Jason<span class="r05-verb">leaves</span><span style="color: #2551E0">6:15</span></p>
+        <p id="r05-label-ana" class="r05-label" style="left: 697px; top: 340px">Ana<span class="r05-time" style="color: #0D9A64">6:28</span></p>
+        <p id="r05-label-maya" class="r05-label" style="left: 933px; top: 450px">Maya<span class="r05-time" style="color: #F57A12">6:34</span></p>
+        <p id="r05-label-dev" class="r05-label" style="left: 1091px; top: 560px">Dev<span class="r05-time" style="color: #8E3FD0">6:38</span></p>
+
+        <p id="r05-axis-start" class="r05-axis-label" style="left: 140px; top: 788px">6:15</p>
+        <p id="r05-axis-end" class="r05-axis-label" style="left: 1320px; top: 788px">6:45</p>
+      </div>
+
+      <!-- HUD (does not pan) -->
+      <p id="r05-clock" data-layout-allow-overlap><span id="r05-clock-time">6:15</span><span id="r05-clock-pm">PM</span></p>
+
+      <div id="r05-banner-jason" class="r05-banner" data-layout-allow-overlap>
+        <div class="r05-app"></div>
+        <div class="r05-banner-text">
+          <div class="r05-banner-meta"><span>Messages</span><span>now</span></div>
+          <div class="r05-banner-msg"><span class="r05-swatch" style="background: #2551E0"></span>Jason, leave by 6:15</div>
+        </div>
+      </div>
+      <div id="r05-banner-ana" class="r05-banner" data-layout-allow-overlap>
+        <div class="r05-app"></div>
+        <div class="r05-banner-text">
+          <div class="r05-banner-meta"><span>Messages</span><span>now</span></div>
+          <div class="r05-banner-msg"><span class="r05-swatch" style="background: #0D9A64"></span>Ana, leave by 6:28</div>
+        </div>
+      </div>
+      <div id="r05-banner-maya" class="r05-banner" data-layout-allow-overlap>
+        <div class="r05-app"></div>
+        <div class="r05-banner-text">
+          <div class="r05-banner-meta"><span>Messages</span><span>now</span></div>
+          <div class="r05-banner-msg"><span class="r05-swatch" style="background: #F57A12"></span>Maya, leave by 6:34</div>
+        </div>
+      </div>
+      <div id="r05-banner-dev" class="r05-banner" data-layout-allow-overlap>
+        <div class="r05-app"></div>
+        <div class="r05-banner-text">
+          <div class="r05-banner-meta"><span>Messages</span><span>now</span></div>
+          <div class="r05-banner-msg"><span class="r05-swatch" style="background: #8E3FD0"></span>Dev, leave by 6:38</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        // Real voice duration 4.437s; packet windows (0–1 / 1–3 / 3–4s) scaled by 4.437/4.
+        var S2 = 1.109; // clock starts at 6:15
+        var S3 = 3.328; // clock hits 6:45 — arrival
+        var CLOCK_SPAN = S3 - S2;
+        function atMinute(m) {
+          return S2 + ((m - 15) / 30) * CLOCK_SPAN;
+        }
+
+        var friends = [
+          { id: "jason", leave: 15 },
+          { id: "ana", leave: 28 },
+          { id: "maya", leave: 34 },
+          { id: "dev", leave: 38 }
+        ];
+
+        // Measure each route and hide it as one dash (svg-path-draw).
+        friends.forEach(function (f) {
+          var p = document.getElementById("r05-route-" + f.id);
+          var len = p.getTotalLength();
+          f.len = len;
+          p.style.strokeDasharray = len + " " + len;
+          p.style.strokeDashoffset = len;
+        });
+
+        // ---- Scene 1 (0.0–1.109): the board assembles; Jason's text arrives ----
+        tl.fromTo("#r05-axis", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
+        tl.fromTo("#r05-tick-group line", { scaleY: 0 }, { scaleY: 1, duration: 0.3, stagger: 0.05, ease: "back.out(2)" }, 0.05);
+        tl.fromTo("#r05-eyebrow, .r05-axis-label", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.05);
+        tl.fromTo(".r05-guide, .r05-ghost", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 0.1);
+        // Every station part scales about the station's own center, not the SVG origin.
+        gsap.set("#r05-pulse, #r05-station, #r05-core-idle, #r05-core", { svgOrigin: "1380 465" });
+        [["jason", "200 300"], ["ana", "711 410"], ["maya", "947 520"], ["dev", "1105 630"]].forEach(function (d) {
+          gsap.set("#r05-dot-" + d[0], { svgOrigin: d[1] });
+        });
+        tl.fromTo("#r05-station, #r05-core-idle", { scale: 0 }, { scale: 1, duration: 0.45, ease: "back.out(2.2)" }, 0.2);
+        friends.forEach(function (f, i) {
+          var t = 0.08 + i * 0.12;
+          tl.fromTo("#r05-dot-" + f.id, { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)" }, t);
+          tl.fromTo("#r05-label-" + f.id, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, t + 0.04);
+        });
+        tl.fromTo("#r05-clock", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 0.15);
+        tl.fromTo("#r05-playhead", { opacity: 0 }, { opacity: 0.18, duration: 0.3 }, 0.3);
+        tl.set("#r05-pulse", { opacity: 0, scale: 1 }, 0);
+
+        // iMessage banners: one per friend, each lands on that friend's leave time.
+        var bannerAt = { jason: 0.3, ana: atMinute(28) - 0.12, maya: atMinute(34) - 0.12, dev: atMinute(38) - 0.12 };
+        friends.forEach(function (f) {
+          var b = "#r05-banner-" + f.id;
+          tl.fromTo(b, { opacity: 0, y: -150, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: f.id === "jason" ? 0.5 : 0.32, ease: "power3.out" }, bannerAt[f.id]);
+        });
+        // Each new banner replaces the one before it, the way a phone stacks notifications.
+        friends.forEach(function (f, i) {
+          var next = friends[i + 1];
+          if (!next) return;
+          tl.to("#r05-banner-" + f.id, { opacity: 0, y: 24, scale: 0.96, duration: 0.2, ease: "power2.in" }, bannerAt[next.id]);
+        });
+
+        // ---- Scene 2 (1.109–3.328): clock runs 6:15 → 6:45, lines leave in order ----
+        // The camera pans across the board toward the arrival station (spatial pan).
+        tl.fromTo("#r05-world", { x: 40 }, { x: -100, duration: 2.5, ease: "power1.inOut" }, 0.95);
+        // Playhead tracks the clock along the axis (200 → 1380px).
+        tl.fromTo("#r05-playhead", { x: 0 }, { x: 1180, duration: CLOCK_SPAN, ease: "none", immediateRender: false }, S2);
+        // Clock ticks minute by minute (discrete, seek-safe sets).
+        var clockEl = document.getElementById("r05-clock-time");
+        for (var m = 16; m <= 45; m++) {
+          tl.set(clockEl, { textContent: "6:" + m }, atMinute(m));
+        }
+        // Each route self-draws from its own leave time; all finish together at 6:45.
+        friends.forEach(function (f) {
+          var start = atMinute(f.leave);
+          tl.fromTo("#r05-route-" + f.id, { strokeDashoffset: f.len }, { strokeDashoffset: 0, duration: S3 - start, ease: "none" }, start);
+          tl.to("#r05-dot-" + f.id, { scale: 1.35, duration: 0.12, ease: "power2.out" }, start);
+          tl.to("#r05-dot-" + f.id, { scale: 1, duration: 0.25, ease: "power2.inOut" }, start + 0.12);
+        });
+
+        // ---- Scene 3 (3.328–4.437): everyone arrives; signal red; hold ----
+        tl.fromTo("#r05-core", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, S3);
+        tl.to("#r05-station", { scale: 1.14, duration: 0.14, ease: "power2.out" }, S3);
+        tl.to("#r05-station", { scale: 1, duration: 0.35, ease: "power2.inOut" }, S3 + 0.14);
+        tl.set("#r05-pulse", { opacity: 0.9 }, S3);
+        tl.to("#r05-pulse", { opacity: 0, scale: 2.1, duration: 0.7, ease: "power2.out" }, S3 + 0.001);
+        tl.set("#r05-clock", { color: "#E3262E" }, S3);
+        tl.set("#r05-clock", { scale: 1.1 }, S3);
+        tl.to("#r05-clock", { scale: 1, duration: 0.4, ease: "back.out(2)" }, S3 + 0.001);
+
+        // Pin the timeline to the full frame length (static hold to the end).
+        tl.set({}, {}, 4.437);
+
+        window.__timelines["05-leave-on-time"] = tl;
+      })();
+    </script>
+  </div>
+</template>

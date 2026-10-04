@@ -15,8 +15,7 @@
     "seed": "npm run seed -w @rendezvous/agent",
     "test": "vitest run",
     "typecheck": "tsc -p packages/core && tsc -p apps/agent && tsc -p apps/web --noEmit",
-    "demo:video": "node demo/record.mjs",
-    "demo:motion": "node demo/motion.mjs"
+    "demo:video": "node demo/record.mjs"
   },
   "devDependencies": {
     "typescript": "~5.9.0",

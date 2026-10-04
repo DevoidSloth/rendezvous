@@ -1,0 +1,634 @@
+<template id="02-just-text-it-template">
+  <div
+    id="root"
+    data-composition-id="02-just-text-it"
+    data-start="0"
+    data-duration="3.465"
+    data-width="1920"
+    data-height="1080"
+  >
+    <style>
+      @font-face {
+        font-family: "Big Shoulders";
+        src: url("assets/fonts/BigShoulders-latin.woff2") format("woff2");
+        font-weight: 400 900;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Atkinson Hyperlegible Next";
+        src: url("assets/fonts/AtkinsonHyperlegibleNext-latin.woff2") format("woff2");
+        font-weight: 300 800;
+        font-style: normal;
+        font-display: block;
+      }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        container-type: size;
+        font-family: "Atkinson Hyperlegible Next", sans-serif;
+        color: #0e1b2c;
+        --jti-ink: #0e1b2c;
+        --jti-blue-out: #0a84ff;
+        --jti-gray-in: #e9e9ee;
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* ---------- ground: 40/60 hard region split ---------- */
+      .jti-ground-left {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 768px;
+        height: 1080px;
+        background: #eef1f4;
+      }
+      .jti-ground-right {
+        position: absolute;
+        left: 768px;
+        top: 0;
+        width: 1152px;
+        height: 1080px;
+        background: #e2e7ed;
+      }
+
+      /* ---------- left: headline + transit stubs ---------- */
+      .jti-headline {
+        position: absolute;
+        left: 96px;
+        top: 250px;
+        width: 640px;
+        font-family: "Big Shoulders", sans-serif;
+        font-weight: 900;
+        font-size: 176px;
+        line-height: 1.02;
+        letter-spacing: 0;
+        color: #0e1b2c;
+        white-space: nowrap;
+      }
+      .jti-hcaret {
+        display: inline-block;
+        width: 12px;
+        height: 132px;
+        margin-left: 8px;
+        background: #0e1b2c;
+        vertical-align: -6px;
+      }
+      .jti-lines {
+        position: absolute;
+        left: 100px;
+        top: 640px;
+        width: 460px;
+        height: 110px;
+      }
+      .jti-line {
+        position: absolute;
+        left: 0;
+        height: 12px;
+        border-radius: 6px;
+        transform-origin: 0% 50%;
+      }
+
+      /* ---------- phone ---------- */
+      .jti-cam {
+        position: absolute;
+        left: 1070px;
+        top: 30px;
+        width: 440px;
+        height: 856px;
+        transform-origin: 50% 100%;
+      }
+      .jti-phone {
+        position: absolute;
+        inset: 0;
+        border-radius: 68px;
+        background: #dfe3e8;
+        box-shadow:
+          inset 0 0 0 2px #c9d1da,
+          0 30px 60px rgba(14, 27, 44, 0.18),
+          0 8px 18px rgba(14, 27, 44, 0.1);
+      }
+      .jti-screen {
+        position: absolute;
+        left: 11px;
+        top: 11px;
+        width: 418px;
+        height: 834px;
+        border-radius: 57px;
+        background: #ffffff;
+        overflow: hidden;
+      }
+      .jti-island {
+        position: absolute;
+        left: 154px;
+        top: 12px;
+        width: 110px;
+        height: 32px;
+        border-radius: 16px;
+        background: #000;
+      }
+      .jti-time {
+        position: absolute;
+        left: 40px;
+        top: 17px;
+        font-size: 17px;
+        font-weight: 700;
+        color: #000;
+      }
+      .jti-sb-icons {
+        position: absolute;
+        left: 318px;
+        top: 20px;
+      }
+      .jti-header {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 418px;
+        height: 168px;
+        background: #f6f6f8;
+        border-bottom: 1px solid #dadadf;
+      }
+      .jti-back {
+        position: absolute;
+        left: 20px;
+        top: 84px;
+      }
+      .jti-avatar {
+        position: absolute;
+        left: 178px;
+        top: 60px;
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: inset 0 0 0 1.5px #dadadf;
+        display: grid;
+        place-items: center;
+        --l1: #2551e0;
+        --l2: #f57a12;
+        --l3: #8e3fd0;
+        --l4: #0d9a64;
+        --signal: #e3262e;
+      }
+      .jti-avatar svg {
+        width: 40px;
+        height: 40px;
+      }
+      .jti-name {
+        position: absolute;
+        left: 0;
+        top: 130px;
+        width: 418px;
+        text-align: center;
+        font-size: 15px;
+        font-weight: 600;
+        color: #000;
+      }
+      .jti-name .jti-chev {
+        color: #8e8e93;
+        margin-left: 4px;
+      }
+      .jti-svc {
+        position: absolute;
+        left: 0;
+        top: 188px;
+        width: 418px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        color: #8e8e93;
+      }
+
+      /* thread bubbles (bottom-anchored above the composer) */
+      .jti-item {
+        position: absolute;
+        bottom: 100px;
+      }
+      .jti-item.jti-sent {
+        right: 20px;
+        transform-origin: 100% 100%;
+      }
+      .jti-item.jti-recv {
+        left: 20px;
+        transform-origin: 0% 100%;
+      }
+      .jti-bubble {
+        position: relative;
+        padding: 9px 15px;
+        border-radius: 19px;
+        font-size: 18px;
+        line-height: 23px;
+        white-space: nowrap;
+      }
+      .jti-sent .jti-bubble {
+        background: #0a84ff;
+        color: #fff;
+      }
+      .jti-recv .jti-bubble {
+        background: #e9e9ee;
+        color: #000;
+      }
+      .jti-tail {
+        position: absolute;
+        bottom: 0;
+        width: 16px;
+        height: 20px;
+      }
+      .jti-sent .jti-tail {
+        right: -10px;
+      }
+      .jti-recv .jti-tail {
+        left: -10px;
+        transform: scaleX(-1);
+      }
+      .jti-bname {
+        font-weight: 700;
+        padding-bottom: 1px;
+        border-bottom: 3px solid currentColor;
+      }
+
+      /* composer */
+      .jti-plus {
+        position: absolute;
+        left: 12px;
+        bottom: 47px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #e9e9ee;
+        color: #8e8e93;
+        font-size: 26px;
+        line-height: 36px;
+        text-align: center;
+        font-weight: 400;
+      }
+      .jti-field {
+        position: absolute;
+        left: 56px;
+        bottom: 44px;
+        width: 350px;
+        height: 42px;
+        border-radius: 21px;
+        border: 1.5px solid #d1d1d6;
+        background: #fff;
+      }
+      .jti-ph {
+        position: absolute;
+        left: 20px;
+        top: 8px;
+        font-size: 19px;
+        line-height: 24px;
+        color: #a3a3a8;
+      }
+      .jti-icaret {
+        position: absolute;
+        left: 14px;
+        top: 9px;
+        width: 2px;
+        height: 23px;
+        background: #0a84ff;
+      }
+      .jti-typed {
+        position: absolute;
+        left: 16px;
+        top: 8px;
+        width: 290px;
+        font-size: 19px;
+        line-height: 24px;
+        color: #000;
+        white-space: nowrap;
+      }
+      .jti-ch {
+        display: none;
+      }
+      .jti-br {
+        display: none;
+      }
+      .jti-tname {
+        font-weight: 700;
+      }
+      .jti-tcaret {
+        display: inline-block;
+        width: 2px;
+        height: 22px;
+        margin-left: 1px;
+        background: #0a84ff;
+        vertical-align: -5px;
+      }
+      .jti-mic {
+        position: absolute;
+        right: 10px;
+        bottom: 8px;
+      }
+      .jti-send {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #0a84ff;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+      }
+      .jti-home {
+        position: absolute;
+        left: 144px;
+        bottom: 9px;
+        width: 130px;
+        height: 5px;
+        border-radius: 3px;
+        background: #000;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+    <!-- full-bleed ground -->
+    <div id="jti02-ground" class="clip jti-ground" data-start="0" data-duration="3.465" data-track-index="0">
+      <div class="jti-ground-left"></div>
+      <div class="jti-ground-right"></div>
+    </div>
+
+    <!-- stage -->
+    <div id="jti02-stage" class="clip jti-stage" data-start="0" data-duration="3.465" data-track-index="1">
+      <div class="jti-headline" data-layout-allow-overlap>
+        <span class="jti-hl1"></span><br /><span class="jti-hl2"></span
+        ><span class="jti-hcaret"></span>
+      </div>
+
+      <div class="jti-lines">
+        <div class="jti-line jti-line-jason" style="top: 0; width: 460px; background: #2551e0"></div>
+        <div class="jti-line jti-line-maya" style="top: 32px; width: 400px; background: #f57a12"></div>
+        <div class="jti-line jti-line-dev" style="top: 64px; width: 340px; background: #8e3fd0"></div>
+        <div class="jti-line jti-line-ana" style="top: 96px; width: 280px; background: #0d9a64"></div>
+      </div>
+
+      <div class="jti-cam">
+        <div class="jti-phone">
+          <div class="jti-screen">
+            <div class="jti-header"></div>
+            <div class="jti-island"></div>
+            <div class="jti-time">9:41</div>
+            <svg class="jti-sb-icons" width="66" height="14" viewBox="0 0 66 14">
+              <rect x="0" y="8" width="3.5" height="6" rx="1" fill="#000" />
+              <rect x="5.5" y="5.5" width="3.5" height="8.5" rx="1" fill="#000" />
+              <rect x="11" y="3" width="3.5" height="11" rx="1" fill="#000" />
+              <rect x="16.5" y="0" width="3.5" height="14" rx="1" fill="#000" />
+              <rect x="36" y="1" width="25" height="12" rx="3.5" fill="none" stroke="#000" stroke-opacity="0.4" stroke-width="1.2" />
+              <rect x="38" y="3" width="19" height="8" rx="2" fill="#000" />
+              <rect x="62.5" y="5" width="2" height="4" rx="1" fill="#000" fill-opacity="0.4" />
+            </svg>
+            <svg class="jti-back" width="14" height="24" viewBox="0 0 14 24">
+              <path
+                d="M12 2 L2 12 L12 22"
+                stroke="#0a84ff"
+                stroke-width="3"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <div class="jti-avatar">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+                <g stroke-width="3.4" stroke-linecap="round" fill="none">
+                  <path d="M5 5 L12.5 12.5" stroke="var(--l1)"></path>
+                  <path d="M27 5 L19.5 12.5" stroke="var(--l2)"></path>
+                  <path d="M5 27 L12.5 19.5" stroke="var(--l3)"></path>
+                  <path d="M27 27 L19.5 19.5" stroke="var(--l4)"></path>
+                </g>
+                <circle cx="16" cy="16" r="4.6" fill="var(--signal)"></circle>
+              </svg>
+            </div>
+            <div class="jti-name">Rendezvous<span class="jti-chev">›</span></div>
+            <div class="jti-svc">iMessage</div>
+
+            <!-- thread -->
+            <div class="jti-item jti-sent">
+              <div class="jti-bubble">
+                dinner tonight, under $15 each,<br />with
+                <span class="jti-bname" style="border-color: #f57a12">Maya</span>,
+                <span class="jti-bname" style="border-color: #8e3fd0">Dev</span> and
+                <span class="jti-bname" style="border-color: #0d9a64">Ana</span>
+                <svg class="jti-tail" viewBox="0 0 16 20"><path d="M0 0 V20 H16 C9 19 5 14 5 0 Z" fill="#0a84ff"/></svg>
+              </div>
+            </div>
+            <div class="jti-item jti-recv">
+              <div class="jti-bubble">On it. Checking calendars,<br />budgets and walks.<svg class="jti-tail" viewBox="0 0 16 20"><path d="M0 0 V20 H16 C9 19 5 14 5 0 Z" fill="#e9e9ee"/></svg></div>
+            </div>
+
+            <!-- composer -->
+            <div class="jti-plus">+</div>
+            <div class="jti-field">
+              <div class="jti-ph">iMessage</div>
+              <div class="jti-icaret"></div>
+              <div class="jti-typed"></div>
+              <svg class="jti-mic" width="20" height="22" viewBox="0 0 20 22">
+                <rect x="1" y="8" width="2.6" height="6" rx="1.3" fill="#8e8e93" />
+                <rect x="6" y="4" width="2.6" height="14" rx="1.3" fill="#8e8e93" />
+                <rect x="11" y="1" width="2.6" height="20" rx="1.3" fill="#8e8e93" />
+                <rect x="16" y="6" width="2.6" height="10" rx="1.3" fill="#8e8e93" />
+              </svg>
+              <div class="jti-send">
+                <svg width="16" height="18" viewBox="0 0 16 18">
+                  <path
+                    d="M8 16 V3 M2.5 8 L8 2.5 L13.5 8"
+                    stroke="#fff"
+                    stroke-width="2.6"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="jti-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const ID = "02-just-text-it";
+        const root = document.querySelector('[data-composition-id="' + ID + '"]');
+        const $ = (s) => root.querySelector(s);
+        const $$ = (s) => Array.from(root.querySelectorAll(s));
+        const tl = gsap.timeline({ paused: true });
+
+        // ---------- build character spans (deterministic, synchronous) ----------
+        function addChars(container, text, cls, color) {
+          const out = [];
+          let host = container;
+          if (cls) {
+            host = document.createElement("span");
+            host.className = cls;
+            if (color) host.style.color = color;
+            container.appendChild(host);
+          }
+          for (const c of text) {
+            const s = document.createElement("span");
+            s.className = "jti-ch";
+            s.textContent = c;
+            host.appendChild(s);
+            out.push(s);
+          }
+          return out;
+        }
+
+        // headline "Just text" / "it."
+        const hChars = addChars($(".jti-hl1"), "Just text").concat(addChars($(".jti-hl2"), "it."));
+
+        // composer text, three controlled lines
+        const typed = $(".jti-typed");
+        const caretT = document.createElement("span");
+        // Scene 2 part
+        const partA = addChars(typed, "dinner tonight, under $15");
+        const br1 = document.createElement("br");
+        br1.className = "jti-br";
+        typed.appendChild(br1);
+        const partA2 = addChars(typed, "each");
+        // Scene 3 part
+        const b1 = addChars(typed, ", with ");
+        const maya = addChars(typed, "Maya", "jti-tname", "#f57a12");
+        const b2 = addChars(typed, ", ");
+        const dev = addChars(typed, "Dev", "jti-tname", "#8e3fd0");
+        const br2 = document.createElement("br");
+        br2.className = "jti-br";
+        typed.appendChild(br2);
+        const b3 = addChars(typed, "and ");
+        const ana = addChars(typed, "Ana", "jti-tname", "#0d9a64");
+        caretT.className = "jti-tcaret";
+        typed.appendChild(caretT);
+
+        // ---------- caret blink helper (finite, explicit sets) ----------
+        function blink(el, start, end, half) {
+          let on = true;
+          for (let t = start; t < end; t += half) {
+            tl.set(el, { opacity: on ? 1 : 0 }, t);
+            on = !on;
+          }
+        }
+
+        // initial states
+        tl.set(caretT, { display: "none" }, 0);
+        tl.set($(".jti-hcaret"), { display: "none" }, 0);
+        tl.set($(".jti-hcaret"), { display: "inline-block" }, 0.31);
+
+        // ---------- Scene 1 (0.00–0.445): phone lands, avatar pops, headline types ----------
+        tl.fromTo(
+          ".jti-phone",
+          { y: 70, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" },
+          0
+        );
+        tl.fromTo(
+          ".jti-avatar",
+          { scale: 0.5 },
+          { scale: 1, duration: 0.3, ease: "back.out(2.2)" },
+          0.12
+        );
+        hChars.forEach((c, i) => tl.set(c, { display: "inline" }, 0.04 + i * 0.03));
+        tl.set($(".jti-hcaret"), { display: "none" }, 0.46);
+        // idle composer caret while focused
+        blink($(".jti-icaret"), 0.1, 0.5, 0.2);
+
+        // slow push-in on the phone, bottom-anchored (keeps keep-out clear)
+        tl.fromTo(
+          ".jti-cam",
+          { scale: 1 },
+          { scale: 1.025, duration: 2.5, ease: "sine.inOut" },
+          0.45
+        );
+
+        // ---------- Scene 2 (0.445–1.78): "dinner tonight, under $15 each" ----------
+        const T2 = 0.5;
+        tl.set($(".jti-icaret"), { opacity: 0 }, T2);
+        tl.set($(".jti-ph"), { opacity: 0 }, T2);
+        tl.set(caretT, { display: "inline-block" }, T2);
+        tl.set($(".jti-mic"), { opacity: 0 }, T2);
+        tl.fromTo(
+          ".jti-send",
+          { opacity: 0, scale: 0.4 },
+          { opacity: 1, scale: 1, duration: 0.14, ease: "back.out(2)" },
+          T2
+        );
+        // the sender's own line starts as the ask begins
+        tl.fromTo(
+          ".jti-line-jason",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.5, ease: "power2.out" },
+          T2
+        );
+
+        const s2 = partA.concat([br1], partA2);
+        const s2Step = (1.7 - T2) / s2.length;
+        s2.forEach((c, i) => {
+          const t = T2 + i * s2Step;
+          tl.set(c, { display: c === br1 ? "block" : "inline" }, t);
+          if (c === br1) {
+            tl.to(".jti-field", { height: 66, duration: 0.08, ease: "power2.out" }, t);
+          }
+        });
+
+        // ---------- Scene 3 (1.78–2.37): ", with Maya, Dev and Ana" → send ----------
+        const T3 = 1.79;
+        const s3 = b1.concat(maya, b2, dev, [br2], b3, ana);
+        const s3Step = (2.13 - T3) / s3.length;
+        s3.forEach((c, i) => {
+          const t = T3 + i * s3Step;
+          tl.set(c, { display: c === br2 ? "block" : "inline" }, t);
+          if (c === br2) {
+            tl.to(".jti-field", { height: 90, duration: 0.07, ease: "power2.out" }, t);
+          }
+        });
+        // each friend's line draws as their name lands
+        const nameAt = (arr) => T3 + s3.indexOf(arr[0]) * s3Step;
+        tl.fromTo(".jti-line-maya", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.out" }, nameAt(maya));
+        tl.fromTo(".jti-line-dev", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.out" }, nameAt(dev));
+        tl.fromTo(".jti-line-ana", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power2.out" }, nameAt(ana));
+
+        // send press
+        tl.to(".jti-send", { scale: 0.78, duration: 0.05, ease: "power2.in" }, 2.15);
+        tl.to(".jti-send", { scale: 1, duration: 0.12, ease: "back.out(3)" }, 2.2);
+
+        // composer clears, bubble lifts into the thread
+        const TS = 2.22;
+        tl.set(typed, { opacity: 0 }, TS);
+        tl.set(".jti-field", { height: 42 }, TS);
+        tl.set($(".jti-ph"), { opacity: 1 }, TS);
+        tl.set(".jti-send", { opacity: 0 }, TS + 0.02);
+        tl.set($(".jti-mic"), { opacity: 1 }, TS + 0.02);
+        tl.fromTo(
+          ".jti-sent",
+          { y: 70, scale: 0.9, opacity: 0 },
+          { y: 0, scale: 1, opacity: 1, duration: 0.2, ease: "power3.out" },
+          TS
+        );
+        blink($(".jti-icaret"), TS + 0.04, 2.965, 0.22);
+
+        // ---------- Scene 4 (2.37–2.965): reply pops, hold ----------
+        const T4 = 2.44;
+        tl.to(".jti-sent", { y: -73, duration: 0.18, ease: "power2.out" }, T4);
+        tl.fromTo(
+          ".jti-recv",
+          { scale: 0.55, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.22, ease: "back.out(1.8)" },
+          T4
+        );
+        // pad to the frame's exact length
+        tl.set({}, {}, 2.965);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines[ID] = tl;
+      })();
+    </script>
+  </div>
+</template>

@@ -54,8 +54,8 @@ export function Hero() {
         </a>
         <div className="nav-links">
           <a href="#how">How it works</a>
+          <a href="#fair">Why this spot</a>
           <a href="#try">Try it</a>
-          <a href="#privacy">Privacy</a>
         </div>
       </nav>
 

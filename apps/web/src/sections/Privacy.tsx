@@ -12,6 +12,7 @@ export function Privacy() {
   return (
     <section className="privacy" id="privacy" aria-labelledby="privacy-title">
       <div className="section-head">
+        <span className="station-mark" data-station aria-hidden="true" />
         <h2 id="privacy-title">It knows just enough</h2>
         <p>{BRAND.name} takes the least it needs for each step, and nothing moves without the right person's say-so.</p>
       </div>

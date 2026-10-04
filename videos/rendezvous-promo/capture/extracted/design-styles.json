@@ -1,0 +1,268 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Big Shoulders",
+      "fontSize": "131.2px",
+      "fontWeight": "900",
+      "lineHeight": "112.832px",
+      "letterSpacing": "-0.656px",
+      "color": "#0E1B2C",
+      "sampleText": "Four routes,one table."
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Big Shoulders",
+      "fontSize": "73.6px",
+      "fontWeight": "850",
+      "lineHeight": "67.712px",
+      "letterSpacing": "normal",
+      "color": "#0E1B2C",
+      "sampleText": "From “dinner?” to “paid back” in one thread"
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Big Shoulders",
+      "fontSize": "51.2px",
+      "fontWeight": "850",
+      "lineHeight": "48.64px",
+      "letterSpacing": "normal",
+      "color": "#0E1B2C",
+      "sampleText": "Say what you want and who's coming"
+    },
+    {
+      "role": "link",
+      "fontFamily": "Big Shoulders",
+      "fontSize": "27.2px",
+      "fontWeight": "850",
+      "lineHeight": "42.16px",
+      "letterSpacing": "0.136px",
+      "color": "#0E1B2C",
+      "sampleText": "Rendezvous"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Big Shoulders",
+      "fontSize": "24px",
+      "fontWeight": "800",
+      "lineHeight": "37.2px",
+      "letterSpacing": "normal",
+      "color": "#4A5868",
+      "sampleText": "1Ask"
+    },
+    {
+      "role": "label",
+      "fontFamily": "Atkinson Hyperlegible Next",
+      "fontSize": "21.6px",
+      "fontWeight": "400",
+      "lineHeight": "33.48px",
+      "letterSpacing": "normal",
+      "color": "#EEF1F4",
+      "sampleText": "Fall CreekCascadilla CreekSix Mile CreekCayuga LakeBeebe Lak"
+    },
+    {
+      "role": "body-small",
+      "fontFamily": "-apple-system",
+      "fontSize": "11.5px",
+      "fontWeight": "400",
+      "lineHeight": "15.18px",
+      "letterSpacing": "normal",
+      "color": "#111111",
+      "sampleText": "Maya, Dev, Ana and Rendezvous"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      3,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      26,
+      34,
+      52,
+      56
+    ],
+    "baseUnit": 4
+  },
+  "radius": [
+    "999px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(14, 27, 44, 0.55) 0px 40px 80px -40px",
+      "count": 2
+    }
+  ],
+  "buttons": [
+    {
+      "label": "Plan a dinner hereSee how it works",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#0E1B2C",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(14, 27, 44)",
+      "boxShadow": "none",
+      "fontSize": "19px",
+      "fontWeight": "400",
+      "height": "52px"
+    },
+    {
+      "label": "Plan a dinner here",
+      "background": "#0E1B2C",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#EEF1F4",
+      "padding": "0px 26px",
+      "borderRadius": "999px",
+      "border": "3px solid rgb(14, 27, 44)",
+      "boxShadow": "none",
+      "fontSize": "16.8px",
+      "fontWeight": "800",
+      "height": "52px"
+    },
+    {
+      "label": "See how it works",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#0E1B2C",
+      "padding": "0px 26px",
+      "borderRadius": "999px",
+      "border": "3px solid rgb(14, 27, 44)",
+      "boxShadow": "none",
+      "fontSize": "16.8px",
+      "fontWeight": "800",
+      "height": "52px"
+    },
+    {
+      "label": "Replay",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#4A5868",
+      "padding": "6px 0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(74, 88, 104)",
+      "boxShadow": "none",
+      "fontSize": "19px",
+      "fontWeight": "700",
+      "height": "41.4375px"
+    },
+    {
+      "label": "@Rendezvous dinner tonight, under $15 ea",
+      "background": "#0A84FF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "6px 12px 5px",
+      "borderRadius": "999px",
+      "border": "1px solid rgba(10, 132, 255, 0.7)",
+      "boxShadow": "none",
+      "fontSize": "13.5px",
+      "fontWeight": "400",
+      "height": "29.875px"
+    },
+    {
+      "label": "@Rendezvous lunch tomorrow at noon",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#0A84FF",
+      "padding": "6px 12px 5px",
+      "borderRadius": "999px",
+      "border": "1px solid rgba(10, 132, 255, 0.7)",
+      "boxShadow": "none",
+      "fontSize": "13.5px",
+      "fontWeight": "400",
+      "height": "29.875px"
+    }
+  ],
+  "cards": [],
+  "nav": {
+    "label": "navigation",
+    "background": "transparent",
+    "backgroundImage": "",
+    "backdropFilter": "",
+    "color": "#0E1B2C",
+    "padding": "0px 56px",
+    "borderRadius": "0px",
+    "border": "0px none rgb(14, 27, 44)",
+    "boxShadow": "none",
+    "fontSize": "19px",
+    "fontWeight": "400",
+    "height": "906.156px"
+  },
+  "chips": [
+    {
+      "label": "@Rendezvous lunch tomorr",
+      "background": "transparent",
+      "color": "#0A84FF",
+      "padding": "6px 12px 5px",
+      "borderRadius": "999px",
+      "border": "1px solid rgba(10, 132, 255, 0.7)",
+      "boxShadow": "none",
+      "fontSize": "13.5px",
+      "fontWeight": "400",
+      "height": "29.875px"
+    },
+    {
+      "label": "M",
+      "background": "#F57A12",
+      "color": "#FFFFFF",
+      "padding": "0px",
+      "borderRadius": "50%",
+      "border": "2px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "13px",
+      "fontWeight": "700",
+      "height": "32px"
+    },
+    {
+      "label": "D",
+      "background": "#8E3FD0",
+      "color": "#FFFFFF",
+      "padding": "0px",
+      "borderRadius": "50%",
+      "border": "2px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "13px",
+      "fontWeight": "700",
+      "height": "32px"
+    },
+    {
+      "label": "A",
+      "background": "#0D9A64",
+      "color": "#FFFFFF",
+      "padding": "0px",
+      "borderRadius": "50%",
+      "border": "2px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "13px",
+      "fontWeight": "700",
+      "height": "32px"
+    }
+  ],
+  "statCells": [
+    {
+      "background": "transparent",
+      "borderRadius": "0px",
+      "border": "0px none rgb(14, 27, 44)",
+      "boxShadow": "none",
+      "numberFontSize": "51.2px",
+      "numberFontWeight": "850",
+      "numberColor": "#0E1B2C"
+    }
+  ],
+  "tabs": [],
+  "backgrounds": [],
+  "glass": []
+}

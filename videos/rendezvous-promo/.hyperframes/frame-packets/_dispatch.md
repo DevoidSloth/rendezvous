@@ -1,0 +1,21 @@
+## Dispatch context (shared by all 7 frame workers)
+
+- PROJECT_DIR: /Users/jasonpitchford/Dev/rondezvous/videos/rendezvous-promo
+- Canvas: 1920×1080
+- Captions: enabled — keep-out cutoff y ≤ 896px (nothing below that line).
+- Confirmed sketch on disk: no (autonomous mode — go straight from outline to animated).
+- Frame duration: use the `duration:` in your packet (the orchestrator padded it past the voice length for breathing room). The packet's Scene windows were drafted against a ~5s frame; RE-PACE them to the real voice cues below — each piece enters on the word that names it, then hold still after the voice ends (no new entrances in the last ~0.5s, everything settled).
+- Voice word timings (seconds from frame start, voice starts at 0):
+  - 01: four@0.11 friends@0.36 four@1.05 routes@1.38 one@2.02 table@2.24 at@2.63 7:15@2.90 (ends 3.80)
+  - 02: Just@0.05 text@0.32 Rendezvous@0.55 what@1.18 you@1.43 want@1.62 and@1.94 who's@2.04 coming@2.25 (ends 2.80)
+  - 03: It@0.03 checks@0.13 calendars@0.47 budgets@1.17 and@1.64 every@1.91 walk@2.36 then@2.81 picks@3.00 the@3.25 fairest@3.40 spot@3.78 (ends 4.18)
+  - 04: If@0.03 they@0.19 take@0.42 reservations@0.65 it@1.61 calls@1.85 and@2.50 asks@2.65 you@2.87 anything@3.10 it@3.44 can't@3.52 answer@3.85 (ends 4.31)
+  - 05: Everyone@0.04 gets@0.48 a@0.71 text@0.78 when@1.02 it's@1.26 time@1.50 to@1.74 leave@1.86 (ends 2.30)
+  - 06: After@0.05 dinner@0.28 the@0.82 bill@0.88 splits@1.10 itself@1.44 (ends 2.03)
+  - 07: Rendezvous@0.07 a@0.84 table@0.86 for@1.19 us@1.39 (ends 1.81)
+- Registry items are ALREADY installed — do NOT run `npx hyperframes add` (parallel workers would race on hyperframes.json):
+  - `compositions/message-thread-reveal.html` (a 1080×1920, 25s phone thread block) — read it as the reference for phone/bubble markup and lift/adapt the markup and styling INTO your own frame file; do not nest it as a sub-composition.
+  - `compositions/components/success-check.html` — paste/adapt its snippet into your frame.
+- Fonts are in `assets/fonts/` (BigShoulders-latin.woff2, AtkinsonHyperlegibleNext-latin.woff2); use @font-face with paths relative to the project root as frame.md specifies.
+- Write ONLY your own `compositions/frames/NN-*.html` (the `src:` in your packet). Never edit STORYBOARD.md, index.html, frame.md, or another frame's file. No <audio>.
+- Validate your file before returning (per the role's self-check; `npx hyperframes lint` from PROJECT_DIR is fine to run). Return a 3–5 line summary: file path, duration, what each scene does, any deviation.

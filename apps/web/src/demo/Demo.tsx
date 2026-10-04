@@ -15,6 +15,7 @@ export function Demo() {
   return (
     <section className="demo night" id="try" aria-labelledby="try-title">
       <div className="section-head">
+        <span className="station-mark" data-station aria-hidden="true" />
         <h2 id="try-title">Now plan one yourself</h2>
         <p>
           This runs the real {BRAND.name} planner in your browser. You're Jason, with three pretend friends, a pretend restaurant and pretend money.

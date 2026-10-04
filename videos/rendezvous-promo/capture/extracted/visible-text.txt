@@ -1,0 +1,150 @@
+[a] Skip to the demo
+[span] Rendezvous
+[a] How it works
+[span] Four routes,
+[span] one table
+[p] Rendezvous
+[p] lives in iMessage. Text it what you want to do and who's coming. It picks the spot that's fairest to everyone's walk, calls to book the table, tells each of you when to leave, and splits the bill afterward.
+[a] Plan a dinner here
+[a] See how it works
+[text] 7:15
+[text] Everyone's at the table
+[text] Jason
+[text] North Campus
+[text] , leaves
+[text] 6:49
+[text] Maya
+[text] Olin Library
+[text] , leaves
+[text] 7:05
+[text] Dev
+[text] Duffield Hall
+[text] , leaves
+[text] 7:09
+[text] Ana
+[text] The Commons
+[text] , leaves
+[text] 7:00
+[text] Sangam
+[text] table for 4, 7:15 PM
+[button] Replay
+[h2] From “dinner?” to “paid back” in one thread
+[p] Ask
+[h3] Say what you want and who's coming
+[p] Text Rendezvous like you'd text a friend. It saves everyone's numbers, so next time "dinner with the roommates" is enough.
+[p] No app to download. It's just iMessage.
+[p] Plan
+[h3] It finds the fairest spot
+[p] It checks when everyone's free, what they can spend, and how far each person walks. Then it picks the place where the longest walk is shortest.
+[p] Calendars share free/busy only. Balances and locations stay private.
+[p] Agree
+[h3] Everyone taps 👍, or asks for a change
+[p] A reply like “can we do Indian instead” starts a new round in seconds. After three rounds, the organizer picks.
+[p] Quiet friends get ten minutes before it locks in.
+[p] Book
+[h3] It calls the restaurant
+[p] Grok Voice calls, says it's an AI, and books the table. When the host asks something only you can answer, the question lands in your chat.
+[p] It never gives out a card number.
+[h3] Everyone gets a nudge to leave
+[p] Each person gets a text 15 minutes before they need to head out, timed to their own walk, with directions that open in Maps.
+[p] Different routes, one arrival time.
+[p] Settle
+[h3] The bill splits itself
+[p] Whoever paid says so. Each person taps 👍 on their own line, and only then does their money move, through Capital One Nessie.
+[p] Nobody can pay on someone else's behalf.
+[span] 5:42
+[div] Rendezvous
+[span] dinner tonight, under $15 each, with Maya, Dev and Ana
+[span] On it. Checking calendars, budgets and walks.
+[span] How about this: Mama Teresa Pizzeria, tonight at 6:45 PM.
+[span] Walks: Jason 29 min, Maya 11, Dev 5, Ana 19.
+[span] React 👍 to lock it in, or reply with a change.
+[h2] Now plan one yourself
+[p] This runs the real
+[p] Rendezvous
+[p] planner in your browser. You're Jason, with three pretend friends, a pretend restaurant and pretend money. Type anything, or tap a suggestion.
+[span] 5:41
+[div] Dinner crew
+[div] Maya, Dev, Ana and
+[div] Rendezvous
+[b] Today
+[div] 5:41 PM
+[p] You're Jason, and Maya, Dev and Ana are in this chat with
+[p] Rendezvous
+[p] . Mention it below and say what you want to do.
+[button] @Rendezvous dinner tonight, under $15 each
+[button] @Rendezvous lunch tomorrow at noon
+[label] Message the group as Jason
+[span] Ask
+[span] Plan
+[span] Agree
+[span] Book
+[span] Settle
+[p] Someone texts Rendezvous what they want to do and who's coming, or mentions it in a group chat.
+[text] Fall Creek
+[text] Cascadilla Creek
+[text] Six Mile Creek
+[text] Cayuga Lake
+[text] Beebe Lake
+[text] North Campus
+[text] Arts Quad
+[text] Engineering Quad
+[text] Collegetown
+[text] The Commons
+[text] Downtown
+[text] East Hill
+[text] Jason
+[text] Maya
+[text] Dev
+[text] Ana
+[caption] Each friend's calendar and walk
+[th] Friend
+[th] Calendar (free/busy only)
+[th] Location
+[th] Jason
+[td] Busy until 6:15 PM
+[td] North Campus
+[th] Maya
+[td] Free until 8:30 PM
+[td] Olin Library
+[th] Dev
+[td] Busy until 6:30 PM
+[td] Duffield Hall
+[th] Ana
+[td] No calendar linked
+[td] The Commons
+[p] Locations only feed the walking math. Nobody else in the plan sees them.
+[h2] It knows just enough
+[p] Rendezvous
+[p] takes the least it needs for each step, and nothing moves without the right person's say-so.
+[dt] Calendars
+[dd] It sees when you're busy, never what you're doing. Event names and guests stay on your calendar.
+[dt] Location
+[dd] Where you are only feeds the walking math. Nobody else in the plan sees it.
+[dt] Balances
+[dd] Your balance only rules out places you can't afford. Nobody in the chat ever sees it.
+[dt] Payments
+[dd] Money moves only when the person who owes taps 👍 on their own line. Anyone else's tap is ignored.
+[dt] Phone calls
+[dd] It says it's an AI at the start of every call, and it never speaks or stores a card or account number.
+[h2] What it runs on
+[p] One agent server holds the plan and talks to the group through Photon. A separate Python bridge handles the phone audio. Built in Cursor at
+[p] BigRed//Hacks 2026
+[b] Photon
+[span] The whole interface: iMessage threads and group chats, tapback approvals and departure texts.
+[b] Grok
+[span] Reads what the group asks for, and Grok Voice places the reservation call.
+[b] Capital One Nessie
+[span] Ithaca restaurants as merchants, budgets from balances, and the transfers that settle the bill.
+[b] Google Maps and Calendar
+[span] Walking times for every route, and free/busy for every calendar.
+[b] Twilio and Pipecat
+[span] Bridge the restaurant's phone line to the voice agent.
+[b] GoDaddy Registry
+[span] tablefor.us, because it's a table for us.
+[b] Table for 4 at 7:15.
+[p] Everyone made it.
+[span] Rendezvous
+[span] BigRed//Hacks 2026
+[span] in Ithaca, NY.
+[a] tablefor.us

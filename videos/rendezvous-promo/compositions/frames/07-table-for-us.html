@@ -1,0 +1,216 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face {
+      font-family: "Big Shoulders";
+      src: url("assets/fonts/BigShoulders-latin.woff2") format("woff2");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Atkinson Hyperlegible Next";
+      src: url("assets/fonts/AtkinsonHyperlegibleNext-latin.woff2") format("woff2");
+      font-weight: 300 800;
+      font-style: normal;
+      font-display: block;
+    }
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      color: #0e1b2c;
+    }
+    #t07-ground {
+      position: absolute;
+      inset: 0;
+      background: #eef1f4;
+    }
+    #t07-lockup {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: 50% 40%;
+    }
+    #t07-mark {
+      display: block;
+      width: 272px;
+      height: 272px;
+      overflow: visible;
+    }
+    #t07-word {
+      margin-top: 30px;
+      font-family: "Big Shoulders", sans-serif;
+      font-weight: 900;
+      font-size: 9cqw;
+      line-height: 0.9;
+      letter-spacing: 0;
+      color: #0e1b2c;
+      white-space: nowrap;
+      display: flex;
+      overflow: hidden;
+      padding: 0 8px 10px;
+    }
+    #t07-word span {
+      display: inline-block;
+    }
+    #t07-rule {
+      margin-top: 22px;
+      width: 120px;
+      height: 6px;
+      background: #0e1b2c;
+    }
+    #t07-url {
+      position: relative;
+      margin-top: 30px;
+      font-family: "Atkinson Hyperlegible Next", sans-serif;
+      font-weight: 700;
+      font-size: 3.4cqw;
+      line-height: 1.1;
+      color: #e3262e;
+      white-space: nowrap;
+      display: flex;
+      align-items: baseline;
+    }
+    #t07-url-main {
+      position: relative;
+      display: inline-block;
+    }
+    #t07-url-text {
+      display: inline-block;
+    }
+    #t07-url-tld {
+      display: inline-block;
+    }
+    #t07-edge-track {
+      position: absolute;
+      top: -6px;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+    }
+    #t07-edge {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -3px;
+      width: 6px;
+      background: #e3262e;
+    }
+  </style>
+
+  <div id="root" data-composition-id="07-table-for-us" data-width="1920" data-height="1080" data-duration="3.221">
+    <div id="t07-ground" class="clip" data-start="0" data-duration="3.221" data-track-index="0"></div>
+
+    <div id="t07-lockup">
+      <svg id="t07-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <g stroke-width="3.4" stroke-linecap="round" fill="none">
+          <path class="t07-line" id="t07-l1" d="M5 5 L12.5 12.5" stroke="#2551E0" pathLength="1"></path>
+          <path class="t07-line" id="t07-l2" d="M27 5 L19.5 12.5" stroke="#F57A12" pathLength="1"></path>
+          <path class="t07-line" id="t07-l3" d="M5 27 L12.5 19.5" stroke="#8E3FD0" pathLength="1"></path>
+          <path class="t07-line" id="t07-l4" d="M27 27 L19.5 19.5" stroke="#0D9A64" pathLength="1"></path>
+        </g>
+        <circle id="t07-dot" cx="16" cy="16" r="4.6" fill="#E3262E"></circle>
+      </svg>
+
+      <div id="t07-word"><span>R</span><span>e</span><span>n</span><span>d</span><span>e</span><span>z</span><span>v</span><span>o</span><span>u</span><span>s</span></div>
+
+      <div id="t07-rule"></div>
+
+      <div id="t07-url">
+        <span id="t07-url-main">
+          <span id="t07-url-text">tablefor</span>
+          <span id="t07-edge-track"><span id="t07-edge"></span></span>
+        </span><span id="t07-url-tld">.us</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      // Scene 1 (0.00–1.10): "Rendezvous." — four lines draw inward from four directions,
+      // the red station dot springs in where they meet, the wordmark cascades in.
+      const lines = [
+        { id: "#t07-l1", x: -7, y: -7 },
+        { id: "#t07-l2", x: 7, y: -7 },
+        { id: "#t07-l3", x: -7, y: 7 },
+        { id: "#t07-l4", x: 7, y: 7 },
+      ];
+      lines.forEach(function (l, i) {
+        const at = 0.04 + i * 0.06;
+        tl.fromTo(
+          l.id,
+          { strokeDasharray: 1, strokeDashoffset: 1, x: l.x, y: l.y },
+          { strokeDashoffset: 0, x: 0, y: 0, duration: 0.5, ease: "power3.out" },
+          at
+        );
+        tl.fromTo(l.id, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, at);
+      });
+
+      tl.fromTo(
+        "#t07-dot",
+        { scale: 0, svgOrigin: "16 16" },
+        { scale: 1, svgOrigin: "16 16", duration: 0.42, ease: "back.out(2.6)" },
+        0.5
+      );
+
+      tl.fromTo(
+        "#t07-word span",
+        { yPercent: 110, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.42, ease: "back.out(1.6)", stagger: 0.035 },
+        0.36
+      );
+
+      // Scene 2 (1.00–1.95): "A table for us" — an ink rule sets the table under the wordmark.
+      tl.fromTo(
+        "#t07-rule",
+        { scaleX: 0, transformOrigin: "50% 50%" },
+        { scaleX: 1, transformOrigin: "50% 50%", duration: 0.5, ease: "power3.out" },
+        1.0
+      );
+
+      // "at tablefor dot us" — URL wipes in left→right with a signal-red leading edge,
+      // landing "tablefor" on the word "table" (≈2.12s), ".us" pops on "us" (≈2.66s).
+      tl.fromTo(
+        "#t07-url-text",
+        { clipPath: "inset(0% 100% 0% 0%)" },
+        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power2.inOut" },
+        1.96
+      );
+      tl.fromTo(
+        "#t07-edge-track",
+        { xPercent: 0 },
+        { xPercent: 100, duration: 0.5, ease: "power2.inOut" },
+        1.96
+      );
+      tl.fromTo("#t07-edge", { opacity: 0 }, { opacity: 1, duration: 0.06, ease: "none" }, 1.96);
+      tl.to("#t07-edge", { opacity: 0, duration: 0.22, ease: "power1.out" }, 2.5);
+
+      tl.fromTo(
+        "#t07-url-tld",
+        { y: 28, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.34, ease: "back.out(2.2)" },
+        2.6
+      );
+
+      // Scene 3 (2.70–3.22): hold still on the full lockup — near-imperceptible settle.
+      tl.fromTo(
+        "#t07-lockup",
+        { scale: 1 },
+        { scale: 1.012, duration: 3.18, ease: "none" },
+        0
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["07-table-for-us"] = tl;
+    })();
+  </script>
+</template>

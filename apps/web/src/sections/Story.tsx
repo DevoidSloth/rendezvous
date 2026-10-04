@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { BRAND } from "../brand";
 import { AgentGlyph } from "../demo/Phone";
+import { scrollToStep, usePinProgress } from "../usePinProgress";
 
 /**
- * How it works, as six stations. The phone fills in as each station scrolls
- * past. It shows Jason's 1:1 thread with the agent, so friends' messages arrive
+ * How it works, as six stations on one pinned stage. Scrolling moves the
+ * plan along the rail, swaps the copy in place and fills in the phone. It shows Jason's 1:1 thread with the agent, so friends' messages arrive
  * relayed by the agent, as they do on a shared Photon line.
  */
 
@@ -82,21 +83,18 @@ const STATIONS: Array<{ name: string; title: string; body: string; detail: strin
   },
 ];
 
-export function Story() {
-  const [active, setActive] = useState(0);
-  const steps = useRef<Array<HTMLElement | null>>([]);
-  const thread = useRef<HTMLDivElement>(null);
+const STEP_VH = 80;
+const PACE = [0.82, 1, 1.22, 1.5];
+const LINE_COLORS = ["var(--l1)", "var(--l2)", "var(--l3)", "var(--l4)"];
 
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.index));
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    for (const s of steps.current) if (s) io.observe(s);
-    return () => io.disconnect();
-  }, []);
+export function Story() {
+  const track = useRef<HTMLDivElement>(null);
+  const thread = useRef<HTMLDivElement>(null);
+  const progress = usePinProgress(track);
+  const n = STATIONS.length;
+  const active = Math.min(n - 1, Math.floor(progress * n));
+  // The rail reaches a station when its step is centered on screen.
+  const fill = Math.min(1, Math.max(0, (progress * n - 0.5) / (n - 1)));
 
   useEffect(() => {
     const el = thread.current;
@@ -108,74 +106,89 @@ export function Story() {
 
   return (
     <section className="story" id="how" aria-labelledby="how-title">
-      <div className="story-head">
-        <h2 id="how-title">From “dinner?” to “paid back” in one thread</h2>
-      </div>
-      <div className="story-grid">
-        <ol className="stations">
-          {STATIONS.map((s, i) => (
-            <li
-              key={s.name}
-              ref={(el) => {
-                steps.current[i] = el;
-              }}
-              data-index={i}
-              className={`station ${i === active ? "active" : ""} ${i < active ? "past" : ""}`}
-            >
-              <span className="station-mark" data-station aria-hidden="true" />
-              <div className="station-body">
-                <p className="station-name">
-                  <span className="station-num">{i + 1}</span>
-                  {s.name}
-                </p>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
-                <p className="station-detail">{s.detail}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+      <div className="story-track" ref={track} style={{ height: `${n * STEP_VH + 100}vh` }}>
+        {STATIONS.map((s, i) => (
+          <span key={s.name} className="snap" style={{ top: `${(i + 0.5) * STEP_VH}vh` }} aria-hidden="true" />
+        ))}
+        <div className="story-stage">
+          <div className="story-inner">
+            <h2 id="how-title" className="story-title">
+              From “dinner?” to “paid back” in one thread
+            </h2>
 
-        <div className="story-phone-wrap">
-          <div className="phone story-phone" aria-hidden="true">
-            <div className="phone-status">
-              <span>{["5:41", "5:42", "5:44", "5:48", "6:00", "9:12"][active]}</span>
-              <span className="phone-status-dot" />
+            <div className="story-rail">
+              <div className="story-rail-lines" aria-hidden="true">
+                {LINE_COLORS.map((c, i) => (
+                  <span key={c} style={{ background: c, transform: `scaleX(${fill ** PACE[i]!})` }} />
+                ))}
+              </div>
+              <ol>
+                {STATIONS.map((s, i) => (
+                  <li
+                    key={s.name}
+                    className={`${i === active ? "current" : ""} ${i < active ? "done" : ""}`}
+                    style={{ left: `${(i / (n - 1)) * 100}%` }}
+                  >
+                    <button onClick={() => track.current && scrollToStep(track.current, i, n)} aria-current={i === active ? "step" : undefined}>
+                      <span className="story-stop" aria-hidden="true" />
+                      <span className="story-stop-name">{s.name}</span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
             </div>
-            {banner && (
-              <div className="phone-banner static" key={`b-${active}`}>
-                <span className="phone-banner-app">{BRAND.name}</span>
-                <span className="phone-banner-text">{banner.text}</span>
-              </div>
-            )}
-            <header className="phone-head">
-              <div className="phone-avatars">
-                <span className="agent-avatar">
-                  <AgentGlyph />
-                </span>
-              </div>
-              <div className="phone-title">{BRAND.name}</div>
-            </header>
-            <div className="phone-thread" ref={thread}>
-              {shown
-                .filter((l) => !l.banner)
-                .map((l) => (
-                  <div key={l.key} className={`msg ${l.from === "you" ? "out" : "in agent"} ${l.fresh ? "fresh" : ""}`}>
-                    <div className={`bubble ${l.tapbacks ? "has-reactions" : ""}`}>
-                      {l.text.split("\n").map((t, k) => (
-                        <span key={k} className="bubble-line">
-                          {k === 0 && l.from !== "you" && l.from !== "agent" && <b className={`relay-name who-${l.from}`}>{NAMES[l.from]}: </b>}
-                          {t}
-                        </span>
-                      ))}
-                      {l.tapbacks ? (
-                        <span className="tapbacks">
-                          👍{l.tapbacks > 1 && <small>{l.tapbacks}</small>}
-                        </span>
-                      ) : null}
-                    </div>
+
+            <div className="story-body">
+              <div className="story-copy">
+                {STATIONS.map((s, i) => (
+                  <div key={s.name} className={`story-step ${i === active ? "on" : i < active ? "before" : "after"}`} aria-hidden={i !== active}>
+                    <p className="story-step-num">
+                      <span className="num">{i + 1}</span> of {n}
+                    </p>
+                    <h3>{s.title}</h3>
+                    <p className="story-step-text">{s.body}</p>
+                    <p className="station-detail">{s.detail}</p>
                   </div>
                 ))}
+              </div>
+
+              <div className="phone story-phone" aria-hidden="true">
+                <div className="phone-status">
+                  <span>{["5:41", "5:42", "5:44", "5:48", "6:00", "9:12"][active]}</span>
+                  <span className="phone-status-dot" />
+                </div>
+                {banner && (
+                  <div className="phone-banner static" key={`b-${active}`}>
+                    <span className="phone-banner-app">{BRAND.name}</span>
+                    <span className="phone-banner-text">{banner.text}</span>
+                  </div>
+                )}
+                <header className="phone-head">
+                  <div className="phone-avatars">
+                    <span className="agent-avatar">
+                      <AgentGlyph />
+                    </span>
+                  </div>
+                  <div className="phone-title">{BRAND.name}</div>
+                </header>
+                <div className="phone-thread" ref={thread}>
+                  {shown
+                    .filter((l) => !l.banner)
+                    .map((l) => (
+                      <div key={l.key} className={`msg ${l.from === "you" ? "out" : "in agent"} ${l.fresh ? "fresh" : ""}`}>
+                        <div className={`bubble ${l.tapbacks ? "has-reactions" : ""}`}>
+                          {l.text.split("\n").map((t, k) => (
+                            <span key={k} className="bubble-line">
+                              {k === 0 && l.from !== "you" && l.from !== "agent" && <b className={`relay-name who-${l.from}`}>{NAMES[l.from]}: </b>}
+                              {t}
+                            </span>
+                          ))}
+                          {l.tapbacks ? <span className="tapbacks">👍{l.tapbacks > 1 && <small>{l.tapbacks}</small>}</span> : null}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

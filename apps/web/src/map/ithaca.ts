@@ -17,6 +17,13 @@ export function project(p: LatLng | Pt): [number, number] {
   return [((lng - BOUNDS.west) / (BOUNDS.east - BOUNDS.west)) * SIZE.w, ((BOUNDS.north - lat) / (BOUNDS.north - BOUNDS.south)) * SIZE.h];
 }
 
+/** The inverse of `project`: map units back to a coordinate, clamped to the map. */
+export function unproject(x: number, y: number): LatLng {
+  const cx = Math.min(SIZE.w, Math.max(0, x));
+  const cy = Math.min(SIZE.h, Math.max(0, y));
+  return { lng: BOUNDS.west + (cx / SIZE.w) * (BOUNDS.east - BOUNDS.west), lat: BOUNDS.north - (cy / SIZE.h) * (BOUNDS.north - BOUNDS.south) };
+}
+
 /** Smooth path through points (Catmull-Rom → cubic Bézier). */
 export function smoothPath(points: Array<[number, number]>, tension = 0.5): string {
   if (points.length < 2) return "";

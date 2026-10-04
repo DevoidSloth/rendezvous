@@ -1,0 +1,414 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face {
+      font-family: "Big Shoulders";
+      src: url("assets/fonts/BigShoulders-latin.woff2") format("woff2");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Atkinson Hyperlegible Next";
+      src: url("assets/fonts/AtkinsonHyperlegibleNext-latin.woff2") format("woff2");
+      font-weight: 300 800;
+      font-style: normal;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Atkinson Hyperlegible Next", sans-serif;
+      color: #0e1b2c;
+    }
+    #\30 1-four-routes-ground {
+      position: absolute;
+      inset: 0;
+      background: #eef1f4;
+    }
+    #\30 1-four-routes-world {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 1464px 436px;
+    }
+    #\30 1-four-routes-map {
+      position: absolute;
+      left: 900px;
+      top: 40px;
+      width: 912px;
+      height: 792px;
+      overflow: visible;
+    }
+    #\30 1-four-routes-map .fr-ghost {
+      fill: none;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 0.1 12;
+      opacity: 0.45;
+    }
+    #\30 1-four-routes-map .fr-line {
+      fill: none;
+      stroke-width: 14;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1 1;
+      stroke-dashoffset: 1;
+    }
+    #\30 1-four-routes-map .fr-origin {
+      fill: #eef1f4;
+      stroke-width: 7;
+    }
+    #\30 1-four-routes-map .fr-walker {
+      fill: #ffffff;
+      stroke-width: 5;
+    }
+    #\30 1-four-routes-map .fr-name {
+      font-family: "Big Shoulders", sans-serif;
+      font-weight: 900;
+      font-size: 36px;
+    }
+    #\30 1-four-routes-map .fr-from {
+      font-family: "Atkinson Hyperlegible Next", sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      fill: #4a5868;
+    }
+    #\30 1-four-routes-map .fr-venue {
+      font-family: "Big Shoulders", sans-serif;
+      font-weight: 900;
+      font-size: 54px;
+      fill: #0e1b2c;
+    }
+    #\30 1-four-routes-map .fr-venue-sub {
+      font-family: "Atkinson Hyperlegible Next", sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      fill: #4a5868;
+    }
+    #\30 1-four-routes-clock-wrap {
+      position: absolute;
+      left: 110px;
+      top: 92px;
+    }
+    #\30 1-four-routes-clock {
+      font-family: "Big Shoulders", sans-serif;
+      font-weight: 900;
+      font-size: 240px;
+      line-height: 0.9;
+      font-variant-numeric: tabular-nums;
+      color: #0e1b2c;
+      white-space: nowrap;
+    }
+    #\30 1-four-routes-clock-rule {
+      width: 120px;
+      height: 6px;
+      margin-top: 22px;
+      background: #0e1b2c;
+      transform-origin: 0 50%;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="01-four-routes"
+    data-start="0"
+    data-duration="4.389"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div
+      id="01-four-routes-ground"
+      class="clip"
+      data-start="0"
+      data-duration="4.389"
+      data-track-index="0"
+    ></div>
+
+    <div
+      id="01-four-routes-world"
+      class="clip"
+      data-start="0"
+      data-duration="4.389"
+      data-track-index="1"
+    >
+      <svg id="01-four-routes-map" viewBox="0 0 760 660" xmlns="http://www.w3.org/2000/svg">
+        <!-- back layer: ghost dotted routes -->
+        <g id="01-four-routes-ghosts">
+          <path class="fr-ghost" style="stroke:#2551e0" d="M70,60 L266,60 Q300,60 324,84 L446,206 Q470,230 470,264 L470,330" />
+          <path class="fr-ghost" style="stroke:#f57a12" d="M690,70 L690,126 Q690,160 666,184 L574.1,275.9 Q560,290 560,310 Q560,330 540,330 L470,330" />
+          <path class="fr-ghost" style="stroke:#8e3fd0" d="M680,600 L634,600 Q600,600 576,576 L494,494 Q470,470 470,436 L470,330" />
+          <path class="fr-ghost" style="stroke:#0d9a64" d="M60,560 L206,560 Q240,560 264,536 L346,454 Q370,430 370,396 L370,364 Q370,330 404,330 L470,330" />
+        </g>
+
+        <!-- mid layer: solid self-drawing lines -->
+        <path id="01-four-routes-line-jason" class="fr-line" pathLength="1" style="stroke:#2551e0" d="M70,60 L266,60 Q300,60 324,84 L446,206 Q470,230 470,264 L470,330" />
+        <path id="01-four-routes-line-maya" class="fr-line" pathLength="1" style="stroke:#f57a12" d="M690,70 L690,126 Q690,160 666,184 L574.1,275.9 Q560,290 560,310 Q560,330 540,330 L470,330" />
+        <path id="01-four-routes-line-dev" class="fr-line" pathLength="1" style="stroke:#8e3fd0" d="M680,600 L634,600 Q600,600 576,576 L494,494 Q470,470 470,436 L470,330" />
+        <path id="01-four-routes-line-ana" class="fr-line" pathLength="1" style="stroke:#0d9a64" d="M60,560 L206,560 Q240,560 264,536 L346,454 Q370,430 370,396 L370,364 Q370,330 404,330 L470,330" />
+
+        <!-- walker dots riding each leading tip -->
+        <circle id="01-four-routes-walk-jason" class="fr-walker" r="9" cx="70" cy="60" style="stroke:#2551e0" />
+        <circle id="01-four-routes-walk-maya" class="fr-walker" r="9" cx="690" cy="70" style="stroke:#f57a12" />
+        <circle id="01-four-routes-walk-dev" class="fr-walker" r="9" cx="680" cy="600" style="stroke:#8e3fd0" />
+        <circle id="01-four-routes-walk-ana" class="fr-walker" r="9" cx="60" cy="560" style="stroke:#0d9a64" />
+
+        <!-- origin stations -->
+        <circle id="01-four-routes-orig-jason" class="fr-origin" cx="70" cy="60" r="14" style="stroke:#2551e0" />
+        <circle id="01-four-routes-orig-maya" class="fr-origin" cx="690" cy="70" r="14" style="stroke:#f57a12" />
+        <circle id="01-four-routes-orig-dev" class="fr-origin" cx="680" cy="600" r="14" style="stroke:#8e3fd0" />
+        <circle id="01-four-routes-orig-ana" class="fr-origin" cx="60" cy="560" r="14" style="stroke:#0d9a64" />
+
+        <!-- the shared table station -->
+        <g transform="translate(470 330)">
+          <circle id="01-four-routes-pulse" r="44" fill="none" stroke="#e3262e" stroke-width="5" opacity="0" />
+          <g id="01-four-routes-station">
+            <circle r="34" fill="#ffffff" stroke="#0e1b2c" stroke-width="11" />
+          </g>
+          <circle id="01-four-routes-dot" r="16" fill="#e3262e" />
+        </g>
+
+        <!-- foreground labels -->
+        <g id="01-four-routes-lab-jason">
+          <text x="58" y="112" text-anchor="start" class="fr-name" style="fill:#2551e0">Jason</text>
+          <text x="58" y="136" text-anchor="start" class="fr-from">North Campus</text>
+        </g>
+        <g id="01-four-routes-lab-maya">
+          <text x="702" y="122" text-anchor="end" class="fr-name" style="fill:#c25e00">Maya</text>
+          <text x="702" y="146" text-anchor="end" class="fr-from">Olin Library</text>
+        </g>
+        <g id="01-four-routes-lab-dev">
+          <text x="694" y="652" text-anchor="end" class="fr-name" style="fill:#8e3fd0">Dev</text>
+          <text x="610" y="652" text-anchor="end" class="fr-from">Duffield Hall</text>
+        </g>
+        <g id="01-four-routes-lab-ana">
+          <text x="46" y="612" text-anchor="start" class="fr-name" style="fill:#0d9a64">Ana</text>
+          <text x="46" y="636" text-anchor="start" class="fr-from">The Commons</text>
+        </g>
+
+        <g id="01-four-routes-venue">
+          <text x="432" y="262" text-anchor="end" class="fr-venue">Sangam</text>
+          <text x="432" y="290" text-anchor="end" class="fr-venue-sub">table for 4</text>
+        </g>
+      </svg>
+    </div>
+
+    <div
+      id="01-four-routes-clock-wrap"
+      class="clip"
+      data-start="0"
+      data-duration="4.389"
+      data-track-index="2"
+    >
+      <div id="01-four-routes-clock">6:46</div>
+      <div id="01-four-routes-clock-rule"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var FID = "01-four-routes";
+      var root = document.querySelector('[data-composition-id="' + FID + '"]');
+      var $ = function (name) {
+        return root.querySelector('[id="' + FID + "-" + name + '"]');
+      };
+
+      // Duration is the real synced voice length; packet Scene windows (0–5.0s)
+      // are scaled proportionally: S = 3.989 / 5.0.
+      var DUR = 3.989;
+      var S = DUR / 5.0;
+      var T = function (s) {
+        return s * S;
+      };
+
+      // Deterministic path sampler (M / L / Q only) so walker dots ride the drawn tip.
+      function sampler(d) {
+        var tok = d.match(/[MLQ]|-?\d*\.?\d+/g);
+        var pts = [];
+        var i = 0,
+          cx = 0,
+          cy = 0,
+          cmd = "M";
+        while (i < tok.length) {
+          if (/[MLQ]/.test(tok[i])) cmd = tok[i++];
+          if (cmd === "M" || cmd === "L") {
+            var x = +tok[i++],
+              y = +tok[i++];
+            if (cmd === "L") {
+              for (var k = 1; k <= 20; k++) pts.push([cx + ((x - cx) * k) / 20, cy + ((y - cy) * k) / 20]);
+            } else pts.push([x, y]);
+            cx = x;
+            cy = y;
+          } else if (cmd === "Q") {
+            var qx = +tok[i++],
+              qy = +tok[i++],
+              ex = +tok[i++],
+              ey = +tok[i++];
+            for (var j = 1; j <= 24; j++) {
+              var t = j / 24,
+                u = 1 - t;
+              pts.push([u * u * cx + 2 * u * t * qx + t * t * ex, u * u * cy + 2 * u * t * qy + t * t * ey]);
+            }
+            cx = ex;
+            cy = ey;
+          }
+        }
+        var acc = [0];
+        for (var m = 1; m < pts.length; m++) {
+          acc.push(acc[m - 1] + Math.hypot(pts[m][0] - pts[m - 1][0], pts[m][1] - pts[m - 1][1]));
+        }
+        var total = acc[acc.length - 1];
+        return function (p) {
+          var target = Math.max(0, Math.min(1, p)) * total;
+          var lo = 1;
+          while (lo < acc.length - 1 && acc[lo] < target) lo++;
+          var seg = acc[lo] - acc[lo - 1] || 1;
+          var f = (target - acc[lo - 1]) / seg;
+          return [
+            pts[lo - 1][0] + (pts[lo][0] - pts[lo - 1][0]) * f,
+            pts[lo - 1][1] + (pts[lo][1] - pts[lo - 1][1]) * f,
+          ];
+        };
+      }
+
+      var tl = gsap.timeline({ paused: true });
+
+      // ---------- Scene 1 (0.0–1.2s packet): "Four friends." ----------
+      // Clock, the display element, arrives first (hero visible well before 0.5s).
+      var clock = $("clock");
+      tl.fromTo(clock, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.0);
+      tl.fromTo($("clock-rule"), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.12);
+
+      // Origins pop in one per corner (spring-pop-entrance: power3.out, no overshoot).
+      var order = ["jason", "maya", "dev", "ana"];
+      order.forEach(function (n, i) {
+        var at = 0.06 + i * 0.14;
+        tl.fromTo(
+          $("orig-" + n),
+          { scale: 0, opacity: 0, transformOrigin: "50% 50%" },
+          { scale: 1, opacity: 1, duration: 0.42, ease: "power3.out" },
+          at,
+        );
+        tl.fromTo(
+          $("lab-" + n),
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.36, ease: "power2.out" },
+          at + 0.08,
+        );
+      });
+
+      // The empty table waits at the center (no red yet), ghost routes faintly behind.
+      tl.fromTo(
+        $("station"),
+        { scale: 0, opacity: 0, transformOrigin: "50% 50%" },
+        { scale: 1.25, opacity: 1, duration: 0.4, ease: "power3.out" },
+        T(0.75),
+      );
+      tl.fromTo($("ghosts"), { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, T(0.95));
+
+      // ---------- Scene 2 (1.2–2.6s): "Four routes." lines self-draw ----------
+      // Staggered starts (Jason first, Dev last); arrivals land one after another in Scene 3.
+      var routes = {
+        jason: { start: T(1.2), end: T(2.7) },
+        ana: { start: T(1.4), end: T(3.0) },
+        maya: { start: T(1.6), end: T(3.3) },
+        dev: { start: T(1.8), end: T(3.6) },
+      };
+      Object.keys(routes).forEach(function (n, k) {
+        var r = routes[n];
+        var line = $("line-" + n);
+        var walker = $("walk-" + n);
+        var at = sampler(line.getAttribute("d"));
+        var prog = { p: 0 };
+        var apply = function () {
+          line.style.strokeDashoffset = String(1 - prog.p);
+          var pt = at(prog.p);
+          walker.setAttribute("cx", pt[0].toFixed(2));
+          walker.setAttribute("cy", pt[1].toFixed(2));
+        };
+        apply();
+        tl.fromTo(
+          prog,
+          { p: 0 },
+          { p: 1, duration: r.end - r.start, ease: "sine.inOut", onUpdate: apply, onComplete: apply },
+          r.start,
+        );
+        tl.fromTo(
+          walker,
+          { scale: 0, opacity: 0, transformOrigin: "50% 50%" },
+          { scale: 1, opacity: 1, duration: 0.18, ease: "power2.out" },
+          r.start,
+        );
+        // On arrival the station's ring tightens one notch.
+        tl.fromTo(
+          $("station"),
+          { scale: 1.25 - k * 0.0625 },
+          { scale: 1.25 - (k + 1) * 0.0625, duration: 0.2, ease: "power2.out", immediateRender: false },
+          r.end,
+        );
+      });
+
+      // Clock ticks forward with the walkers: 6:46 -> 7:15 (lands at Scene 4 start).
+      var mins = { m: 46 };
+      var renderClock = function () {
+        var total = 6 * 60 + Math.round(mins.m);
+        var h = Math.floor(total / 60);
+        var mm = total % 60;
+        clock.textContent = h + ":" + (mm < 10 ? "0" : "") + mm;
+      };
+      renderClock();
+      tl.fromTo(
+        mins,
+        { m: 46 },
+        { m: 75, duration: T(4.2) - T(1.2), ease: "power1.inOut", onUpdate: renderClock, onComplete: renderClock },
+        T(1.2),
+      );
+
+      // ---------- Scene 3 (2.6–4.2s): "One table —" ----------
+      var lastArrive = routes.dev.end;
+      tl.fromTo(
+        $("dot"),
+        { scale: 0, opacity: 0, transformOrigin: "50% 50%" },
+        { scale: 1, opacity: 1, duration: 0.32, ease: "power3.out" },
+        lastArrive + 0.02,
+      );
+      // A single expanding ring off the arrival.
+      tl.fromTo(
+        $("pulse"),
+        { scale: 0.7, opacity: 0.9, transformOrigin: "50% 50%" },
+        { scale: 2.6, opacity: 0, duration: 0.7, ease: "power2.out", immediateRender: false },
+        lastArrive + 0.02,
+      );
+
+      // Gentle camera settle onto the table (scale about the station point).
+      tl.fromTo(
+        $("world"),
+        { scale: 1 },
+        { scale: 1.06, duration: DUR - T(2.6), ease: "power2.inOut" },
+        T(2.6),
+      );
+
+      // ---------- Scene 4 (4.2–5.0s): "— at seven fifteen." ----------
+      tl.fromTo(clock, { color: "#0e1b2c" }, { color: "#e3262e", duration: 0.18, ease: "power1.out" }, T(4.2));
+      tl.fromTo($("clock-rule"), { backgroundColor: "#0e1b2c" }, { backgroundColor: "#e3262e", duration: 0.18, ease: "power1.out" }, T(4.2));
+      tl.fromTo(
+        $("venue"),
+        { opacity: 0, x: 14 },
+        { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" },
+        T(4.2) + 0.04,
+      );
+
+      // Pad to the exact frame duration; the final state holds still.
+      tl.set({}, {}, DUR);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[FID] = tl;
+    })();
+  </script>
+</template>

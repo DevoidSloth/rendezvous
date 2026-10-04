@@ -1,0 +1,832 @@
+{
+  "total_duration_s": 29.226,
+  "width": 1920,
+  "height": 1080,
+  "groups": [
+    {
+      "id": "caption-group-0",
+      "frame": 1,
+      "start": 0.14,
+      "end": 1.11,
+      "text": "Four friends,",
+      "words": [
+        {
+          "id": "caption-word-0-0",
+          "text": "Four",
+          "start": 0.14,
+          "end": 0.27
+        },
+        {
+          "id": "caption-word-0-1",
+          "text": "friends,",
+          "start": 0.38,
+          "end": 1.11
+        }
+      ]
+    },
+    {
+      "id": "caption-group-1",
+      "frame": 1,
+      "start": 1.11,
+      "end": 2.14,
+      "text": "four routes.",
+      "words": [
+        {
+          "id": "caption-word-1-0",
+          "text": "four",
+          "start": 1.11,
+          "end": 1.39
+        },
+        {
+          "id": "caption-word-1-1",
+          "text": "routes.",
+          "start": 1.48,
+          "end": 2.02
+        }
+      ]
+    },
+    {
+      "id": "caption-group-2",
+      "frame": 1,
+      "start": 2.16,
+      "end": 2.71,
+      "text": "One table",
+      "words": [
+        {
+          "id": "caption-word-2-0",
+          "text": "One",
+          "start": 2.16,
+          "end": 2.28
+        },
+        {
+          "id": "caption-word-2-1",
+          "text": "table",
+          "start": 2.28,
+          "end": 2.71
+        }
+      ]
+    },
+    {
+      "id": "caption-group-3",
+      "frame": 1,
+      "start": 2.71,
+      "end": 2.9,
+      "text": "at",
+      "words": [
+        {
+          "id": "caption-word-3-0",
+          "text": "at",
+          "start": 2.71,
+          "end": 2.78
+        }
+      ]
+    },
+    {
+      "id": "caption-group-4",
+      "frame": 1,
+      "start": 2.96,
+      "end": 4.029,
+      "text": "7:15.",
+      "words": [
+        {
+          "id": "caption-word-4-0",
+          "text": "7:15.",
+          "start": 2.96,
+          "end": 4.06
+        }
+      ]
+    },
+    {
+      "id": "caption-group-5",
+      "frame": 2,
+      "start": 4.029,
+      "end": 5.209,
+      "text": "Just text Rendezvous",
+      "words": [
+        {
+          "id": "caption-word-5-0",
+          "text": "Just",
+          "start": 4.029,
+          "end": 4.239
+        },
+        {
+          "id": "caption-word-5-1",
+          "text": "text",
+          "start": 4.359,
+          "end": 4.519
+        },
+        {
+          "id": "caption-word-5-2",
+          "text": "Rendezvous",
+          "start": 4.589,
+          "end": 5.199
+        }
+      ]
+    },
+    {
+      "id": "caption-group-6",
+      "frame": 2,
+      "start": 5.209,
+      "end": 5.699,
+      "text": "what you",
+      "words": [
+        {
+          "id": "caption-word-6-0",
+          "text": "what",
+          "start": 5.209,
+          "end": 5.479
+        },
+        {
+          "id": "caption-word-6-1",
+          "text": "you",
+          "start": 5.479,
+          "end": 5.649
+        }
+      ]
+    },
+    {
+      "id": "caption-group-7",
+      "frame": 2,
+      "start": 5.699,
+      "end": 5.859,
+      "text": "want",
+      "words": [
+        {
+          "id": "caption-word-7-0",
+          "text": "want",
+          "start": 5.699,
+          "end": 5.739
+        }
+      ]
+    },
+    {
+      "id": "caption-group-8",
+      "frame": 2,
+      "start": 6.039,
+      "end": 6.449,
+      "text": "and who's",
+      "words": [
+        {
+          "id": "caption-word-8-0",
+          "text": "and",
+          "start": 6.039,
+          "end": 6.169
+        },
+        {
+          "id": "caption-word-8-1",
+          "text": "who's",
+          "start": 6.169,
+          "end": 6.419
+        }
+      ]
+    },
+    {
+      "id": "caption-group-9",
+      "frame": 2,
+      "start": 6.449,
+      "end": 6.949,
+      "text": "coming.",
+      "words": [
+        {
+          "id": "caption-word-9-0",
+          "text": "coming.",
+          "start": 6.449,
+          "end": 6.829
+        }
+      ]
+    },
+    {
+      "id": "caption-group-10",
+      "frame": 3,
+      "start": 6.974,
+      "end": 8.204,
+      "text": "It checks calendars,",
+      "words": [
+        {
+          "id": "caption-word-10-0",
+          "text": "It",
+          "start": 6.974,
+          "end": 7.044
+        },
+        {
+          "id": "caption-word-10-1",
+          "text": "checks",
+          "start": 7.094,
+          "end": 7.424
+        },
+        {
+          "id": "caption-word-10-2",
+          "text": "calendars,",
+          "start": 7.464,
+          "end": 8.084
+        }
+      ]
+    },
+    {
+      "id": "caption-group-11",
+      "frame": 3,
+      "start": 8.214,
+      "end": 8.714,
+      "text": "budgets,",
+      "words": [
+        {
+          "id": "caption-word-11-0",
+          "text": "budgets,",
+          "start": 8.214,
+          "end": 8.694
+        }
+      ]
+    },
+    {
+      "id": "caption-group-12",
+      "frame": 3,
+      "start": 8.714,
+      "end": 9.934,
+      "text": "and every walk,",
+      "words": [
+        {
+          "id": "caption-word-12-0",
+          "text": "and",
+          "start": 8.714,
+          "end": 8.964
+        },
+        {
+          "id": "caption-word-12-1",
+          "text": "every",
+          "start": 8.994,
+          "end": 9.374
+        },
+        {
+          "id": "caption-word-12-2",
+          "text": "walk,",
+          "start": 9.464,
+          "end": 9.934
+        }
+      ]
+    },
+    {
+      "id": "caption-group-13",
+      "frame": 3,
+      "start": 9.934,
+      "end": 10.454,
+      "text": "then picks",
+      "words": [
+        {
+          "id": "caption-word-13-0",
+          "text": "then",
+          "start": 9.934,
+          "end": 10.104
+        },
+        {
+          "id": "caption-word-13-1",
+          "text": "picks",
+          "start": 10.144,
+          "end": 10.364
+        }
+      ]
+    },
+    {
+      "id": "caption-group-14",
+      "frame": 3,
+      "start": 10.454,
+      "end": 11.504,
+      "text": "the fairest spot.",
+      "words": [
+        {
+          "id": "caption-word-14-0",
+          "text": "the",
+          "start": 10.454,
+          "end": 10.504
+        },
+        {
+          "id": "caption-word-14-1",
+          "text": "fairest",
+          "start": 10.624,
+          "end": 10.974
+        },
+        {
+          "id": "caption-word-14-2",
+          "text": "spot.",
+          "start": 10.974,
+          "end": 11.384
+        }
+      ]
+    },
+    {
+      "id": "caption-group-15",
+      "frame": 4,
+      "start": 11.517,
+      "end": 11.897,
+      "text": "If they",
+      "words": [
+        {
+          "id": "caption-word-15-0",
+          "text": "If",
+          "start": 11.517,
+          "end": 11.587
+        },
+        {
+          "id": "caption-word-15-1",
+          "text": "they",
+          "start": 11.697,
+          "end": 11.897
+        }
+      ]
+    },
+    {
+      "id": "caption-group-16",
+      "frame": 4,
+      "start": 11.897,
+      "end": 13.197,
+      "text": "take reservations,",
+      "words": [
+        {
+          "id": "caption-word-16-0",
+          "text": "take",
+          "start": 11.897,
+          "end": 12.167
+        },
+        {
+          "id": "caption-word-16-1",
+          "text": "reservations,",
+          "start": 12.167,
+          "end": 13.077
+        }
+      ]
+    },
+    {
+      "id": "caption-group-17",
+      "frame": 4,
+      "start": 13.217,
+      "end": 13.917,
+      "text": "it calls",
+      "words": [
+        {
+          "id": "caption-word-17-0",
+          "text": "it",
+          "start": 13.217,
+          "end": 13.467
+        },
+        {
+          "id": "caption-word-17-1",
+          "text": "calls",
+          "start": 13.467,
+          "end": 13.797
+        }
+      ]
+    },
+    {
+      "id": "caption-group-18",
+      "frame": 4,
+      "start": 14.237,
+      "end": 14.647,
+      "text": "and asks",
+      "words": [
+        {
+          "id": "caption-word-18-0",
+          "text": "and",
+          "start": 14.237,
+          "end": 14.357
+        },
+        {
+          "id": "caption-word-18-1",
+          "text": "asks",
+          "start": 14.357,
+          "end": 14.597
+        }
+      ]
+    },
+    {
+      "id": "caption-group-19",
+      "frame": 4,
+      "start": 14.647,
+      "end": 15.217,
+      "text": "you anything",
+      "words": [
+        {
+          "id": "caption-word-19-0",
+          "text": "you",
+          "start": 14.647,
+          "end": 14.807
+        },
+        {
+          "id": "caption-word-19-1",
+          "text": "anything",
+          "start": 14.877,
+          "end": 15.217
+        }
+      ]
+    },
+    {
+      "id": "caption-group-20",
+      "frame": 4,
+      "start": 15.217,
+      "end": 16.243,
+      "text": "it can't answer.",
+      "words": [
+        {
+          "id": "caption-word-20-0",
+          "text": "it",
+          "start": 15.217,
+          "end": 15.267
+        },
+        {
+          "id": "caption-word-20-1",
+          "text": "can't",
+          "start": 15.347,
+          "end": 15.667
+        },
+        {
+          "id": "caption-word-20-2",
+          "text": "answer.",
+          "start": 15.667,
+          "end": 16.157
+        }
+      ]
+    },
+    {
+      "id": "caption-group-21",
+      "frame": 5,
+      "start": 16.243,
+      "end": 16.973,
+      "text": "Everyone gets",
+      "words": [
+        {
+          "id": "caption-word-21-0",
+          "text": "Everyone",
+          "start": 16.243,
+          "end": 16.723
+        },
+        {
+          "id": "caption-word-21-1",
+          "text": "gets",
+          "start": 16.723,
+          "end": 16.883
+        }
+      ]
+    },
+    {
+      "id": "caption-group-22",
+      "frame": 5,
+      "start": 16.973,
+      "end": 17.283,
+      "text": "a text",
+      "words": [
+        {
+          "id": "caption-word-22-0",
+          "text": "a",
+          "start": 16.973,
+          "end": 17.033
+        },
+        {
+          "id": "caption-word-22-1",
+          "text": "text",
+          "start": 17.033,
+          "end": 17.283
+        }
+      ]
+    },
+    {
+      "id": "caption-group-23",
+      "frame": 5,
+      "start": 17.283,
+      "end": 17.873,
+      "text": "right when",
+      "words": [
+        {
+          "id": "caption-word-23-0",
+          "text": "right",
+          "start": 17.283,
+          "end": 17.603
+        },
+        {
+          "id": "caption-word-23-1",
+          "text": "when",
+          "start": 17.603,
+          "end": 17.813
+        }
+      ]
+    },
+    {
+      "id": "caption-group-24",
+      "frame": 5,
+      "start": 17.873,
+      "end": 18.413,
+      "text": "it's time",
+      "words": [
+        {
+          "id": "caption-word-24-0",
+          "text": "it's",
+          "start": 17.873,
+          "end": 18.093
+        },
+        {
+          "id": "caption-word-24-1",
+          "text": "time",
+          "start": 18.093,
+          "end": 18.393
+        }
+      ]
+    },
+    {
+      "id": "caption-group-25",
+      "frame": 5,
+      "start": 18.413,
+      "end": 19.323,
+      "text": "to leave,",
+      "words": [
+        {
+          "id": "caption-word-25-0",
+          "text": "to",
+          "start": 18.413,
+          "end": 18.653
+        },
+        {
+          "id": "caption-word-25-1",
+          "text": "leave,",
+          "start": 18.653,
+          "end": 19.293
+        }
+      ]
+    },
+    {
+      "id": "caption-group-26",
+      "frame": 5,
+      "start": 19.323,
+      "end": 19.763,
+      "text": "timed to",
+      "words": [
+        {
+          "id": "caption-word-26-0",
+          "text": "timed",
+          "start": 19.323,
+          "end": 19.633
+        },
+        {
+          "id": "caption-word-26-1",
+          "text": "to",
+          "start": 19.633,
+          "end": 19.763
+        }
+      ]
+    },
+    {
+      "id": "caption-group-27",
+      "frame": 5,
+      "start": 19.763,
+      "end": 20.303,
+      "text": "their own",
+      "words": [
+        {
+          "id": "caption-word-27-0",
+          "text": "their",
+          "start": 19.763,
+          "end": 20.103
+        },
+        {
+          "id": "caption-word-27-1",
+          "text": "own",
+          "start": 20.103,
+          "end": 20.303
+        }
+      ]
+    },
+    {
+      "id": "caption-group-28",
+      "frame": 5,
+      "start": 20.303,
+      "end": 20.73,
+      "text": "walk.",
+      "words": [
+        {
+          "id": "caption-word-28-0",
+          "text": "walk.",
+          "start": 20.303,
+          "end": 20.793
+        }
+      ]
+    },
+    {
+      "id": "caption-group-29",
+      "frame": 6,
+      "start": 20.73,
+      "end": 21.9,
+      "text": "And after dinner,",
+      "words": [
+        {
+          "id": "caption-word-29-0",
+          "text": "And",
+          "start": 20.73,
+          "end": 20.87
+        },
+        {
+          "id": "caption-word-29-1",
+          "text": "after",
+          "start": 20.87,
+          "end": 21.24
+        },
+        {
+          "id": "caption-word-29-2",
+          "text": "dinner,",
+          "start": 21.24,
+          "end": 21.85
+        }
+      ]
+    },
+    {
+      "id": "caption-group-30",
+      "frame": 6,
+      "start": 21.9,
+      "end": 22.93,
+      "text": "the bill splits",
+      "words": [
+        {
+          "id": "caption-word-30-0",
+          "text": "the",
+          "start": 21.9,
+          "end": 22.1
+        },
+        {
+          "id": "caption-word-30-1",
+          "text": "bill",
+          "start": 22.1,
+          "end": 22.38
+        },
+        {
+          "id": "caption-word-30-2",
+          "text": "splits",
+          "start": 22.46,
+          "end": 22.93
+        }
+      ]
+    },
+    {
+      "id": "caption-group-31",
+      "frame": 6,
+      "start": 22.93,
+      "end": 23.56,
+      "text": "itself,",
+      "words": [
+        {
+          "id": "caption-word-31-0",
+          "text": "itself,",
+          "start": 22.93,
+          "end": 23.56
+        }
+      ]
+    },
+    {
+      "id": "caption-group-32",
+      "frame": 6,
+      "start": 23.56,
+      "end": 24.57,
+      "text": "everyone pays back",
+      "words": [
+        {
+          "id": "caption-word-32-0",
+          "text": "everyone",
+          "start": 23.56,
+          "end": 23.97
+        },
+        {
+          "id": "caption-word-32-1",
+          "text": "pays",
+          "start": 24.07,
+          "end": 24.29
+        },
+        {
+          "id": "caption-word-32-2",
+          "text": "back",
+          "start": 24.29,
+          "end": 24.52
+        }
+      ]
+    },
+    {
+      "id": "caption-group-33",
+      "frame": 6,
+      "start": 24.57,
+      "end": 25.05,
+      "text": "their share",
+      "words": [
+        {
+          "id": "caption-word-33-0",
+          "text": "their",
+          "start": 24.57,
+          "end": 24.81
+        },
+        {
+          "id": "caption-word-33-1",
+          "text": "share",
+          "start": 24.81,
+          "end": 25.05
+        }
+      ]
+    },
+    {
+      "id": "caption-group-34",
+      "frame": 6,
+      "start": 25.05,
+      "end": 26.05,
+      "text": "with one tap.",
+      "words": [
+        {
+          "id": "caption-word-34-0",
+          "text": "with",
+          "start": 25.05,
+          "end": 25.38
+        },
+        {
+          "id": "caption-word-34-1",
+          "text": "one",
+          "start": 25.38,
+          "end": 25.63
+        },
+        {
+          "id": "caption-word-34-2",
+          "text": "tap.",
+          "start": 25.63,
+          "end": 25.93
+        }
+      ]
+    },
+    {
+      "id": "caption-group-35",
+      "frame": 7,
+      "start": 26.065,
+      "end": 26.965,
+      "text": "Rendezvous,",
+      "words": [
+        {
+          "id": "caption-word-35-0",
+          "text": "Rendezvous,",
+          "start": 26.065,
+          "end": 26.965
+        }
+      ]
+    },
+    {
+      "id": "caption-group-36",
+      "frame": 7,
+      "start": 26.965,
+      "end": 27.465,
+      "text": "a table",
+      "words": [
+        {
+          "id": "caption-word-36-0",
+          "text": "a",
+          "start": 26.965,
+          "end": 27.045
+        },
+        {
+          "id": "caption-word-36-1",
+          "text": "table",
+          "start": 27.045,
+          "end": 27.365
+        }
+      ]
+    },
+    {
+      "id": "caption-group-37",
+      "frame": 7,
+      "start": 27.465,
+      "end": 27.975,
+      "text": "for us,",
+      "words": [
+        {
+          "id": "caption-word-37-0",
+          "text": "for",
+          "start": 27.465,
+          "end": 27.685
+        },
+        {
+          "id": "caption-word-37-1",
+          "text": "us,",
+          "start": 27.685,
+          "end": 27.945
+        }
+      ]
+    },
+    {
+      "id": "caption-group-38",
+      "frame": 7,
+      "start": 27.975,
+      "end": 29.245,
+      "text": "at tablefor.us.",
+      "words": [
+        {
+          "id": "caption-word-38-0",
+          "text": "at",
+          "start": 27.975,
+          "end": 28.065
+        },
+        {
+          "id": "caption-word-38-1",
+          "text": "tablefor.us.",
+          "start": 28.125,
+          "end": 29.125
+        }
+      ]
+    }
+  ]
+}

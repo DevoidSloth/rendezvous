@@ -10,3 +10,4 @@ __pycache__/
 .pytest_cache/
 apps/agent/data/contacts.json
 demo/.build/
+.github/readme/.fonts/

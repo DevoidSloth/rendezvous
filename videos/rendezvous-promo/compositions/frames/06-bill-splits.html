@@ -1,0 +1,331 @@
+<template>
+  <div id="root" data-composition-id="06-bill-splits" data-width="1920" data-height="1080" data-start="0" data-duration="5.755">
+    <style>
+      @font-face {
+        font-family: "Big Shoulders";
+        src: url("assets/fonts/BigShoulders-latin.woff2") format("woff2");
+        font-weight: 400 900;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Atkinson Hyperlegible Next";
+        src: url("assets/fonts/AtkinsonHyperlegibleNext-latin.woff2") format("woff2");
+        font-weight: 300 800;
+        font-style: normal;
+      }
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        container-type: size;
+        font-family: "Atkinson Hyperlegible Next", sans-serif;
+        color: #0e1b2c;
+      }
+      .fr06-bs-ground {
+        position: absolute;
+        inset: 0;
+        background: #eef1f4;
+      }
+      .fr06-bs-panel {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 768px;
+        height: 1080px;
+        background: #0e1b2c;
+      }
+      .fr06-bs-stage {
+        position: absolute;
+        inset: 0;
+        transform-origin: 1100px 450px;
+      }
+      /* ---- left: who paid ---- */
+      .fr06-bs-paid {
+        position: absolute;
+        left: 96px;
+        top: 200px;
+        width: 600px;
+      }
+      .fr06-bs-label {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-weight: 700;
+        font-size: 34px;
+        color: #eef1f4;
+      }
+      .fr06-bs-dot {
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        flex: none;
+      }
+      .fr06-bs-amount {
+        margin-top: 44px;
+        font-family: "Big Shoulders", sans-serif;
+        font-weight: 900;
+        font-size: 330px;
+        line-height: 1.08;
+        color: #eef1f4;
+        transform-origin: 0% 100%;
+      }
+      .fr06-bs-bar {
+        position: absolute;
+        left: 0;
+        top: 470px;
+        width: 560px;
+        height: 22px;
+      }
+      .fr06-bs-seg {
+        position: absolute;
+        top: 0;
+        width: 140px;
+        height: 22px;
+      }
+      .fr06-bs-settled {
+        position: absolute;
+        left: 0;
+        top: 530px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-weight: 700;
+        font-size: 30px;
+        color: #c9d1da;
+      }
+      .fr06-bs-settled b {
+        font-family: "Big Shoulders", sans-serif;
+        font-weight: 900;
+        font-size: 44px;
+        color: #0d9a64;
+      }
+      /* ---- right: ledger rows ---- */
+      .fr06-bs-list {
+        position: absolute;
+        left: 912px;
+        top: 196px;
+        width: 912px;
+      }
+      .fr06-bs-row {
+        position: relative;
+        height: 150px;
+        margin-bottom: 32px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+      }
+      .fr06-bs-who {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 190px;
+        font-family: "Big Shoulders", sans-serif;
+        font-weight: 900;
+        font-size: 64px;
+        line-height: 1;
+      }
+      .fr06-bs-route {
+        position: relative;
+        width: 150px;
+        height: 30px;
+        flex: none;
+      }
+      .fr06-bs-route-line {
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 150px;
+        height: 10px;
+        border-radius: 5px;
+        transform-origin: 0% 50%;
+      }
+      .fr06-bs-route-end {
+        position: absolute;
+        right: -6px;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #2551e0;
+        box-sizing: border-box;
+        border: 6px solid #0e1b2c;
+      }
+      .fr06-bs-to {
+        margin-left: 26px;
+        width: 120px;
+        font-weight: 700;
+        font-size: 34px;
+        color: #2551e0;
+      }
+      .fr06-bs-sum {
+        font-family: "Big Shoulders", sans-serif;
+        font-weight: 900;
+        font-size: 72px;
+        line-height: 1;
+        width: 170px;
+      }
+      .fr06-bs-sent {
+        position: absolute;
+        right: 36px;
+        top: 34px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .fr06-bs-check {
+        display: grid;
+        place-items: center;
+        width: 82px;
+        height: 82px;
+        border-radius: 50%;
+        background: #d6f0e5;
+        color: #0d9a64;
+      }
+      .fr06-bs-check svg {
+        width: 64px;
+        height: 64px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .fr06-bs-check circle {
+        opacity: 0.35;
+      }
+      .fr06-bs-check path {
+        stroke-dasharray: 37;
+        stroke-dashoffset: 37;
+      }
+      .fr06-bs-sent-word {
+        font-weight: 700;
+        font-size: 30px;
+        color: #0d9a64;
+        clip-path: inset(0 100% 0 0);
+      }
+    </style>
+
+    <div id="fr06-bs-ground" class="clip fr06-bs-ground" data-start="0" data-duration="5.755" data-track-index="0"></div>
+    <div id="fr06-bs-panel" class="clip fr06-bs-panel" data-start="0" data-duration="5.755" data-track-index="1"></div>
+
+    <div class="clip fr06-bs-stage" id="fr06-bs-stage" data-start="0" data-duration="5.755" data-track-index="2">
+      <div class="fr06-bs-paid">
+        <div class="fr06-bs-label" id="fr06-bs-label">
+          <span class="fr06-bs-dot" style="background: #2551e0"></span>Jason paid
+        </div>
+        <div class="fr06-bs-amount" id="fr06-bs-amount">$52</div>
+        <div class="fr06-bs-bar">
+          <div class="fr06-bs-seg" id="fr06-bs-seg-0" style="left: 0; background: #2551e0"></div>
+          <div class="fr06-bs-seg" id="fr06-bs-seg-1" style="left: 140px; background: #f57a12"></div>
+          <div class="fr06-bs-seg" id="fr06-bs-seg-2" style="left: 280px; background: #8e3fd0"></div>
+          <div class="fr06-bs-seg" id="fr06-bs-seg-3" style="left: 420px; background: #0d9a64"></div>
+        </div>
+        <div class="fr06-bs-settled" id="fr06-bs-settled"><b>3/3</b> paid back</div>
+      </div>
+
+      <div class="fr06-bs-list">
+        <div class="fr06-bs-row" id="fr06-bs-row-0">
+          <div class="fr06-bs-who"><span class="fr06-bs-dot" style="background: #f57a12"></span>Maya</div>
+          <div class="fr06-bs-route">
+            <div class="fr06-bs-route-line" id="fr06-bs-line-0" style="background: #f57a12"></div>
+            <div class="fr06-bs-route-end"></div>
+          </div>
+          <div class="fr06-bs-to">Jason</div>
+          <div class="fr06-bs-sum">$13.00</div>
+          <div class="fr06-bs-sent">
+            <div class="fr06-bs-check" id="fr06-bs-check-0">
+              <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" /><path id="fr06-bs-tick-0" d="M20 33.5l8 8L45 23" /></svg>
+            </div>
+            <div class="fr06-bs-sent-word" id="fr06-bs-word-0">Sent</div>
+          </div>
+        </div>
+        <div class="fr06-bs-row" id="fr06-bs-row-1">
+          <div class="fr06-bs-who"><span class="fr06-bs-dot" style="background: #8e3fd0"></span>Dev</div>
+          <div class="fr06-bs-route">
+            <div class="fr06-bs-route-line" id="fr06-bs-line-1" style="background: #8e3fd0"></div>
+            <div class="fr06-bs-route-end"></div>
+          </div>
+          <div class="fr06-bs-to">Jason</div>
+          <div class="fr06-bs-sum">$13.00</div>
+          <div class="fr06-bs-sent">
+            <div class="fr06-bs-check" id="fr06-bs-check-1">
+              <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" /><path id="fr06-bs-tick-1" d="M20 33.5l8 8L45 23" /></svg>
+            </div>
+            <div class="fr06-bs-sent-word" id="fr06-bs-word-1">Sent</div>
+          </div>
+        </div>
+        <div class="fr06-bs-row" id="fr06-bs-row-2">
+          <div class="fr06-bs-who"><span class="fr06-bs-dot" style="background: #0d9a64"></span>Ana</div>
+          <div class="fr06-bs-route">
+            <div class="fr06-bs-route-line" id="fr06-bs-line-2" style="background: #0d9a64"></div>
+            <div class="fr06-bs-route-end"></div>
+          </div>
+          <div class="fr06-bs-to">Jason</div>
+          <div class="fr06-bs-sum">$13.00</div>
+          <div class="fr06-bs-sent">
+            <div class="fr06-bs-check" id="fr06-bs-check-2">
+              <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" /><path id="fr06-bs-tick-2" d="M20 33.5l8 8L45 23" /></svg>
+            </div>
+            <div class="fr06-bs-sent-word" id="fr06-bs-word-2">Sent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var $ = function (id) {
+          return document.getElementById(id);
+        };
+        var tl = gsap.timeline({ paused: true });
+
+        // Voice cues (local s): "after" 0.22, "dinner" 0.59, "bill" 1.45, "splits" 1.81, "itself" 2.28,
+        // "everyone" 2.91, "pays back" 3.42, "share" 4.16, "one tap" 4.73-5.28. Duration 5.355.
+
+        // Scene 1 (0.0-1.25 "And after dinner"): who paid + the hero amount; the bill lands as one run.
+        tl.fromTo($("fr06-bs-label"), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 0.05);
+        tl.fromTo($("fr06-bs-amount"), { opacity: 0, scale: 0.86, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.14);
+        tl.fromTo($("fr06-bs-seg-0"), { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 4, duration: 0.55, ease: "power3.out" }, 0.6);
+
+        // Scene 2 (1.25-2.91 "the bill splits itself"): three ledger rows cascade into their slots
+        // starting on "bill"; the bill bar splits into four shares on "splits".
+        for (var i = 0; i < 3; i++) {
+          var at = 1.45 + i * 0.24;
+          tl.fromTo($("fr06-bs-row-" + i), { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, at);
+          tl.fromTo($("fr06-bs-line-" + i), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, at + 0.2);
+        }
+        tl.to($("fr06-bs-seg-0"), { scaleX: 1, duration: 0.45, ease: "power3.inOut" }, 1.81);
+        for (var s = 1; s <= 3; s++) {
+          tl.fromTo($("fr06-bs-seg-" + s), { opacity: 0, scaleX: 0, transformOrigin: "0% 50%" }, { opacity: 1, scaleX: 1, duration: 0.45, ease: "power3.out" }, 1.81 + s * 0.07);
+          tl.fromTo($("fr06-bs-seg-" + s), { x: -8 * s }, { x: 0, duration: 0.45, ease: "power3.out" }, 1.81 + s * 0.07);
+        }
+
+        // Scene 3 (2.91-5.355 "everyone pays back their share with one tap"): a green Sent check
+        // (success-check recipe: halo pop, mark back.out spin-in, tick draw) lands on each row in turn.
+        var checkAt = [2.95, 3.45, 4.0];
+        for (var k = 0; k < 3; k++) {
+          var c = checkAt[k];
+          var svg = $("fr06-bs-check-" + k).querySelector("svg");
+          tl.fromTo($("fr06-bs-check-" + k), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: "power3.out" }, c);
+          tl.fromTo(svg, { opacity: 0, scale: 0.72, rotation: -18, filter: "blur(7px)" }, { opacity: 1, scale: 1, rotation: 0, filter: "blur(0px)", duration: 0.34, ease: "back.out(1.8)" }, c);
+          tl.fromTo($("fr06-bs-tick-" + k), { strokeDashoffset: 37 }, { strokeDashoffset: 0, duration: 0.42, ease: "power2.out" }, c + 0.12);
+          tl.fromTo($("fr06-bs-word-" + k), { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.35, ease: "power2.out" }, c + 0.16);
+        }
+
+        // "with one tap": the tally lands under the bill, then the frame holds still (the breather).
+        tl.fromTo($("fr06-bs-settled"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 4.72);
+
+        // Faint camera push-in underneath the whole shot.
+        tl.fromTo($("fr06-bs-stage"), { scale: 1 }, { scale: 1.025, duration: 5.355, ease: "none" }, 0);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["06-bill-splits"] = tl;
+      })();
+    </script>
+  </div>
+</template>
