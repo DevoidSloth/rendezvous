@@ -13,12 +13,12 @@ export function Demo() {
   const snap = useSyncExternalStore(session.subscribe, session.getSnapshot);
 
   return (
-    <section className="demo" id="try" aria-labelledby="try-title">
+    <section className="demo night" id="try" aria-labelledby="try-title">
       <div className="section-head">
-        <h2 id="try-title">Plan a dinner from this page</h2>
+        <h2 id="try-title">Now plan one yourself</h2>
         <p>
-          This is the real {BRAND.name} planner and conversation engine, running in your browser with a pretend group, a pretend restaurant and
-          pretend money. Type anything, or tap a suggestion.
+          This runs the real {BRAND.name} planner in your browser. You're Jason, with three pretend friends, a pretend restaurant and pretend money.
+          Type anything, or tap a suggestion.
         </p>
       </div>
       <div className="demo-grid">

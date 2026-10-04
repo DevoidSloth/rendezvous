@@ -88,7 +88,7 @@ const waitFor = async (fn, arg, timeout = 30000) => {
   }
   throw new Error(`timed out waiting: ${fn}`);
 };
-const hasMsg = (re) => [...document.querySelectorAll(".msg")].some((m) => new RegExp(re).test(m.innerText));
+const hasMsg = (re) => [...document.querySelectorAll("#try .msg")].some((m) => new RegExp(re).test(m.innerText));
 const scrollTo = (sel, offset = 0) =>
   page.evaluate(
     (s, o) => window.scrollTo({ top: document.querySelector(s).getBoundingClientRect().top + window.scrollY - o, behavior: "smooth" }),

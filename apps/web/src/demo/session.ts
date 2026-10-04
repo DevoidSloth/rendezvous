@@ -311,6 +311,10 @@ export class DemoSession {
     this.skipping = true;
     this.changed();
     try {
+      // The texts are scheduled just after the lock message posts; wait for them.
+      for (let i = 0; i < 40 && !this.clock.pending().some((p) => p.key.startsWith("dm:")) && this.dms.length === 0; i++) {
+        await this.sleep(100, gen);
+      }
       for (;;) {
         const next = this.clock.pending().find((p) => p.key.startsWith("dm:"));
         if (!next) break;
