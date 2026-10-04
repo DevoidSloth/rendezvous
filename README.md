@@ -71,7 +71,7 @@ One mention runs the whole loop. The group only steps in to approve, answer the 
 
 ## What's inside
 
-| | |
+| Package | What it does |
 | --- | --- |
 | [`packages/core`](packages/core) | Planner, parsers, message copy and the conversation engine, shared by everything below |
 | [`apps/agent`](apps/agent) | Agent server on Photon (spectrum-ts) and Grok, plus Nessie, Google and the bridge endpoints |
