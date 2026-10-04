@@ -9,3 +9,4 @@ apps/bridge/.venv/
 __pycache__/
 .pytest_cache/
 apps/agent/data/contacts.json
+demo/.build/

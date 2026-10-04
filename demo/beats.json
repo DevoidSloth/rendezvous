@@ -1,0 +1,37 @@
+[
+  {
+    "id": "hero",
+    "caption": "Six texts, three “where are you”s, and one friend who never pays you back.",
+    "say": "Planning dinner with friends takes six texts, three where-are-yous, and one friend who never pays you back. Rendezvous fixes that, right inside iMessage."
+  },
+  {
+    "id": "ask",
+    "caption": "Text Rendezvous what you want. It checks calendars, budgets and walks, then picks the fairest spot.",
+    "say": "Jason texts Rendezvous: dinner tonight, under fifteen dollars each. It checks everyone's free busy, budgets, and walking times, and picks the spot where the longest walk is shortest."
+  },
+  {
+    "id": "agree",
+    "caption": "👍 approves. Any reply with a change re-plans.",
+    "say": "Maya and Dev tap thumbs up. Ana asks for Indian instead, so Rendezvous re-plans in seconds."
+  },
+  {
+    "id": "book",
+    "caption": "Grok Voice calls to book, and asks the group anything it can't answer.",
+    "say": "Sangam takes reservations, so Grok Voice calls. It says it's an AI, and when the host asks booth or window, it asks the group. Jason replies one, and the call continues."
+  },
+  {
+    "id": "go",
+    "caption": "Everyone gets a text 15 minutes before they need to leave.",
+    "say": "The table is booked. Each person gets a text fifteen minutes before they need to leave, with walking directions."
+  },
+  {
+    "id": "settle",
+    "caption": "Only the person who owes can send their share, through Capital One Nessie.",
+    "say": "After dinner, Jason says he paid fifty-two dollars. Maya had an extra drink, so her share goes up. Each person taps thumbs up on their own line, and Capital One Nessie moves the money."
+  },
+  {
+    "id": "close",
+    "caption": "Photon, Grok, Capital One Nessie, Google Maps and Twilio. tablefor.us",
+    "say": "Photon for iMessage, Grok for language and voice, Nessie for money, and Google Maps for routes. Rendezvous. A table for us."
+  }
+]

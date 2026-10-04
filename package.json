@@ -2,7 +2,11 @@
   "name": "rendezvous",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/*", "apps/agent", "apps/web"],
+  "workspaces": [
+    "packages/*",
+    "apps/agent",
+    "apps/web"
+  ],
   "scripts": {
     "dev:web": "npm run dev -w @rendezvous/web",
     "build:web": "npm run build -w @rendezvous/web",
@@ -10,10 +14,12 @@
     "sim": "npm run sim -w @rendezvous/agent",
     "seed": "npm run seed -w @rendezvous/agent",
     "test": "vitest run",
-    "typecheck": "tsc -p packages/core && tsc -p apps/agent && tsc -p apps/web --noEmit"
+    "typecheck": "tsc -p packages/core && tsc -p apps/agent && tsc -p apps/web --noEmit",
+    "demo:video": "node demo/record.mjs"
   },
   "devDependencies": {
     "typescript": "~5.9.0",
-    "vitest": "^4.0.0"
+    "vitest": "^4.0.0",
+    "puppeteer-core": "^25.12.0"
   }
 }
