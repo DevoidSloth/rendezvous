@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+apps/agent/data/members.json
+apps/agent/data/merchants.json
+apps/bridge/.venv/
+__pycache__/
+.pytest_cache/
+apps/agent/data/contacts.json

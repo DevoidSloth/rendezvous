@@ -1,0 +1,6 @@
+[
+  { "name": "Jason", "handle": "+16075550101", "usualPlace": "North Campus", "calendarId": "jason@example.com", "nessieAccountId": "" },
+  { "name": "Maya", "handle": "+16075550102", "usualPlace": "Collegetown", "calendarId": "", "nessieAccountId": "" },
+  { "name": "Dev", "handle": "+16075550103", "usualPlace": "Duffield", "calendarId": "", "nessieAccountId": "" },
+  { "name": "Ana", "handle": "+16075550104", "usualPlace": "West Campus", "calendarId": "", "nessieAccountId": "" }
+]

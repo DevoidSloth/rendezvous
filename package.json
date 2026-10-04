@@ -1,0 +1,19 @@
+{
+  "name": "rendezvous",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*", "apps/agent", "apps/web"],
+  "scripts": {
+    "dev:web": "npm run dev -w @rendezvous/web",
+    "build:web": "npm run build -w @rendezvous/web",
+    "dev:agent": "npm run dev -w @rendezvous/agent",
+    "sim": "npm run sim -w @rendezvous/agent",
+    "seed": "npm run seed -w @rendezvous/agent",
+    "test": "vitest run",
+    "typecheck": "tsc -p packages/core && tsc -p apps/agent && tsc -p apps/web --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.0",
+    "vitest": "^4.0.0"
+  }
+}
